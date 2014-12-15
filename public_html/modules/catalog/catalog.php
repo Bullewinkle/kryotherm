@@ -906,8 +906,8 @@
            $action = $_SERVER['REQUEST_URI'];
            $html .= '<script type="text/javascript">
                     window.kryotherm || (window.kryotherm = {});
-                    window.kryotherm.cart ='. json_encode($array)
-               .'</script>';
+                    window.kryotherm.cart ='. json_encode($array) .'
+                </script>';
            $html .= '<div style="height: 54px"><a href="/">В каталог</a> > <a href="/cart.php" class="active">Корзина</a></div>
                      <h1>Корзина</h1>
                      <div class="clearfloat" style="width: 100%"></div>
@@ -1055,6 +1055,11 @@
                       > <a href='/cart.php&exec_order=form' class='active'>Подтверждение заказа</a>
                      </div>
                      <h1>Ваш заказ</h1>".customers_order($array);
+           $html .= '<script type="text/javascript">
+                    window.kryotherm || (window.kryotherm = {});
+                    window.kryotherm.cart ='. json_encode($array) .'
+                    window.kryotherm.customer ='. json_encode($customer) .'
+                </script>';
 
            $html .= '<br /><h2>Ваши данные:</h2>
                      <form name="order_form" action="/cart.php&exec_order=send" method="post">
