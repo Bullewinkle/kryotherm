@@ -35,8 +35,13 @@ $(document).ready(function () {
 
 	var $orderForm = $('.js-place-order');
 	$orderForm.on('submit',function (e) {
-		e.preventDefault();
-		console.log(this.action)
+		console.log(this.action, e);
+		if (validate() === 'valid' ) {
+			return true
+		}
+		else {
+			return false
+		}
 	});
 
 });
@@ -131,9 +136,11 @@ function validate() {
 
 				alert('ИНН должно содержать 10 цифр.');
 			else
-				order_form.submit();
+				//order_form.submit();
+				return 'valid'
 		}
 	}
+	return 'invalid'
 }
 
 function define_customer(value) {
