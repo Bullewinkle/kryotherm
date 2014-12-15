@@ -904,7 +904,10 @@
        if (count($array) > 0)
        {
            $action = $_SERVER['REQUEST_URI'];
-
+           $html .= '<script type="text/javascript">
+                    window.kryotherm || (window.kryotherm = {});
+                    window.kryotherm.cart ='. json_encode($array)
+               .'</script>';
            $html .= '<div style="height: 54px"><a href="/">В каталог</a> > <a href="/cart.php" class="active">Корзина</a></div>
                      <h1>Корзина</h1>
                      <div class="clearfloat" style="width: 100%"></div>
