@@ -1062,7 +1062,7 @@
                 </script>';
 
            $html .= '<br /><h2>Ваши данные:</h2>
-                     <form name="order_form" action="/cart.php&exec_order=send" method="post">
+                     <form class="js-place-order" name="order_form" action="/cart.php&exec_order=send" method="post">
                      <table width="60%" class="order_form">
                        <tr>
                            <td width="30%">Заказчик:</td>
@@ -1171,7 +1171,7 @@
                        </tr>
                        <tr>
                            <td></td>
-                           <td><input type="button" value="Подтвердить заказ" onClick="validate();"></td>
+                           <td><input type="submit" value="Подтвердить заказ"></td>
                        </tr>
                      </table>
                      </form><br />
