@@ -1,0 +1,103 @@
+body{
+  color:black; background: #040913 url(images/head.jpg) right top no-repeat;
+  font-family:Arial;
+  margin:0px; padding:0px; width:100%; height:100%;
+}
+
+a { text-decoration:underline; color:black; font-family:Georgia; }
+a:hover{ text-decoration:none; }
+
+h1{ font-family:Georgia; font-size:24px; font-weight:normal; padding-bottom:5px; }
+img{ border:0px; vertical-align: middle;}
+table{ border:0px; }
+
+#main{ width:100%; height:100%; }
+
+#head{ height:135px; font-family:Georgia; font-size:16px; padding-bottom:20px; }
+#head td{ color:white; }
+#head p{ font-size:50px; display:inline;}
+#head a p{ color:white; text-decoration:none; }
+#head a:hover p{ color:white; text-decoration:underline; }
+
+#cont{
+  background:white url(images/center-bg.jpg) left repeat-y;
+  width:100%; height:100%;
+}
+
+#centr{ background:url(images/center-bg.jpg) right repeat-y; width:100%; height:100%;  }
+#headl{ background:url(images/head-left.jpg) left top no-repeat; width:100%; height:100%; }
+#headr{ background:url(images/head-right.jpg) right top no-repeat; width:100%; height:100%; }
+#footl{ background:url(images/foot-left.jpg) left bottom no-repeat; width:100%; height:100%; }
+#footr{ background:url(images/foot-right.jpg) right bottom no-repeat; width:100%; height:100%; }
+
+#cont{ font-size:14px; }
+.main td{ padding:0px 12px; font-size:14px; }
+
+.button1{
+  line-height:31px; height:31px; width:107px; float:right;
+  margin-right:12px;
+  background:url(images/button1.gif) no-repeat;
+  text-align:center; vertical-align:bottom;
+}
+
+.button2{
+  line-height:31px; height:31px; width:107px; float:left;
+  margin-right:12px; margin-top:7px;
+  background:url(images/button2.gif) no-repeat;
+  text-align:center; vertical-align:bottom;
+}
+
+.button3 {
+  line-height:31px; height:31px; width:107px; float:left;
+  margin-right:12px; margin-top:7px;
+  background:url(images/button3.gif) no-repeat;
+  text-align:center; vertical-align:bottom;
+}
+
+.modtitle{ font-size:24px; }
+
+#modules{ padding:3px 30px; }
+#modules div{ height:50px; vertical-align:top; white-space:nowrap; }
+#modules a{ font-size:20px; height:50px; line-height:35px; }
+
+#submenu {margin-left: 48px;}
+#submenu a {font-size: 12px;}
+
+#dataTable th{ background-color:#bfd7ed; color:#415b7b; font-size:14px; font-weight:normal; }
+#dataTable td, #dataTable th{padding:5px; }
+
+
+.dataTableRow0{ background-color:white; }
+.dataTableRow1{ background-color:#f1f7fc; }
+.dataTableRowOver{ background-color:#e5edf4; }
+
+#editor{ font-size:12px; }
+#editor a{ font-size:16px; }
+
+#foot{
+  height:30px; padding:0px 49px 3px 0px;
+  background:black url(images/foot.jpg) right bottom no-repeat;
+}
+
+td.pr3 {padding-right: 3%;}
+.dot{   background: url(images/dot.jpg) repeat-x left center; 
+	    width: 90%; 
+        height: 21px; 
+        position: relative;
+        left: 5%;    
+    }
+td.tac, th.tac {text-align: center;}
+td.tal, th.tal {text-align: left;}
+td.tar, th.tar {text-align: right;}
+
+.red {color: red;}
+.green {color: green;}
+
+.settings td {font-size: 12px;}
+span.green {color: #FF6600}
+#dataTable a{ font-size:20px; }
+td.small {font-size: 12px;}
+#baner_info a {font-size: 14px; color: blue;}
+#baner_info span {color: blue; font-family: georgia} 
+
+

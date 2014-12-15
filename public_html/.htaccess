@@ -1,0 +1,9 @@
+Options +FollowSymlinks
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME}       !-s
+RewriteRule ^(.*)$ /translater.php?request_url=/$1 [L]
+
+
+AddDefaultCharset cp1251
