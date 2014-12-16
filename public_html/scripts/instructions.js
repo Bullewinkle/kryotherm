@@ -34,17 +34,51 @@ $(document).ready(function () {
 	 */
 
 	var $orderForm = $('.js-place-order');
-	$orderForm.on('submit',function (e) {
-		console.log(this.action, e);
-		if (validate() === 'valid' ) {
-			return true
-		}
-		else {
-			return false
-		}
-	});
+	$orderForm.on('submit', validate);
 
 });
+
+function validate() {
+	var customer = $("select[name='customer']");
+	var order_form = $("form[name='order_form']");
+	var error = '';
+	var inn = $("input[name='inn']").val();
+	var nonum = false;
+
+
+	for (var i = 0; i < inn.length; i++) {
+		var s = parseInt(inn.substr(i, 1));
+
+		if (isNaN(s)) {
+			nonum = true;
+		}
+	}
+
+
+	var exclusion = ['patronymic', 'fax', 'okpo', 'contactperson'];
+
+	$.each(order_form.find("input"),
+		function (k, v) {
+			if ( $.inArray( $(v).attr("name"), exclusion ) == -1 && $(v).val() == '' )
+				error += $(v).parent("td").prev("td").text() + '\n';
+		});
+
+	if (error) alert('Заполните поля:\n' + error);
+	else {
+		if ((inn.length !== 12 && customer.val() == 1) || (nonum && customer.val() == 1))
+
+			alert('ИНН должно содержать 12 цифр.');
+		else {
+			if ((inn.length !== 10 && customer.val() == 2) || (nonum && customer.val() == 2))
+
+				alert('ИНН должно содержать 10 цифр.');
+			else
+			//order_form.submit();
+				return true
+		}
+	}
+	return true
+}
 
 function list_processing(list) {
 	var curent = $(list);
@@ -96,52 +130,13 @@ function ajax_request(request, update) {
 			$(".load").fadeOut("slow");
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
+			$(".loading").fadeOut("slow");
+			$(".load").fadeOut("slow");
 			alert("Error... " + textStatus + "        " + errorThrown);
 		}
 	});
 }
 
-function validate() {
-	var customer = $("select[name='customer']");
-	var order_form = $("form[name='order_form']");
-	var error = '';
-	var inn = $("input[name='inn']").val();
-	var nonum = false;
-
-
-	for (var i = 0; i < inn.length; i++) {
-		var s = parseInt(inn.substr(i, 1));
-
-		if (isNaN(s)) {
-			nonum = true;
-		}
-	}
-
-
-	var exclusion = ['patronymic', 'fax', 'okpo', 'contactperson'];
-
-	$.each(order_form.find("input"),
-		function (k, v) {
-			if ( $.inArray( $(v).attr("name"), exclusion ) == -1 && $(v).val() == '' )
-				error += $(v).parent("td").prev("td").text() + '\n';
-		});
-
-	if (error) alert('Заполните поля:\n' + error);
-	else {
-		if ((inn.length !== 12 && customer.val() == 1) || (nonum && customer.val() == 1))
-
-			alert('ИНН должно содержать 12 цифр.');
-		else {
-			if ((inn.length !== 10 && customer.val() == 2) || (nonum && customer.val() == 2))
-
-				alert('ИНН должно содержать 10 цифр.');
-			else
-				//order_form.submit();
-				return 'valid'
-		}
-	}
-	return 'invalid'
-}
 
 function define_customer(value) {
 	document.location.href = '/cart.php&exec_order=form&customer=' + value;
