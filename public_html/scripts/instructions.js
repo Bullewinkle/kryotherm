@@ -33,8 +33,31 @@ $(document).ready(function () {
 	 }
 	 */
 
-	var $orderForm = $('.js-place-order');
-	$orderForm.on('submit', validate);
+	var $orderForm = $('.js-place-order-form');
+	//$orderForm.on('submit', validate);
+
+	window.kryotherm.requireUrl = 'http://193.200.10.117:8080/cgi-bin/cgi_link'
+
+	window.kryotherm || (window.kryotherm = {});
+	window.kryotherm.paymentData = {
+		AMOUNT: '29',
+		CURRENCY: 'RUB',
+		ORDER: '20141216090747',
+		DESC: 'Red Book',
+		TERMINAL: '79036829',
+		TRTYPE: '1',
+		KEY: 'C50E41160302E0F5D6D59F1AA3925C45',
+		MAC_DATA: '2293RUB142014121609074710TEST_MERCH1579036768621999987903676817lakhtin@psbank.ru11142014121609075816F2B2DD7E603A7ADA63http://kryotherm.hol.es/',
+		MERCH_NAME: 'TEST_MERCH',
+		MERCHANT: '790367686219999',
+		EMAIL: 'lakhtin@psbank.ru',
+		TIMESTAMP: '20141216090758',
+		NONCE: 'F2B2DD7E603A7ADA',
+		BACKREF: 'http://kryotherm.hol.es/',
+		P_SIGN: 'eeb0a77cd9793041f0e5e7ef29be7c07a9067853',
+		LANG: '',
+		SERVICE: ''
+	}
 
 });
 

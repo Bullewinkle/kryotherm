@@ -1062,7 +1062,7 @@
                 </script>';
 
            $html .= '<br /><h2>Ваши данные:</h2>
-                     <form class="js-place-order" name="order_form" action="/cart.php&exec_order=send" method="post">
+                     <form class="js-place-order-form" name="order_form" action="/cart.php&exec_order=send" method="post">
                      <table width="60%" class="order_form">
                        <tr>
                            <td width="30%">Заказчик:</td>
@@ -1175,6 +1175,64 @@
                        </tr>
                      </table>
                      </form><br />
+<form name="payment" target="payment-frame" method="post" action="http://193.200.10.117:8080/cgi-bin/cgi_link">
+	<label for="AMOUNT">AMOUNT <br/>
+		<input name="AMOUNT" id="AMOUNT" type="text" value="29"/>
+	</label><br/>
+	<label for="CURRENCY">CURRENCY <br/>
+		<input name="CURRENCY" id="CURRENCY" type="text" value="RUB"/>
+	</label><br/>
+	<label for="ORDER">ORDER <br/>
+		<input name="ORDER" id="ORDER" type="text" value="20141216090747"/>
+	</label><br/>
+	<label for="DESC">DESC <br/>
+		<input name="DESC" id="DESC" type="text" value="Red Book"/>
+	</label><br/>
+	<label for="TERMINAL">TERMINAL <br/>
+		<input name="TERMINAL" id="TERMINAL" type="text" value="79036829"/>
+	</label><br/>
+	<label for="TRTYPE">TRTYPE <br/>
+		<input name="TRTYPE" id="TRTYPE" type="text" value="1"/>
+	</label><br/>
+	<label for="KEY">KEY <br/>
+		<input name="KEY" id="KEY" type="text" value="C50E41160302E0F5D6D59F1AA3925C45"/>
+	</label><br/>
+	<label for="MAC_DATA">MAC_DATA <br/>
+		<input name="MAC_DATA" id="MAC_DATA" type="text" value="2293RUB142014121609074710TEST_MERCH1579036768621999987903676817lakhtin@psbank.ru11142014121609075816F2B2DD7E603A7ADA63http://kryotherm.hol.es/" />
+	</label><br/>
+	<br/>
+	<label for="MERCH_NAME">MERCH_NAME <br/>
+		<input name="MERCH_NAME" id="MERCH_NAME" type="text" value="TEST_MERCH"/>
+	</label><br/>
+	<label for="MERCHANT">MERCHANT <br/>
+		<input name="MERCHANT" id="MERCHANT" type="text" value="790367686219999"/>
+	</label><br/>
+	<label for="EMAIL">EMAIL <br/>
+		<input name="EMAIL" id="EMAIL" type="text" value="lakhtin@psbank.ru"/>
+	</label><br/>
+	<label for="TIMESTAMP">TIMESTAMP <br/>
+		<input name="TIMESTAMP" id="TIMESTAMP" type="text" value="20141216090758"/>
+	</label><br/>
+	<label for="NONCE">NONCE <br/>
+		<input name="NONCE" id="NONCE" type="text" value="F2B2DD7E603A7ADA"/>
+	</label><br/>
+	<label for="BACKREF">BACKREF <br/>
+		<input name="BACKREF" id="BACKREF" type="text" value="http://kryotherm.hol.es/"/>
+	</label><br/>
+	<label for="P_SIGN">P_SIGN <br/>
+		<input name="P_SIGN" id="P_SIGN" type="text" value="eeb0a77cd9793041f0e5e7ef29be7c07a9067853" />
+	</label><br/>
+	<label for="LANG">LANG <br/>
+		<input name="LANG" id="LANG" type="text" value=""/>
+	</label><br/>
+	<label for="SERVICE">SERVICE <br/>
+		<input name="SERVICE" id="SERVICE" type="text" value=""/>
+	</label><br/>
+	<input type="submit" value="Submit"/>
+</form>
+
+<iframe class="payment-frame" src="about:blank" name="payment-frame" frameborder="0"></iframe>
+
 
                      ';
 

@@ -230,3 +230,8 @@ div#help2 iframe
 }
 div#help_holder { position: relative; }
 
+.payment-frame {
+	width: 100%;
+	height: 500px;
+}
+
