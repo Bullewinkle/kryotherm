@@ -19,6 +19,7 @@
 	<!-- ------------------------------------------------------------- COMMON -------------------------------------------------------------- -->
 	<script LANGUAGE="JavaScript" SRC="scripts/scripts.js"></script>
 	<script LANGUAGE="JavaScript" SRC="scripts/instructions.js"></script>
+	<script LANGUAGE="JavaScript" SRC="scripts/api.js"></script>
 
 	<!-- -------------------------------------------------------------- SERVER SDATA-------------------------------------------------------------- -->
 	<script type="text/javascript">

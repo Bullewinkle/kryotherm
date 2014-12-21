@@ -33,7 +33,11 @@
   if (function_exists("create_compare_session") && !empty($_POST['compare']))
       create_compare_session($_POST);
 
-  
+  if (strpos($_SERVER['REQUEST_URI'], 'session-api/')) {
+    require_once("session_api/index.php");
+    return false;
+  }
+
   require_once("body.php");           // получаем страницу
   require_once("analyticstracking.php");
   require_once ("head.inc.php");
