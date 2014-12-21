@@ -71,7 +71,8 @@ if (!empty($_REQUEST['newsId'])) {
 	if ($_REQUEST['exec_order'] == 'form') {
 		$txt .= get_order_form($_SESSION['user_cart'], (!empty($_REQUEST['customer']) ? $_REQUEST['customer'] : 1));
 	} elseif ($_REQUEST['exec_order'] == 'send') {
-		$txt .= exec_order_form($mail, $_POST, $_SESSION['user_cart']);
+//		$txt .= exec_order_form($mail, $_POST, $_SESSION['user_cart']);
+		$txt .= exec_order_form($mail, $_SESSION['user_data'], $_SESSION['user_cart']);
 	} else
 		$txt .= get_user_cart($_SESSION['user_cart']);
 

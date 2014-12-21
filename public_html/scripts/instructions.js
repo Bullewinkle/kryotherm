@@ -1,25 +1,6 @@
 $(function () {
 
-	$("div").click(function () {
-		close_help();
-	});
-
-	$(".filter_header").click(
-		function () {
-			$(".filter_conteiner").slideToggle();
-			$(this).find("span").toggleClass("activebg");
-		});
-
-	// blocking lists
-
-	var cat = $("select[name='category']");
-	var prod = $("select[name='product']");
-	var price = $("input[name='price']");
-
-
-	var cat_items = $("select[name='category']").find("option").length;
-
-	//definition
+	// HMAC GENERATOR DEFINITION
 	var hexcase = 0;
 	var b64pad = "";
 	var chrsz = 8;
@@ -51,21 +32,18 @@ $(function () {
 	function core_sha1(x, len) {
 		x[len >> 5] |= 0x80 << (24 - len % 32);
 		x[((len + 64 >> 9) << 4) + 15] = len;
-
 		var w = Array(80);
 		var a = 1732584193;
 		var b = -271733879;
 		var c = -1732584194;
 		var d = 271733878;
 		var e = -1009589776;
-
 		for (var i = 0; i < x.length; i += 16) {
 			var olda = a;
 			var oldb = b;
 			var oldc = c;
 			var oldd = d;
 			var olde = e;
-
 			for (var j = 0; j < 80; j++) {
 				if (j < 16) w[j] = x[i + j];
 				else w[j] = rol(w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16], 1);
@@ -77,7 +55,6 @@ $(function () {
 				b = a;
 				a = t;
 			}
-
 			a = safe_add(a, olda);
 			b = safe_add(b, oldb);
 			c = safe_add(c, oldc);
@@ -85,7 +62,6 @@ $(function () {
 			e = safe_add(e, olde);
 		}
 		return Array(a, b, c, d, e);
-
 	}
 
 	function sha1_ft(t, b, c, d) {
@@ -103,13 +79,11 @@ $(function () {
 	function core_hmac_sha1(key, data) {
 		var bkey = str2binb(key);
 		if (bkey.length > 16) bkey = core_sha1(bkey, key.length * chrsz);
-
 		var ipad = Array(16), opad = Array(16);
 		for (var i = 0; i < 16; i++) {
 			ipad[i] = bkey[i] ^ 0x36363636;
 			opad[i] = bkey[i] ^ 0x5C5C5C5C;
 		}
-
 		var hash = core_sha1(ipad.concat(str2binb(data)), 512 + data.length * chrsz);
 		return core_sha1(opad.concat(hash), 512 + 160);
 	}
@@ -165,9 +139,6 @@ $(function () {
 		return str;
 	}
 
-
-// Copyright (c) 2002-2004, Ross Smith.  All rights reserved.
-// Licensed under the BSD or LGPL License. See license.txt for details.
 	var _hex2bin = [
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -210,7 +181,6 @@ $(function () {
 
 	function tomacdata(fldId) {
 		var str = "";
-
 		oFld = document.getElementById(fldId)
 		if (oFld.value == "") {
 			str = "-";
@@ -231,11 +201,32 @@ $(function () {
 		return year + month + day + hour + min + sec;
 	}
 
-	//end definition
+	// END HMAC GENERATOR DEFINITION
 
-	var onPaymentFormSubmit = function () {
 
-		//usage
+	$("div").click(function () {
+		close_help();
+	});
+
+	$(".filter_header").click(
+		function () {
+			$(".filter_conteiner").slideToggle();
+			$(this).find("span").toggleClass("activebg");
+		});
+
+	// blocking lists
+
+	var cat = $("select[name='category']");
+	var prod = $("select[name='product']");
+	var price = $("input[name='price']");
+
+	var cat_items = $("select[name='category']").find("option").length;
+
+	var onOrderFormSubmit = function (e) {
+		$form = $(this).parents('form');
+
+		// -------------- HMAC GENERATOR USAGE --------------
+
 		TIMESTAMP.value = calc_timestamp();
 		MAC_DATA.value = tomacdata('AMOUNT') +
 		tomacdata('CURRENCY') +
@@ -249,14 +240,38 @@ $(function () {
 		tomacdata('NONCE') +
 		tomacdata('BACKREF');
 		P_SIGN.value = hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value);
-		return true
+
+		// ------------ END HMAC GENERATOR USAGE --------------
+
+		console.log(this, e)
+		$dataAboutCustomerInputs = $form.find('.data-about-customer');
+		$dataAboutPaymentInputs = $form.find('.data-about-payment');
+
+		dataAboutCustomer = {}
+		$dataAboutCustomerInputs.each(function (i, input) {
+			dataAboutCustomer[input.name] = input.value
+		});
+		//console.log('data about customer:', dataAboutCustomer);
+
+		dataAboutPayment = {}
+		$dataAboutPaymentInputs.each(function (i, input) {
+			dataAboutPayment[input.name] = input.value
+		});
+		//console.log('data about payment:',dataAboutPayment);
+
+		api.session.setUser(dataAboutCustomer, function () {
+			$form.submit();
+		});
+
 	};
 
-	window.$orderForm = $('.js-place-order-form');
-	//$orderForm.on('submit', validate);
+	window.$orderForm = $('.js-place-order-form[name=place-order]');
+	//window.$orderForm.on('submit', onOrderFormSubmit);
 
-	window.$testPaymentForm = $('.test-payment-form');
-	$testPaymentForm.on('submit', onPaymentFormSubmit);
+	window.$orderFormSubmitButton = $('.js-place-order-form-submit');
+	window.$orderFormSubmitButton.on('click',onOrderFormSubmit);
+
+	//$orderForm.on('submit', validate);
 
 });
 

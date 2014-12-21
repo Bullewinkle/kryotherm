@@ -33,14 +33,22 @@
   if (function_exists("create_compare_session") && !empty($_POST['compare']))
       create_compare_session($_POST);
 
-  if (strpos($_SERVER['REQUEST_URI'], 'session-api/')) {
-    require_once("session_api/index.php");
-    return false;
+// DO NOT INSERT ANY OUTPUT BEFORE THIS LINES, JUST AFTER !!!
+
+  if (strpos($_SERVER['REQUEST_URI'], 'api/')) {           // API
+
+    if (strpos($_SERVER['REQUEST_URI'], 'api/session/')) {    // SESSION
+      require_once("api/session/index.php");
+    }
+
+
+  } else if(!strpos($_SERVER['REQUEST_URI'], 'session-api/')) {
+
+    require_once("body.php");           // получаем страницу
+    require_once("analyticstracking.php");
+    require_once ("head.inc.php");
+    require_once ("foot.inc.php");
+
   }
 
-  require_once("body.php");           // получаем страницу
-  require_once("analyticstracking.php");
-  require_once ("head.inc.php");
-
-  require_once ("foot.inc.php");
 ?>

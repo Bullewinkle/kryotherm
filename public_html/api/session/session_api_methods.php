@@ -6,8 +6,6 @@ function set_user_data() {
 
 	if (!empty($data)) {
 		$_SESSION['user_data'] = $data;
-	} else {
-		unset($_SESSION['user_data']);
 	}
 
 	$result = $_SESSION['user_data'];
@@ -29,6 +27,10 @@ function get_user_data() {
 	//$result = prettyPrint($result); // if you want to see formatted JSON - you can do so.
 
 	return $result;
+}
+
+function unset_user_data() {
+	unset($_SESSION['user_data']);
 }
 
 ?>

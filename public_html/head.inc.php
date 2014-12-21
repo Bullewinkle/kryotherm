@@ -14,21 +14,21 @@
 	<!-- -------------------------------------------------------------- DEPS -------------------------------------------------------------- -->
 	<script LANGUAGE="JavaScript" SRC="scripts/jquery.js"></script>
 	<script LANGUAGE="JavaScript" SRC="scripts/jquery.validate.min.js"></script>
-
 	<script LANGUAGE="JavaScript" SRC="scripts/underscore-min.js"></script>
+	<!-- ----------------------------------------------------------- REQUIREMENTS -------------------------------------------------------------- -->
+	<script LANGUAGE="JavaScript" SRC="scripts/api.js"></script>
 	<!-- ------------------------------------------------------------- COMMON -------------------------------------------------------------- -->
 	<script LANGUAGE="JavaScript" SRC="scripts/scripts.js"></script>
 	<script LANGUAGE="JavaScript" SRC="scripts/instructions.js"></script>
-	<script LANGUAGE="JavaScript" SRC="scripts/api.js"></script>
 
 	<!-- -------------------------------------------------------------- SERVER SDATA-------------------------------------------------------------- -->
-	<script type="text/javascript">
+	<!-- script type="text/javascript">
 		window.kryotherm || (window.kryotherm = {});
-		window.kryotherm.$_REQUEST = 	<?= json_encode($_REQUEST); ?>;
-		window.kryotherm.$_SERVER = 	<?= json_encode($_SERVER); ?>;
-		window.kryotherm.$_ENV = 		<?= json_encode($_ENV); ?>;
-		window.kryotherm.$_FILES = 		<?= json_encode($_FILES); ?>;
-	</script>
+		window.kryotherm.$_REQUEST = 	< json_encode($_REQUEST); >;
+		window.kryotherm.$_SERVER = 	< json_encode($_SERVER); >;
+		window.kryotherm.$_ENV = 		< json_encode($_ENV); >;
+		window.kryotherm.$_FILES = 		< json_encode($_FILES); >;
+	</script -->
 	<!-- ------------------------------------------------------------ END SERVER SDATA-------------------------------------------------------------- -->
 
 

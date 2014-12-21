@@ -235,3 +235,22 @@ div#help_holder { position: relative; }
 	height: 500px;
 }
 
+.hidden {
+	display: none;
+}
+
+.transition-opacity {
+	-webkit-transition: opacity .3s ease;
+	-moz-transition: opacity .3s ease;
+	-ms-transition: opacity .3s ease;
+	-o-transition: opacity .3s ease;
+	transition: opacity .3s ease;
+}
+
+.invisible {
+	opacity: 0;
+}
+.visible {
+	visibility: visible;
+	opacity: 1;
+}

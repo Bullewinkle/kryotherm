@@ -961,6 +961,7 @@ function get_order_form($array, $customer) {
 }
 
 function exec_order_form($mail, $send_data, &$order_data) {
+	$send_data = (array) $send_data;
 	$html .= '<script  type="text/javascript">
 		window.kryotherm || (window.kryotherm = {});
 		window.kryotherm.orderFormArgs =' . json_encode(func_get_args()) . '
@@ -1054,7 +1055,7 @@ function order_data_definer() {
 		'descript' => 'Комментарии пользователя',
 		'patronymic' => 'Отчество',
 		'surname' => 'Фамилия',
-		'adres' => 'Адрес грузополучателя',
+		'adress' => 'Адрес грузополучателя',
 		'name' => 'Имя',
 		'mail' => 'E-mail'
 	);
