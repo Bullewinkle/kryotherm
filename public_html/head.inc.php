@@ -2,7 +2,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="google-site-verification" content="YhctPoYyqqfMEjorlzFjBjp-LKawZ0vMqiBBVl3pArA"/>
 	<title><?= ((!empty($title)) ? $title : DEF_TITLE); ?></title>
 	<meta name="description" content="<?= ((!empty($desc)) ? $desc : DEF_DESC); ?>"/>
@@ -22,13 +22,13 @@
 	<script LANGUAGE="JavaScript" SRC="scripts/instructions.js"></script>
 
 	<!-- -------------------------------------------------------------- SERVER SDATA-------------------------------------------------------------- -->
-	<!-- script type="text/javascript">
+	<script type="text/javascript">
 		window.kryotherm || (window.kryotherm = {});
-		window.kryotherm.$_REQUEST = 	< json_encode($_REQUEST); >;
-		window.kryotherm.$_SERVER = 	< json_encode($_SERVER); >;
-		window.kryotherm.$_ENV = 		< json_encode($_ENV); >;
-		window.kryotherm.$_FILES = 		< json_encode($_FILES); >;
-	</script -->
+		window.kryotherm.$_REQUEST = 	<?= json_encode($_REQUEST); ?>;
+		window.kryotherm.$_SERVER = 	<?= json_encode($_SERVER); ?>;
+		window.kryotherm.$_ENV = 		<?= json_encode($_ENV); ?>;
+		window.kryotherm.$_GET = 		<?= json_encode($_GET); ?>;
+	</script >
 	<!-- ------------------------------------------------------------ END SERVER SDATA-------------------------------------------------------------- -->
 
 
@@ -51,9 +51,9 @@
 <!-- Start Header -->
 <div class="wr">
 	<div class="header">
-		<div class="slog">Производство термоэлектрических модулей и&nbsp;комплексных систем охлаждения</div>
-		<div class="logo"><a href="http://kryotherm.ru/ru/" title="Главнвя страница сайта kryotherm.ru"><img
-					src="/img/logo.jpg" alt="криотерм" border="0" align="left"/></a></div>
+		<div class="slog">РџСЂРѕРёР·РІРѕРґСЃС‚РІРѕ С‚РµСЂРјРѕСЌР»РµРєС‚СЂРёС‡РµСЃРєРёС… РјРѕРґСѓР»РµР№ Рё&nbsp;РєРѕРјРїР»РµРєСЃРЅС‹С… СЃРёСЃС‚РµРј РѕС…Р»Р°Р¶РґРµРЅРёСЏ</div>
+		<div class="logo"><a href="http://kryotherm.ru/ru/" title="Р“Р»Р°РІРЅРІСЏ СЃС‚СЂР°РЅРёС†Р° СЃР°Р№С‚Р° kryotherm.ru"><img
+					src="/img/logo.jpg" alt="РєСЂРёРѕС‚РµСЂРј" border="0" align="left"/></a></div>
 		<div class="flags">
 			<ul>
 				<li><a href="http://kryotherm.ru/ru/" title=""><img src="/img/flag_rf.jpg" border="0" alt="rf"/></a>
@@ -82,16 +82,16 @@
 		</div>
 		<div class="mh">
 			<ul>
-				<li><a href="http://kryotherm.ru/ru/" title="">Главная</a></li>
-				<li><a href="http://kryotherm.ru/ru/about-company.html" title="">О компании</a></li>
-				<li><a href="http://kryotherm.ru/ru/tem-construction/" title="">Технологии</a></li>
-				<li><a href="/" title="">Продукция</a></li>
-				<li><a href="/cart.php" title="">Корзина</a></li>
-				<li><a href="http://kryotherm.ru/ru/technical-support.html" title="">Тех.поддержка</a></li>
-				<li><a href="http://kryotherm.ru/ru/tests.html" title="">Испытания</a></li>
-				<li><a href="http://kryotherm.ru/ru/download-catalog.html" title="">Электронные каталоги</a></li>
-				<li><a href="http://kryotherm.ru/ru/contact-us.html" title="">Контакты</a></li>
-				<li><a href="http://kryotherm.ru/ru/vacancy.html" title="">Вакансии</a></li>
+				<li><a href="http://kryotherm.ru/ru/" title="">Р“Р»Р°РІРЅР°СЏ</a></li>
+				<li><a href="http://kryotherm.ru/ru/about-company.html" title="">Рћ РєРѕРјРїР°РЅРёРё</a></li>
+				<li><a href="http://kryotherm.ru/ru/tem-construction/" title="">РўРµС…РЅРѕР»РѕРіРёРё</a></li>
+				<li><a href="/" title="">РџСЂРѕРґСѓРєС†РёСЏ</a></li>
+				<li><a href="/cart.php" title="">РљРѕСЂР·РёРЅР°</a></li>
+				<li><a href="http://kryotherm.ru/ru/technical-support.html" title="">РўРµС….РїРѕРґРґРµСЂР¶РєР°</a></li>
+				<li><a href="http://kryotherm.ru/ru/tests.html" title="">РСЃРїС‹С‚Р°РЅРёСЏ</a></li>
+				<li><a href="http://kryotherm.ru/ru/download-catalog.html" title="">Р­Р»РµРєС‚СЂРѕРЅРЅС‹Рµ РєР°С‚Р°Р»РѕРіРё</a></li>
+				<li><a href="http://kryotherm.ru/ru/contact-us.html" title="">РљРѕРЅС‚Р°РєС‚С‹</a></li>
+				<li><a href="http://kryotherm.ru/ru/vacancy.html" title="">Р’Р°РєР°РЅСЃРёРё</a></li>
 			</ul>
 		</div>
 		<!--begin of Top100--><a href="http://top100.rambler.ru/top100/"><img
@@ -111,7 +111,7 @@
 					</form>
 
 					<p class="title dec-none"><a href="/" style="color: black; text-decoration: none;">
-							Интернет-магазин </a></p>
+							РРЅС‚РµСЂРЅРµС‚-РјР°РіР°Р·РёРЅ </a></p>
 					<ul><?= getCatalog($auth, 2, 0, (!empty($_REQUEST['idCat']) ? $_REQUEST['idCat'] : 0)) ?></ul>
 					<?
 
@@ -119,13 +119,13 @@
 						?>
 						<span class="dec-none">
                <a href="/cart.php" style="text-decoration: none;">
-				   <span class="korzina-t title"><b>Корзина</b></span></a></span>
+				   <span class="korzina-t title"><b>РљРѕСЂР·РёРЅР°</b></span></a></span>
 						<p class="ot-37"><?= ((function_exists("cart_status")) ? cart_status($_SESSION['user_cart']) : ""); ?></p>
 
 						<br/>
 						<span class="dec-none">
                <a href="/compare.php" style="text-decoration: none;">
-				   <span class="compare-t title"><b>Сравнение</b></span></a></span>
+				   <span class="compare-t title"><b>РЎСЂР°РІРЅРµРЅРёРµ</b></span></a></span>
 						<p class="ot-37"><?= ((function_exists("compare_status")) ? compare_status($_SESSION['compare']) : ""); ?></p>
 
 						<? require_once(CATALOG_SCRIPT_DIR . "filter.php"); ?>
@@ -137,13 +137,13 @@
 						?>
 						<span class="dec-none">
                <a href="/cart.php">
-				   <span class="korzina-t title"><b>Корзина</b></span></a></span>
+				   <span class="korzina-t title"><b>РљРѕСЂР·РёРЅР°</b></span></a></span>
 						<p class="ot-37"><?= ((function_exists("cart_status")) ? cart_status($_SESSION['user_cart']) : ""); ?></p>
 
 						<br/>
 						<span class="dec-none">
                <a href="/cart.php">
-				   <span class="compare-t title"><b>Сравнение</b></span></a></span>
+				   <span class="compare-t title"><b>РЎСЂР°РІРЅРµРЅРёРµ</b></span></a></span>
 						<p class="ot-37"><?= ((function_exists("compare_status")) ? compare_status($_SESSION['compare']) : ""); ?></p>
 
 						<? require_once(CATALOG_SCRIPT_DIR . "filter.php");?>
@@ -153,6 +153,6 @@
 					?>
 				</div>
 			</div>
-			<div class="center content">   <!-- колонка с содержимым -->
-				<div class="cont" <?= ($show_right ? "style='width: 100%'" : "") ?>>         <!-- вторая колонка -->
+			<div class="center content">   <!-- РєРѕР»РѕРЅРєР° СЃ СЃРѕРґРµСЂР¶РёРјС‹Рј -->
+				<div class="cont" <?= ($show_right ? "style='width: 100%'" : "") ?>>         <!-- РІС‚РѕСЂР°СЏ РєРѕР»РѕРЅРєР° -->
 <?= ((!empty($txt)) ? $txt : ""); ?>

@@ -5,7 +5,7 @@ $html .= '<script type="text/javascript">
 	window.kryotherm.customer =' . json_encode($customer) . '
 </script>';
 
-$html .= '<br /><h2>Ваши данные:</h2>
+$html .= '<br /><h2>Р’Р°С€Рё РґР°РЅРЅС‹Рµ:</h2>
 
 <!--<form class="js-place-order-form" name="order_form" action="/cart.php&exec_order=send" method="post"> -->
 
@@ -15,55 +15,55 @@ $html .= '<br /><h2>Ваши данные:</h2>
 <!-- ------------------------------------ DATA ABOUT CUSTOMER ------------------------------------- -->
 
 		<tr>
-			<td width="30%">Заказчик:</td>
+			<td width="30%">Р—Р°РєР°Р·С‡РёРє:</td>
 			<td>
 				<select class="data-about-customer" size="1" name="customer" onChange="define_customer(this.value)">
-					<option value="1" ' . (($customer == 1) ? 'selected' : '') . '>Физическое лицо</option>
-					<option value="2" ' . (($customer == 2) ? 'selected' : '') . '>Юридическое лицо</option>
+					<option value="1" ' . (($customer == 1) ? 'selected' : '') . '>Р¤РёР·РёС‡РµСЃРєРѕРµ Р»РёС†Рѕ</option>
+					<option value="2" ' . (($customer == 2) ? 'selected' : '') . '>Р®СЂРёРґРёС‡РµСЃРєРѕРµ Р»РёС†Рѕ</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>Способ доставки:</td>
+			<td>РЎРїРѕСЃРѕР± РґРѕСЃС‚Р°РІРєРё:</td>
 			<td>
 				<select class="data-about-customer" size="1" name="shipping">
 					<option value=""> --- </option>
-					<option value="СПСР-Экспресс">СПСР-Экспресс</option>
-					<option value="Грузовозов">Грузовозов</option>
-					<option value="Автотрейдинг">Автотрейдинг</option>
-					<option value="Почта России">Почта России</option>
-					<option value="Самовывоз">Самовывоз</option>
-					<option value="Другое">Другое</option>
+					<option value="РЎРџРЎР -Р­РєСЃРїСЂРµСЃСЃ">РЎРџРЎР -Р­РєСЃРїСЂРµСЃСЃ</option>
+					<option value="Р“СЂСѓР·РѕРІРѕР·РѕРІ">Р“СЂСѓР·РѕРІРѕР·РѕРІ</option>
+					<option value="РђРІС‚РѕС‚СЂРµР№РґРёРЅРі">РђРІС‚РѕС‚СЂРµР№РґРёРЅРі</option>
+					<option value="РџРѕС‡С‚Р° Р РѕСЃСЃРёРё">РџРѕС‡С‚Р° Р РѕСЃСЃРёРё</option>
+					<option value="РЎР°РјРѕРІС‹РІРѕР·">РЎР°РјРѕРІС‹РІРѕР·</option>
+					<option value="Р”СЂСѓРіРѕРµ">Р”СЂСѓРіРѕРµ</option>
 				</select>
 			</td>
 		</tr>
 		' . (($customer == '1') ? '
 		<tr>
-			<td>Имя: <span class="active">*</span></td>
+			<td>РРјСЏ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" name="name" type="text" value=""></td>
 		</tr>
 		<tr>
-			<td>Отчество:</td>
+			<td>РћС‚С‡РµСЃС‚РІРѕ:</td>
 			<td><input class="data-about-customer" name="patronymic" type="text" value=""></td>
 		</tr>
 		<tr>
-			<td>Фамилия: <span class="active">*</span></td>
+			<td>Р¤Р°РјРёР»РёСЏ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" name="surname" type="text" value=""></td>
 		</tr>
 		<tr>
-			<td>ИНН: <span class="active">*</span></td>
+			<td>РРќРќ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" name="inn" type="text" value=""></td>
 		</tr>
 		<tr>
-			<td>Адрес грузополучателя: <span class="active">*</span></td>
+			<td>РђРґСЂРµСЃ РіСЂСѓР·РѕРїРѕР»СѓС‡Р°С‚РµР»СЏ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" name="adress" type="text" value=""></td>
 		</tr>
 		<tr>
-			<td>Телефон: <span class="active">*</span></td>
+			<td>РўРµР»РµС„РѕРЅ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" name="phone" type="text" value=""></td>
 		</tr>
 		<tr>
-			<td>Факс:</td>
+			<td>Р¤Р°РєСЃ:</td>
 			<td><input class="data-about-customer" name="fax" type="text" value=""></td>
 		</tr>
 		<tr>
@@ -74,47 +74,47 @@ $html .= '<br /><h2>Ваши данные:</h2>
 		' : '
 
 		<tr>
-			<td>Полное название организации: <span class="active">*</span></td>
+			<td>РџРѕР»РЅРѕРµ РЅР°Р·РІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="organisation"></td>
 		</tr>
 		<tr>
-			<td>ИНН: <span class="active">*</span></td>
+			<td>РРќРќ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="inn"></td>
 		</tr>
 		<tr>
-			<td>КПП: <span class="active">*</span></td>
+			<td>РљРџРџ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="kpp"></td>
 		</tr>
 		<tr>
-			<td>ОКПО:</td>
+			<td>РћРљРџРћ:</td>
 			<td><input class="data-about-customer" type="text" value="" name="okpo"></td>
 		</tr>
 		<tr>
-			<td>Юридический адрес: <span class="active">*</span></td>
+			<td>Р®СЂРёРґРёС‡РµСЃРєРёР№ Р°РґСЂРµСЃ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="jaddress"></td>
 		</tr>
 		<tr>
-			<td>Фактический адрес: <span class="active">*</span></td>
+			<td>Р¤Р°РєС‚РёС‡РµСЃРєРёР№ Р°РґСЂРµСЃ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="postaladdress"></td>
 		</tr>
 		<tr>
-			<td>Банковские реквизиты: <span class="active">*</span></td>
+			<td>Р‘Р°РЅРєРѕРІСЃРєРёРµ СЂРµРєРІРёР·РёС‚С‹: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="bank"></td>
 		</tr>
 		<tr>
-			<td>ФИО Ген. директора: <span class="active">*</span></td>
+			<td>Р¤РРћ Р“РµРЅ. РґРёСЂРµРєС‚РѕСЂР°: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="gendir"></td>
 		</tr>
 		<tr>
-			<td>Контактное лицо:</td>
+			<td>РљРѕРЅС‚Р°РєС‚РЅРѕРµ Р»РёС†Рѕ:</td>
 			<td><input class="data-about-customer" type="text" value="" name="contactperson"></td>
 		</tr>
 		<tr>
-			<td>Телефон: <span class="active">*</span></td>
+			<td>РўРµР»РµС„РѕРЅ: <span class="active">*</span></td>
 			<td><input class="data-about-customer" type="text" value="" name="phone"></td>
 		</tr>
 		<tr>
-			<td>Факс:</td>
+			<td>Р¤Р°РєСЃ:</td>
 			<td><input class="data-about-customer" type="text" value="" name="fax"></td>
 		</tr>
 		<tr>
@@ -144,7 +144,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 		</tr>
 		<tr>
 			<td>TERMINAL:</td>
-			<td><input class="data-about-payment" name="TERMINAL" id="TERMINAL" type="text" value="79036768"/></td>
+			<td><input class="data-about-payment" name="TERMINAL" id="TERMINAL" type="text" value="79036829"/></td>
 		</tr>
 		<tr>
 			<td>TRTYPE:</td>
@@ -195,17 +195,17 @@ $html .= '<br /><h2>Ваши данные:</h2>
 			<td><input class="data-about-payment" name="SERVICE" id="SERVICE" type="text" value=""/></td>
 		</tr>
 		<tr>
-			<td>Комментарии пользователя:</td>
+			<td>РљРѕРјРјРµРЅС‚Р°СЂРёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ:</td>
 			<td><textarea name="descript"></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" class="vam">
-				<span class="active">*</span> &mdash; поля обязательные для заполнения.
+				<span class="active">*</span> &mdash; РїРѕР»СЏ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ.
 			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input class="js-place-order-form-submit" type="button" value="Подтвердить заказ"></td>
+			<td><input class="js-place-order-form-submit" type="button" value="РџРѕРґС‚РІРµСЂРґРёС‚СЊ Р·Р°РєР°Р·"></td>
 		</tr>
 	</table>
 </form>

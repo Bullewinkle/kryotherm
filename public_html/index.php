@@ -7,13 +7,13 @@
 
 
 
-  require_once("settings.inc.php");       // подключаем константы
-  require_once("classes/authorization.php");  // подключаем функции по работе с БД
-  require_once("functions/module.php");       // остальные функции
-  require_once("functions/menu.module.php");  // функции построения меню
+  require_once("settings.inc.php");       // РїРѕРґРєР»СЋС‡Р°РµРј РєРѕРЅСЃС‚Р°РЅС‚С‹
+  require_once("classes/authorization.php");  // РїРѕРґРєР»СЋС‡Р°РµРј С„СѓРЅРєС†РёРё РїРѕ СЂР°Р±РѕС‚Рµ СЃ Р‘Р”
+  require_once("functions/module.php");       // РѕСЃС‚Р°Р»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
+  require_once("functions/menu.module.php");  // С„СѓРЅРєС†РёРё РїРѕСЃС‚СЂРѕРµРЅРёСЏ РјРµРЅСЋ
   require_once("classes/class.phpmailer.php");
 
-  $auth = new CAuthorization();       // переменная для работы с БД
+  $auth = new CAuthorization();       // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р‘Р”
   $mail = new PHPMailer();
 
   session_start();
@@ -44,7 +44,7 @@
 
   } else if(!strpos($_SERVER['REQUEST_URI'], 'session-api/')) {
 
-    require_once("body.php");           // получаем страницу
+    require_once("body.php");           // РїРѕР»СѓС‡Р°РµРј СЃС‚СЂР°РЅРёС†Сѓ
     require_once("analyticstracking.php");
     require_once ("head.inc.php");
     require_once ("foot.inc.php");

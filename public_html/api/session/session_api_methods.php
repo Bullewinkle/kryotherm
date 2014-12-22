@@ -4,14 +4,18 @@ function set_user_data() {
 	$data = file_get_contents('php://input');
 //	$data = json_encode($data);
 //	$data = json_decode($data);
+	mb_http_output('UTF-8');
 
 	if (!empty($data)) {
 		$_SESSION['user_data'] = $data;
 	}
 
-	$result = $_SESSION['user_data'];
+	$result = $data;
 //	$result = json_encode($result);
 	//$result = prettyPrint($result); // if you want to see formatted JSON - you can do so.
+
+	$encoding = mb_detect_encoding($result, 'UTF-8', true);
+
 
 	return $result;
 }

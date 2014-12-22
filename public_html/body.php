@@ -12,15 +12,15 @@ if (!empty($_REQUEST['idCat']) ||
 
 
 if (!empty($_REQUEST['newsId'])) {
-	if ($_REQUEST['newsId'] == 'all') $r = getNews(3);   // архив
-	else                             $r = getNews(1); // конкретная новость
+	if ($_REQUEST['newsId'] == 'all') $r = getNews(3);   // Р°СЂС…РёРІ
+	else                             $r = getNews(1); // РєРѕРЅРєСЂРµС‚РЅР°СЏ РЅРѕРІРѕСЃС‚СЊ
 
 	$txt = html_entity_decode($r['content']);
 	$desc = $r['description'];
 	$keyw = $r['keywords'];
 	$title = $r['title'];
 
-	$txt .= getGallery($auth, 1, 'news');  // список прикрепленных к материалу галерей
+	$txt .= getGallery($auth, 1, 'news');  // СЃРїРёСЃРѕРє РїСЂРёРєСЂРµРїР»РµРЅРЅС‹С… Рє РјР°С‚РµСЂРёР°Р»Сѓ РіР°Р»РµСЂРµР№
 
 } elseif (!empty($_REQUEST['galleryId'])) {
 
@@ -94,9 +94,9 @@ if (!empty($_REQUEST['newsId'])) {
 		PageView($auth, intval($_REQUEST['page_id']),
 			((!empty($_REQUEST['word'])) ? mysql_real_escape_string($_REQUEST['word']) : ""), mysql_real_escape_string($_SERVER['REQUEST_URI']));
 
-	$txt .= getGallery($auth, 1, 'pages');  // список прикрепленных к материалу галерей
+	$txt .= getGallery($auth, 1, 'pages');  // СЃРїРёСЃРѕРє РїСЂРёРєСЂРµРїР»РµРЅРЅС‹С… Рє РјР°С‚РµСЂРёР°Р»Сѓ РіР°Р»РµСЂРµР№
 
-	$copyright = "&copy; Сайт создан в <br>kreazone.ru '2009";
+	$copyright = "&copy; РЎР°Р№С‚ СЃРѕР·РґР°РЅ РІ <br>kreazone.ru '2009";
 
 }
 ?>

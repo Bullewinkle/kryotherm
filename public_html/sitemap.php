@@ -4,17 +4,17 @@
   if (@is_array($_REQUEST)) foreach ($_REQUEST as $key => $value)
     if (stripos($value, "select")!==false) die("Thank you!");
 
-  require_once("settings.inc.php");       // подключаем константы
-  require_once("classes/authorization.php");  // подключаем функции по работе с БД
-  require_once("functions/module.php");         // остальные функции
-  require_once("functions/menu.module.php");  // функции построения меню
+  require_once("settings.inc.php");       // РїРѕРґРєР»СЋС‡Р°РµРј РєРѕРЅСЃС‚Р°РЅС‚С‹
+  require_once("classes/authorization.php");  // РїРѕРґРєР»СЋС‡Р°РµРј С„СѓРЅРєС†РёРё РїРѕ СЂР°Р±РѕС‚Рµ СЃ Р‘Р”
+  require_once("functions/module.php");         // РѕСЃС‚Р°Р»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
+  require_once("functions/menu.module.php");  // С„СѓРЅРєС†РёРё РїРѕСЃС‚СЂРѕРµРЅРёСЏ РјРµРЅСЋ
 
-  $auth = new CAuthorization();       // переменная для работы с БД
+  $auth = new CAuthorization();       // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р‘Р”
 
 require_once ("head.inc.php");
 ?>
 
-<h1>Карта сайта</h1>
+<h1>РљР°СЂС‚Р° СЃР°Р№С‚Р°</h1>
 
 <?
   $map = TreeMenu($auth, 0, 1, 0);

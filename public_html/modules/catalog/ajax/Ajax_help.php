@@ -1,10 +1,10 @@
 <?php
     header('Content-type: text/html; charset=utf-8');
 
-    require_once($_SERVER['DOCUMENT_ROOT']."/settings.inc.php");       // ïîäêëþ÷àåì êîíñòàíòû
-    require_once($_SERVER['DOCUMENT_ROOT']."/classes/authorization.php");  // ïîäêëþ÷àåì ôóíêöèè ïî ðàáîòå ñ ÁÄ
+    require_once($_SERVER['DOCUMENT_ROOT']."/settings.inc.php");       // Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ ÐºÐ¾Ð½ÑÑ‚Ð°Ð½Ñ‚Ñ‹
+    require_once($_SERVER['DOCUMENT_ROOT']."/classes/authorization.php");  // Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð¿Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ Ð‘Ð”
 
-    $auth = new CAuthorization();       // ïåðåìåííàÿ äëÿ ðàáîòû ñ ÁÄ
+    $auth = new CAuthorization();       // Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ Ð´Ð»Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ Ð‘Ð”
 
     $sql = "SELECT * FROM ".TBL_PREF."pages WHERE id = '".$_REQUEST['page_id']."'";
     $q = mysql_query($sql);

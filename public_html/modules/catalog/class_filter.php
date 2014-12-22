@@ -12,7 +12,7 @@ class catalog_filter
         $this->idCat = $idCat;
     }
 
-/*  определяет предка страницы
+/*  РѕРїСЂРµРґРµР»СЏРµС‚ РїСЂРµРґРєР° СЃС‚СЂР°РЅРёС†С‹
 */
     function define_parent($idCat = '')
     {
@@ -24,7 +24,7 @@ class catalog_filter
     return $parent[0]['id_parent'];
     }
 
-/*  пределяет какие выпадающие меню показывать при навигации по страницам каталога
+/*  РїСЂРµРґРµР»СЏРµС‚ РєР°РєРёРµ РІС‹РїР°РґР°СЋС‰РёРµ РјРµРЅСЋ РїРѕРєР°Р·С‹РІР°С‚СЊ РїСЂРё РЅР°РІРёРіР°С†РёРё РїРѕ СЃС‚СЂР°РЅРёС†Р°Рј РєР°С‚Р°Р»РѕРіР°
 */
     function define_lists($cat_prod)
     {
@@ -47,7 +47,7 @@ class catalog_filter
         }
     }
 
-/*  Построение списка из массива
+/*  РџРѕСЃС‚СЂРѕРµРЅРёРµ СЃРїРёСЃРєР° РёР· РјР°СЃСЃРёРІР°
 */
     function build_list($data_array, $cat_prod, $default = '')
     {
@@ -60,7 +60,7 @@ class catalog_filter
     return $list;
     }
 
-/*  получает данные для списка
+/*  РїРѕР»СѓС‡Р°РµС‚ РґР°РЅРЅС‹Рµ РґР»СЏ СЃРїРёСЃРєР°
 */
     function get_list($parent, $cat_prod, $default = '', $operator = '=')
     {
@@ -70,7 +70,7 @@ class catalog_filter
     return $list;
     }
 
-/*  Фильтр диапазонов
+/*  Р¤РёР»СЊС‚СЂ РґРёР°РїР°Р·РѕРЅРѕРІ
 */
     function range_filter($min_array, $max_array, $min_def = '', $max_def = '')
     {
@@ -133,26 +133,26 @@ class catalog_filter
     return  '<option value="'.$atr.'" '.(($atr == $def)?'selected':'').' >'.$val.'</option>';
     }
 
-/*  Фильтр электрических параметров
+/*  Р¤РёР»СЊС‚СЂ СЌР»РµРєС‚СЂРёС‡РµСЃРєРёС… РїР°СЂР°РјРµС‚СЂРѕРІ
 */
     function electro_filter($I_max='', $Q_max='', $U='', $R='', $A='', $B='', $C='', $D='', $Drus='', $di='', $sealing_type='', $HT='')
     {
         $filter = '';
         $help_ids = $this->get_help_id();
 
-        // строим фильтры которые с диапазонами
+        // СЃС‚СЂРѕРёРј С„РёР»СЊС‚СЂС‹ РєРѕС‚РѕСЂС‹Рµ СЃ РґРёР°РїР°Р·РѕРЅР°РјРё
         $data = $this->electro_filter_range_data();
 
         if (is_array($data)) foreach ($data as $k => $v )
         {
             $rf = $$v['name'];
             $filter .= '<tr><td width="33%"><img src="/img/help.gif" onClick="show_help(this, '.$help_ids[$v['name']].');" class="help_img">'.$v['title'].'</td>
-                          <td>от</td>
+                          <td>РѕС‚</td>
                           <td><select onChange="list_processing(this);" size="1" name="'.$v['name'].'[]"  style="width: 47px">
                                 <option value=""> --- </option>'.$rf[0].'
                               </select>
                           </td>
-                          <td style="text-align: center">до</td>
+                          <td style="text-align: center">РґРѕ</td>
                           <td><select onChange="list_processing(this);"  size="1" name="'.$v['name'].'[]" style="width: 47px">
                                 <option value="">---</option>'.$rf[1].'
                               </select>
@@ -161,18 +161,18 @@ class catalog_filter
         }
 
         $filter .= '</table>
-                    <p class="sub_head">Геометрические параметры</p>
+                    <p class="sub_head">Р“РµРѕРјРµС‚СЂРёС‡РµСЃРєРёРµ РїР°СЂР°РјРµС‚СЂС‹</p>
                     <table width="100%" cellpadding="0" class="electro_filter">
                    ';
 
-        // строим те, которые без диапазонов
+        // СЃС‚СЂРѕРёРј С‚Рµ, РєРѕС‚РѕСЂС‹Рµ Р±РµР· РґРёР°РїР°Р·РѕРЅРѕРІ
         $data = $this->electro_filter_data();
         if (is_array($data)) foreach ($data as $k => $v)
         {
             if ($v['name'] == 'sealing_type')
 
                 $filter .= '</table>
-                            <p class="sub_head">Опции</p>
+                            <p class="sub_head">РћРїС†РёРё</p>
                             <table width="100%" cellpadding="0" class="electro_filter">
                            ';
 
@@ -183,10 +183,10 @@ class catalog_filter
                             </td>
                         </tr>';
         }
-        // поле с ценой
+        // РїРѕР»Рµ СЃ С†РµРЅРѕР№
         /*
         $add .= '<tr>
-                  <td>Цена</td>
+                  <td>Р¦РµРЅР°</td>
                   <td colspan="4"><input name="price" type="text" value="" style="width: 119px"></td>
                 </tr>';
           */
@@ -197,22 +197,22 @@ class catalog_filter
     {
     return
     array(0 => array('title' => 'I<sub>max</sub> (A)',  'name' => 'I_max'),
-          1 => array('title' => 'Q<sub>max</sub> (Вт)', 'name' => 'Q_max'),
-          2 => array('title' => 'U (В)',  'name' => 'U'),
-          3 => array('title' => 'R (Oм)', 'name' => 'R')
+          1 => array('title' => 'Q<sub>max</sub> (Р’С‚)', 'name' => 'Q_max'),
+          2 => array('title' => 'U (Р’)',  'name' => 'U'),
+          3 => array('title' => 'R (OРј)', 'name' => 'R')
           );
     }
 
     private function electro_filter_data()
     {
     return
-    array(5  => array('title' => 'А (мм)',         'name' => 'A'),
-          6  => array('title' => 'В (мм)',         'name' => 'B'),
-          7  => array('title' => 'C (мм)',         'name' => 'C'),
-          8  => array('title' => 'D (мм)',         'name' => 'D'),
-          9  => array('title' => '&Oslash;внеш.',  'name' => 'Drus'),
-          10 => array('title' => '&Oslash;внутр.', 'name' => 'di'),
-          11 => array('title' => 'Тип герм',       'name' => 'sealing_type'),
+    array(5  => array('title' => 'Рђ (РјРј)',         'name' => 'A'),
+          6  => array('title' => 'Р’ (РјРј)',         'name' => 'B'),
+          7  => array('title' => 'C (РјРј)',         'name' => 'C'),
+          8  => array('title' => 'D (РјРј)',         'name' => 'D'),
+          9  => array('title' => '&Oslash;РІРЅРµС€.',  'name' => 'Drus'),
+          10 => array('title' => '&Oslash;РІРЅСѓС‚СЂ.', 'name' => 'di'),
+          11 => array('title' => 'РўРёРї РіРµСЂРј',       'name' => 'sealing_type'),
           12 => array('title' => 'HT',             'name' => 'HT'));
     }
 
@@ -240,7 +240,7 @@ class catalog_filter
                  'HT'    => 22);
     }
 
-/*  Получает значения для фильтров продукции
+/*  РџРѕР»СѓС‡Р°РµС‚ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ С„РёР»СЊС‚СЂРѕРІ РїСЂРѕРґСѓРєС†РёРё
 */
     function electro_filter_values($array, $category_id = '')
     {
@@ -254,7 +254,7 @@ class catalog_filter
 
            if (is_array($id_data)) foreach ($id_data as $k => $v)
                $id_set .= ','.$v['id'];
-           // составляем строку запроса с id
+           // СЃРѕСЃС‚Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ Р·Р°РїСЂРѕСЃР° СЃ id
            $id_set = substr($id_set,1);
        }
 
@@ -332,14 +332,14 @@ class catalog_filter
     return $product_data;
     }
 
-/*  Высняет большее и меньшее значение
+/*  Р’С‹СЃРЅСЏРµС‚ Р±РѕР»СЊС€РµРµ Рё РјРµРЅСЊС€РµРµ Р·РЅР°С‡РµРЅРёРµ
 */
     function max_min($data)
     {
        if (is_array($data)) return array(min($data), max($data));
     }
 
-/*  Пстроение списка электрофильтра
+/*  РџСЃС‚СЂРѕРµРЅРёРµ СЃРїРёСЃРєР° СЌР»РµРєС‚СЂРѕС„РёР»СЊС‚СЂР°
 */
     function build_electro_list($data_array, $default = '')
     {

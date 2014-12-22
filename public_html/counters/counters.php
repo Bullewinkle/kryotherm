@@ -13,17 +13,17 @@ js=13//--></script><script language="JavaScript" type="text/javascript"><!--
 d.write('<a href="http://top.mail.ru/jump?from=324030"'+
 ' target=_top><img src="http://d1.cf.b4.a0.top.list.ru/counter'+
 '?id=324030;t=130;js='+js+a+';rand='+Math.random()+
-'" alt="Ðåéòèíã@Mail.ru"'+' border=0 height=40 width=88/><\/a>')
+'" alt="Ð ÐµÐ¹Ñ‚Ð¸Ð½Ð³@Mail.ru"'+' border=0 height=40 width=88/><\/a>')
 if(11<js)d.write('<'+'!-- ')//--></script><noscript><a
 target=_top href="http://top.mail.ru/jump?from=324030"><img
 src="http://d1.cf.b4.a0.top.list.ru/counter?js=na;id=324030;t=130"
 border=0 height=40 width=88
-alt="Ðåéòèíã@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
+alt="Ð ÐµÐ¹Ñ‚Ð¸Ð½Ð³@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
 if(11<js)d.write('--'+'>')//--></script><!--/COUNTER-->
 <!-- Yandex.Metrika informer -->
 <a href="https://metrika.yandex.ru/stat/?id=25052198&amp;from=informer"
 target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/25052198/1_1_FFFFFFFF_FFFFFFFF_0_pageviews"
-style="width:80px; height:15px; border:0;" alt="Ÿíäåêñ.Œåòðèêà" title="Ÿíäåêñ.Œåòðèêà: äàííûå çà ñåãîäíß (ïðîñìîòðû)" onclick="try{Ya.Metrika.informer({i:this,id:25052198,lang:'ru'});return false}catch(e){}"/></a>
+style="width:80px; height:15px; border:0;" alt="ÑŸÐ½Ð´ÐµÐºÑ.ÐŠÐµÑ‚Ñ€Ð¸ÐºÐ°" title="ÑŸÐ½Ð´ÐµÐºÑ.ÐŠÐµÑ‚Ñ€Ð¸ÐºÐ°: Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð·Ð° ÑÐµÐ³Ð¾Ð´Ð½Ð¯ (Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ñ‹)" onclick="try{Ya.Metrika.informer({i:this,id:25052198,lang:'ru'});return false}catch(e){}"/></a>
 <!-- /Yandex.Metrika informer -->
 
 <!-- Yandex.Metrika counter -->

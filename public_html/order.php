@@ -8,13 +8,13 @@
   if (@is_array($_REQUEST)) foreach ($_REQUEST as $key => $value)
     if (stripos($value, "select")!==false) die("Thank you!");
 
-  require_once("settings.inc.php");       // подключаем константы
-  require_once("classes/authorization.php");  // подключаем функции по работе с БД
-  require_once("functions/module.php");         // остальные функции
-  require_once("functions/menu.module.php");  // функции построения меню
+  require_once("settings.inc.php");       // РїРѕРґРєР»СЋС‡Р°РµРј РєРѕРЅСЃС‚Р°РЅС‚С‹
+  require_once("classes/authorization.php");  // РїРѕРґРєР»СЋС‡Р°РµРј С„СѓРЅРєС†РёРё РїРѕ СЂР°Р±РѕС‚Рµ СЃ Р‘Р”
+  require_once("functions/module.php");         // РѕСЃС‚Р°Р»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
+  require_once("functions/menu.module.php");  // С„СѓРЅРєС†РёРё РїРѕСЃС‚СЂРѕРµРЅРёСЏ РјРµРЅСЋ
   //require_once("captcha.php");
 
-  $auth = new CAuthorization();       // переменная для работы с БД
+  $auth = new CAuthorization();       // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р‘Р”
 
   session_start();
 
@@ -27,9 +27,9 @@
       $filter = new catalog_filter($auth, $idCat);
   }
 
-   mysql_query('SET NAMES cp1251');
-   mysql_query('SET CHARACTER SET cp1251');
-   mysql_query('SET COLLATION_CONNECTION=cp1251_general_ci');
+   mysql_query('SET NAMES utf-8');
+   mysql_query('SET CHARACTER SET utf-8');
+   mysql_query('SET COLLATION_CONNECTION=utf-8_general_ci');
 
 
 
@@ -44,31 +44,31 @@
 
     if(trim($name)==""||trim($email)=="")
     {
-      echo("<script language=javascript>alert('Вы не заполнили все обязательные поля!');document.location.href='/order.php';</script>");
+      echo("<script language=javascript>alert('Р’С‹ РЅРµ Р·Р°РїРѕР»РЅРёР»Рё РІСЃРµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ!');document.location.href='/order.php';</script>");
       exit();
     };
 
     if(!empty($badcode))
     {
 
-      echo("<script language=javascript>alert('Неверно введено число с картинки !');document.location.href='/order.php';</script>");
+      echo("<script language=javascript>alert('РќРµРІРµСЂРЅРѕ РІРІРµРґРµРЅРѕ С‡РёСЃР»Рѕ СЃ РєР°СЂС‚РёРЅРєРё !');document.location.href='/order.php';</script>");
       exit();
     }
 
-    if($name=="") $name = " - не указано - ";
+    if($name=="") $name = " - РЅРµ СѓРєР°Р·Р°РЅРѕ - ";
 
     $date=date('d M Y, H:i:s');
 
-    $mess=" Запрос с сайта ".$_SERVER['SERVER_NAME']." от ".$date." \n  \n ФИО: ".$name."  \n E-Mail: ".$email." \n \n Комментарии: \n".$mess;
+    $mess=" Р—Р°РїСЂРѕСЃ СЃ СЃР°Р№С‚Р° ".$_SERVER['SERVER_NAME']." РѕС‚ ".$date." \n  \n Р¤РРћ: ".$name."  \n E-Mail: ".$email." \n \n РљРѕРјРјРµРЅС‚Р°СЂРёРё: \n".$mess;
 
-    if($email=="нет") $email = "anonymous@".$_SERVER['HTTP_HOST'];
+    if($email=="РЅРµС‚") $email = "anonymous@".$_SERVER['HTTP_HOST'];
 
     $from="FROM: ".$email." \nContent-Type: text/plain; charset=windows-1251\nContent-Transfer-Encoding: 8bit";
 
     $fostasmail=MAIL_INFO;
-    mail($fostasmail,"Запрос с сайта", $mess, $from) or  printf("<font color=red><b> НЕ </b></font>");
+    mail($fostasmail,"Р—Р°РїСЂРѕСЃ СЃ СЃР°Р№С‚Р°", $mess, $from) or  printf("<font color=red><b> РќР• </b></font>");
 
-    print "<script language='javascript'>alert('Успешно отправлено!');document.location.href='/order.php';</script>";
+    print "<script language='javascript'>alert('РЈСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅРѕ!');document.location.href='/order.php';</script>";
 
     exit;
   };
@@ -80,20 +80,20 @@
  .p10 {padding: 10px 0 0 0}
 </style>
 <div style="height: 54px;">
-<a href="/">В каталог</a> &gt; <span class="active">Задать вопрос</span>
+<a href="/">Р’ РєР°С‚Р°Р»РѕРі</a> &gt; <span class="active">Р—Р°РґР°С‚СЊ РІРѕРїСЂРѕСЃ</span>
 </div>
-<h1>Обратная связь:</h1>
+<h1>РћР±СЂР°С‚РЅР°СЏ СЃРІСЏР·СЊ:</h1>
 <form action="<?echo "$PHP_SELF?bction=send";?>" method=post>
 <table width="100%" border="0" cellpadding=10 cellspacing=5 class="order">
- <tr><td>От кого:</td></tr>
+ <tr><td>РћС‚ РєРѕРіРѕ:</td></tr>
   <tr><td><input type="text" name="name" maxlength="20" size="25" value=""></td></tr>
- <tr><td class="p10">Контактная информация:</td></tr>
+ <tr><td class="p10">РљРѕРЅС‚Р°РєС‚РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ:</td></tr>
   <tr><td><input type="text" name="email" maxlength="60" size="25" value=""></td></tr>
- <tr><td class="p10">Текст заявки или вопроса:</td></tr>
+ <tr><td class="p10">РўРµРєСЃС‚ Р·Р°СЏРІРєРё РёР»Рё РІРѕРїСЂРѕСЃР°:</td></tr>
   <tr><td><textarea name="comments" cols="50" rows="6"></textarea></td></tr>
- <tr><td class="p10">Введите число с картинки:</td></tr>
+ <tr><td class="p10">Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ СЃ РєР°СЂС‚РёРЅРєРё:</td></tr>
   <tr><td><input type='text' id='code' name='code' size='4' maxlength='4' value="<?=$_REQUEST['code'];?>"><img src='captcha.php' align='absmiddle'></td></tr>
- <tr><td><br><input type=hidden name=bction value=send> <input type="submit" value="Отправить"></td></tr>
+ <tr><td><br><input type=hidden name=bction value=send> <input type="submit" value="РћС‚РїСЂР°РІРёС‚СЊ"></td></tr>
 </table>
 
 </form>

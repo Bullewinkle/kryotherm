@@ -1,11 +1,11 @@
 <?
   @extract($HTTP_GET_VARS);
 
-  // åñëè ñãåíåðèðîâàí ôàéëîì .htaccess âíóòðåííèé ïàðàìåòð request_url
+  // ÐµÑÐ»Ð¸ ÑÐ³ÐµÐ½ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ð½ Ñ„Ð°Ð¹Ð»Ð¾Ð¼ .htaccess Ð²Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ð¹ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€ request_url
   if (!empty($_SERVER['REQUEST_URI']))
   {
-    require_once("settings.inc.php");       // ïîäêëþ÷àåì êîíñòàíòû
-    require_once("classes/authorization.php");  // ïîäêëþ÷àåì ôóíêöèè ïî ðàáîòå ñ ÁÄ
+    require_once("settings.inc.php");       // Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ ÐºÐ¾Ð½ÑÑ‚Ð°Ð½Ñ‚Ñ‹
+    require_once("classes/authorization.php");  // Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð¿Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ Ð‘Ð”
 
     $auth = new CAuthorization();
 

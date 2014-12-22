@@ -5,31 +5,31 @@ session_start ();
                 $bg = imagecolorallocate ($im, 232, 238, 247);
                 $char = $_SESSION['code'];
 
-                //создаём шум на фоне
+                //СЃРѕР·РґР°С‘Рј С€СѓРј РЅР° С„РѕРЅРµ
                 for ($i=0; $i<=128; $i++) {
-                        $color = imagecolorallocate ($im, rand(0,255), rand(0,255), rand(0,255)); //задаём цвет
-                        imagesetpixel($im, rand(2,80), rand(2,20), $color); //рисуем пиксель
+                        $color = imagecolorallocate ($im, rand(0,255), rand(0,255), rand(0,255)); //Р·Р°РґР°С‘Рј С†РІРµС‚
+                        imagesetpixel($im, rand(2,80), rand(2,20), $color); //СЂРёСЃСѓРµРј РїРёРєСЃРµР»СЊ
                 }
 
-                //выводим символы кода
+                //РІС‹РІРѕРґРёРј СЃРёРјРІРѕР»С‹ РєРѕРґР°
                 for ($i = 0; $i < strlen($char); $i++) {
-                        $color = imagecolorallocate ($im, rand(0,255), rand(0,128), rand(0,255)); //задаём цвет
+                        $color = imagecolorallocate ($im, rand(0,255), rand(0,128), rand(0,255)); //Р·Р°РґР°С‘Рј С†РІРµС‚
                         $x = 5 + $i * 20;
                         $y = rand(1, 6);
                         imagechar ($im, 5, $x, $y, $char[$i], $color);
                 }
 
-                /*/упрощённый вариант
+                /*/СѓРїСЂРѕС‰С‘РЅРЅС‹Р№ РІР°СЂРёР°РЅС‚
                 $color = imagecolorallocate($img, 0, 0, 0);
                 imagestring($im, 3, 5, 3, $char, $color);*/
 
-                //антикеширование
+                //Р°РЅС‚РёРєРµС€РёСЂРѕРІР°РЅРёРµ
                 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
                 header("Cache-Control: no-store, no-cache, must-revalidate");
                 header("Cache-Control: post-check=0, pre-check=0", false);
                 header("Pragma: no-cache");
 
-                //создание рисунка в зависимости от доступного формата
+                //СЃРѕР·РґР°РЅРёРµ СЂРёСЃСѓРЅРєР° РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РґРѕСЃС‚СѓРїРЅРѕРіРѕ С„РѕСЂРјР°С‚Р°
                 if (function_exists("imagepng")) {
                    header("Content-type: image/png");
                    imagepng($im);

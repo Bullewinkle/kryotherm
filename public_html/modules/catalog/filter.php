@@ -2,13 +2,13 @@
 
     $category = $product = '';
 
-    // если не пустой id категории
+    // РµСЃР»Рё РЅРµ РїСѓСЃС‚РѕР№ id РєР°С‚РµРіРѕСЂРёРё
     if ($idCat)
     {
         $_SESSION['filter_search'] = null;
-        // определяем предка категории
+        // РѕРїСЂРµРґРµР»СЏРµРј РїСЂРµРґРєР° РєР°С‚РµРіРѕСЂРёРё
         $parent = $filter->define_parent($idCat);
-        // если предок нулевой
+        // РµСЃР»Рё РїСЂРµРґРѕРє РЅСѓР»РµРІРѕР№
         if (!$parent)
         {
             $category = $idCat;  $product = '';
@@ -36,10 +36,10 @@
 
     $filter->electro_filter_values($electro, $_REQUEST['idCat']);
 ?>
-<div class="title filter_header">Фильтр<span></span></div>
+<div class="title filter_header">Р¤РёР»СЊС‚СЂ<span></span></div>
 <div class="filter_conteiner">
 
-<div class="load">Загрузка<br /><img src="../../img/loading_100x100.gif">
+<div class="load">Р—Р°РіСЂСѓР·РєР°<br /><img src="../../img/loading_100x100.gif">
 <!--[if lte IE 6.5]><iframe></iframe><![endif]-->
 </div>
 <div class="loading">

@@ -8,9 +8,9 @@
    // print_r($compare_data);
 
     $txt .= '<div style="height: 54px;">
-                 <a href="/">В каталог</a> &gt; <span class="active">Сравнение</span>
+                 <a href="/">Р’ РєР°С‚Р°Р»РѕРі</a> &gt; <span class="active">РЎСЂР°РІРЅРµРЅРёРµ</span>
              </div>
-             <h1>Сравнение товаров</h1>
+             <h1>РЎСЂР°РІРЅРµРЅРёРµ С‚РѕРІР°СЂРѕРІ</h1>
             ';
 
     $order = (!empty($_REQUEST['order'])?$_REQUEST['order']:'name_asc');
@@ -43,13 +43,13 @@
         }
     }
     else
-        $txt .= '<tr><td colspan="17" align="center" height="26"> Нет товаров для сравнения </td></tr>';
+        $txt .= '<tr><td colspan="17" align="center" height="26"> РќРµС‚ С‚РѕРІР°СЂРѕРІ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ </td></tr>';
 
     $txt .= '</table>';
 
     if ($count > 0)
 
-        $txt .= '<p><input type="button" value="Очистить сравнение" onClick="javascript: document.location.href=\''.$href.'&limit_begin='.$limit_begin.'&clear_compare=1\'"></p>';
+        $txt .= '<p><input type="button" value="РћС‡РёСЃС‚РёС‚СЊ СЃСЂР°РІРЅРµРЅРёРµ" onClick="javascript: document.location.href=\''.$href.'&limit_begin='.$limit_begin.'&clear_compare=1\'"></p>';
 
 
 

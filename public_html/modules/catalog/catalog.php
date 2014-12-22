@@ -66,13 +66,13 @@ function getAllCatalog($auth) {
                        ' . (!empty($image[$k]) ? '<a href="index.php?idProd=' . $v . '"><img src="' . A_PRODUCT_IMG_URL . 'small_' . $image[$k] . '" border="0" alt="' . $name[$k] . '"></a>' : '') . '
                        </div>
                        <p class="catalog_product_header"><a href="index.php?idProd=' . $v . '&idCat=' . $id_Cat[$k] . '">' . $manufacturers[$k] . '  ' . $name[$k] . '</a></p>
-                       <p class="catalog_product_price">Цена:' . (!empty($price[$k]) ? $price[$k] : ' &mdash;') . '</p>
+                       <p class="catalog_product_price">Р¦РµРЅР°:' . (!empty($price[$k]) ? $price[$k] : ' &mdash;') . '</p>
                        </div>';
 
 		if (($count) % 3 == 0) $html .= '<br class="clearfloat" />';
 		// }
 	}
-	else $html .= '<p style="text-align: center">Нет товаров</p>';
+	else $html .= '<p style="text-align: center">РќРµС‚ С‚РѕРІР°СЂРѕРІ</p>';
 	/*
 	  $html .= '<div class="catalog_footer">
 				<div class="pagesTab">
@@ -127,8 +127,8 @@ function getInnerView($auth, $param, $filter_obj = '') {
 	$first_pos = $limit_begin * $per_page;
 	$order = (!empty($_REQUEST['order']) ? $_REQUEST['order'] : 'name_asc');
 
-	$title = "Криотерм";
-	$keywords = "Термоэлектрические модули, термоэлектрические сборки";
+	$title = "РљСЂРёРѕС‚РµСЂРј";
+	$keywords = "РўРµСЂРјРѕСЌР»РµРєС‚СЂРёС‡РµСЃРєРёРµ РјРѕРґСѓР»Рё, С‚РµСЂРјРѕСЌР»РµРєС‚СЂРёС‡РµСЃРєРёРµ СЃР±РѕСЂРєРё";
 	$description = "Kryotherm";
 
 	$href = 'index.php?&idCat=' . $idCat . '&order=' . $order;
@@ -173,7 +173,7 @@ function getInnerView($auth, $param, $filter_obj = '') {
 	$r = mysql_fetch_array($q);
 
 
-	$html .= '<div style="height: 54px"><a href="/">В каталог</a>' . $pass . '</div>
+	$html .= '<div style="height: 54px"><a href="/">Р’ РєР°С‚Р°Р»РѕРі</a>' . $pass . '</div>
                 <h1>' . $r['name'] . '</h1>
                 <!--    <img src="' . A_CATALOG_IMG_URL . $r['image'] . '">  -->
                ';
@@ -234,7 +234,7 @@ function getInnerView($auth, $param, $filter_obj = '') {
 		/*
 				  $html .=
 				  (!empty($r['pdf_file'])
-				   ?'<p style="clear: both; text-align: right; margin-top: -58px;"><a href="http://'.$_SERVER['SERVER_NAME'].'/pdf_docs/'.$r['pdf_file'].'" target="_blanck" title="Скачать спецификацию">
+				   ?'<p style="clear: both; text-align: right; margin-top: -58px;"><a href="http://'.$_SERVER['SERVER_NAME'].'/pdf_docs/'.$r['pdf_file'].'" target="_blanck" title="РЎРєР°С‡Р°С‚СЊ СЃРїРµС†РёС„РёРєР°С†РёСЋ">
 						<img src="/img/pdf.gif" border="0"></a></p>'
 				   :'');
 		*/
@@ -243,7 +243,7 @@ function getInnerView($auth, $param, $filter_obj = '') {
 
 		$html .=
 			(!empty($r['pdf_file'])
-				? '<p style="clear: both;"><a href="http://' . $_SERVER['SERVER_NAME'] . '/pdf_docs/' . $r['pdf_file'] . '" target="_blank" style="background:url(/img/small_pdf.gif) no-repeat 0px 0px; padding-left:25px; height:20px; line-height:18px; display:block;">Скачать спецификацию</a></p>'
+				? '<p style="clear: both;"><a href="http://' . $_SERVER['SERVER_NAME'] . '/pdf_docs/' . $r['pdf_file'] . '" target="_blank" style="background:url(/img/small_pdf.gif) no-repeat 0px 0px; padding-left:25px; height:20px; line-height:18px; display:block;">РЎРєР°С‡Р°С‚СЊ СЃРїРµС†РёС„РёРєР°С†РёСЋ</a></p>'
 				: '');
 
 		if ($count > 0)
@@ -304,28 +304,28 @@ function get_product_content($r, $mode = '') {
           </td>';
 }
 
-/*  Заголовок таблицы продукции
+/*  Р—Р°РіРѕР»РѕРІРѕРє С‚Р°Р±Р»РёС†С‹ РїСЂРѕРґСѓРєС†РёРё
 */
 function products_header_data() {
-	return array('name' => 'Название<br />',
+	return array('name' => 'РќР°Р·РІР°РЅРёРµ<br />',
 		'I_max' => 'I<sub>max</sub> (A)',
-		'Q_max' => 'Q<sub>max</sub> (Вт)',
-		'U' => 'U<br />(В)',
-		'R' => 'R (Ом)',
-		'A' => 'A (мм)',
-		'B' => 'В (мм)',
-		'C' => 'С (мм)',
-		'D' => 'D (мм)',
-		'H' => 'H (мм)',
-		'Drus' => '&Oslash;<br />внеш.',
-		'd' => '&Oslash;<br />внутр.',
-		'sealing_type' => '<nobr>Тип герм</nobr><br />',
+		'Q_max' => 'Q<sub>max</sub> (Р’С‚)',
+		'U' => 'U<br />(Р’)',
+		'R' => 'R (РћРј)',
+		'A' => 'A (РјРј)',
+		'B' => 'Р’ (РјРј)',
+		'C' => 'РЎ (РјРј)',
+		'D' => 'D (РјРј)',
+		'H' => 'H (РјРј)',
+		'Drus' => '&Oslash;<br />РІРЅРµС€.',
+		'd' => '&Oslash;<br />РІРЅСѓС‚СЂ.',
+		'sealing_type' => '<nobr>РўРёРї РіРµСЂРј</nobr><br />',
 		'HT' => 'HT<br />',
-		'quant' => 'Кол-во шт.',
-		'price' => 'Цена (руб/шт)');
+		'quant' => 'РљРѕР»-РІРѕ С€С‚.',
+		'price' => 'Р¦РµРЅР° (СЂСѓР±/С€С‚)');
 }
 
-/*  Построение таблицы продукции
+/*  РџРѕСЃС‚СЂРѕРµРЅРёРµ С‚Р°Р±Р»РёС†С‹ РїСЂРѕРґСѓРєС†РёРё
 */
 function get_products_header($array, $order, $href, $mode = '', $help_ids = '') {
 	if (is_array($array)) foreach ($array as $k => $v) {
@@ -354,53 +354,53 @@ function get_products_header($array, $order, $href, $mode = '', $help_ids = '') 
                      </th>';
 	}
 	$html .= '<th style="font-size: 12px; width: 93px; text-align: left;">
-                 <img src="/img/cart.gif" align="left" style="margin: 0;"> &mdash;&nbsp;купить<br style="clear: both;" />
-                 <img src="/img/' . (($mode == 'compare') ? 'un' : '') . 'compare.gif" align="left" style="margin: 0;"> &mdash;&nbsp;' . (($mode == 'compare') ? 'удалить' : 'сравнить') . '</th></tr>';
+                 <img src="/img/cart.gif" align="left" style="margin: 0;"> &mdash;&nbsp;РєСѓРїРёС‚СЊ<br style="clear: both;" />
+                 <img src="/img/' . (($mode == 'compare') ? 'un' : '') . 'compare.gif" align="left" style="margin: 0;"> &mdash;&nbsp;' . (($mode == 'compare') ? 'СѓРґР°Р»РёС‚СЊ' : 'СЃСЂР°РІРЅРёС‚СЊ') . '</th></tr>';
 	return $html;
 }
 
 
-/*  Список страничек
+/*  РЎРїРёСЃРѕРє СЃС‚СЂР°РЅРёС‡РµРє
 */
 function get_pages_tab($href, $first_pos, $Count, $limit_begin, $per_page) {
-	return '<span style="float:left">Показано <b>' . ($first_pos + 1) . '</b> - <b>' . min(count($Count), $first_pos + $per_page) . '</b> (из <b>' . count($Count) . '</b> товаров)</span>
-          <span style="float:right">Страницы: ' . viewPages(count($Count), $limit_begin, $per_page, 4, $href) . '</span></div>';
+	return '<span style="float:left">РџРѕРєР°Р·Р°РЅРѕ <b>' . ($first_pos + 1) . '</b> - <b>' . min(count($Count), $first_pos + $per_page) . '</b> (РёР· <b>' . count($Count) . '</b> С‚РѕРІР°СЂРѕРІ)</span>
+          <span style="float:right">РЎС‚СЂР°РЅРёС†С‹: ' . viewPages(count($Count), $limit_begin, $per_page, 4, $href) . '</span></div>';
 }
 
-/*  Фильтры
+/*  Р¤РёР»СЊС‚СЂС‹
 */
 function get_sort_list($sort) {
 	return '<select name="sort" onchange="selecter.submit()" style="width:110px;">
-          <option value="1" ' . (($sort == 1) ? "selected" : "") . '>имя А-Я</option>
-          <option value="2" ' . (($sort == 2) ? "selected" : "") . '>имя Я-А</option>
-          <option value="3" ' . (($sort == 3) ? "selected" : "") . '>цена 0-9</option>
-          <option value="4" ' . (($sort == 4) ? "selected" : "") . ' >цена 9-0</option>
+          <option value="1" ' . (($sort == 1) ? "selected" : "") . '>РёРјСЏ Рђ-РЇ</option>
+          <option value="2" ' . (($sort == 2) ? "selected" : "") . '>РёРјСЏ РЇ-Рђ</option>
+          <option value="3" ' . (($sort == 3) ? "selected" : "") . '>С†РµРЅР° 0-9</option>
+          <option value="4" ' . (($sort == 4) ? "selected" : "") . ' >С†РµРЅР° 9-0</option>
           </select>';
 }
 
-/*  Фильтры постраничного вывода
+/*  Р¤РёР»СЊС‚СЂС‹ РїРѕСЃС‚СЂР°РЅРёС‡РЅРѕРіРѕ РІС‹РІРѕРґР°
 */
 function get_perpage_filter($per_page) {
 	return '<select name="per_page" onchange="selecter.submit()">
-          <option value="6" ' . (($per_page == "6") ? "selected" : "") . '>по 6 </option>
-          <option value="12" ' . (($per_page == "12") ? "selected" : "") . '>по 12 </option>
-          <option value="24" ' . (($per_page == "24") ? "selected" : "") . '>по 24 </option>
-          <option value="48" ' . (($per_page == "48") ? "selected" : "") . '>по 48 </option>
+          <option value="6" ' . (($per_page == "6") ? "selected" : "") . '>РїРѕ 6 </option>
+          <option value="12" ' . (($per_page == "12") ? "selected" : "") . '>РїРѕ 12 </option>
+          <option value="24" ' . (($per_page == "24") ? "selected" : "") . '>РїРѕ 24 </option>
+          <option value="48" ' . (($per_page == "48") ? "selected" : "") . '>РїРѕ 48 </option>
           </select>';
 }
 
-/*  Набор фильтров
+/*  РќР°Р±РѕСЂ С„РёР»СЊС‚СЂРѕРІ
 */
 function get_filter_set($auth, $idCat, $idManuf, $idStr, $sort, $per_page) {
 	return '<form name="selecter" action="index.php" method="get">
           <div class="catalog_manuf_list">
             <select name="idManuf" onChange="javascript:selecter.submit();" >
-              <option value="0" >Производители:</option>' . getManufacturersList($auth, $idManuf, $idCat . $idStr) . '
+              <option value="0" >РџСЂРѕРёР·РІРѕРґРёС‚РµР»Рё:</option>' . getManufacturersList($auth, $idManuf, $idCat . $idStr) . '
             </select>
           </div>
           <div class="catalog_filter">
             <select name="idCat" onChange="javascript:selecter.submit();" >
-              <option value="0" >Категория:</option>' . getCategoriesList($auth, $idCat, $idManuf) . '
+              <option value="0" >РљР°С‚РµРіРѕСЂРёСЏ:</option>' . getCategoriesList($auth, $idCat, $idManuf) . '
             </select>
           </div>
           <div class="sort_filter">' . get_sort_list($sort) . '</div>
@@ -428,14 +428,14 @@ function getProduct($auth, $idCat, $idProd) {
                <h1>' . $name[0] . '</h1>
                <div class="catalog_product_content">
               ' . (!empty($image[0]) ? '<a href="' . A_PRODUCT_IMG_URL . $image[0] . '" target="_blanck" title="' . $name[0] . '"><img src="' . A_PRODUCT_IMG_URL . 'medium_' . $image[0] . '" align="left" alt="' . $name[0] . '"></a>' : '') . '
-               <p class="catalog_product_price">Цена: ' . (!empty($price[0]) ? $price[0] : '&mdash;') . '</p>
+               <p class="catalog_product_price">Р¦РµРЅР°: ' . (!empty($price[0]) ? $price[0] : '&mdash;') . '</p>
                <p>' . buy_form($buy_link, $id[0], $price[0], $name[0], $idCat, $image[0]) . '</p>
-               <p class="catalog_product_manufacturer">Производитель: ' . $nameManuf[0] . '</p>
+               <p class="catalog_product_manufacturer">РџСЂРѕРёР·РІРѕРґРёС‚РµР»СЊ: ' . $nameManuf[0] . '</p>
               ' . $text[0] . '
                </div>
                <div class="catalog_product_bottom_link">
-               <a href="index.php?idCat=' . $idCat . '">Все товары категории ' . $nameCat[0] . '</a>
-               <a href="index.php?idManuf=' . $idManuf[0] . '">Все товары производителя ' . $nameManuf[0] . '</a>
+               <a href="index.php?idCat=' . $idCat . '">Р’СЃРµ С‚РѕРІР°СЂС‹ РєР°С‚РµРіРѕСЂРёРё ' . $nameCat[0] . '</a>
+               <a href="index.php?idManuf=' . $idManuf[0] . '">Р’СЃРµ С‚РѕРІР°СЂС‹ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏ ' . $nameManuf[0] . '</a>
                </div>
                </div>
               ';
@@ -541,7 +541,6 @@ function getParents($auth, $string = '', $result = '') {
 	return $result;
 }
 
-
 function getCategoriesList($auth, $def = '', $idManuf = '') {
 	$catTree = categoriesTree();
 	$CatId = getCategoriesVsProducts($auth, $idManuf);
@@ -596,7 +595,7 @@ function get_subcategories($auth, $id_parent, $limit = 5) {
 
 		$html .= '<br /><br /><form action="index.php" method="get">
                 <select name="idCat" onChange="javascript: this.form.submit();" style="width: 100%">
-                <option value="0"> Выберите товар: </option>
+                <option value="0"> Р’С‹Р±РµСЂРёС‚Рµ С‚РѕРІР°СЂ: </option>
                ';
 
 
@@ -609,18 +608,18 @@ function get_subcategories($auth, $id_parent, $limit = 5) {
 	return $html;
 }
 
-/*  Получить инфу на главную страницу
+/*  РџРѕР»СѓС‡РёС‚СЊ РёРЅС„Сѓ РЅР° РіР»Р°РІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ
 */
 function getIndexView($auth) {
-	$html = '<h1>Термоэлектрические модули</h1>';
+	$html = '<h1>РўРµСЂРјРѕСЌР»РµРєС‚СЂРёС‡РµСЃРєРёРµ РјРѕРґСѓР»Рё</h1>';
 
 	$sql = "SELECT * FROM " . TBL_PREF . "catalog_categories
               WHERE id_parent='0' ORDER BY sort_order";
 
 	$q = $auth->db->Execute($sql);
 
-	$title = "Криотерм";
-	$keywords = "Термоэлектрические модули, термоэлектрические сборки";
+	$title = "РљСЂРёРѕС‚РµСЂРј";
+	$keywords = "РўРµСЂРјРѕСЌР»РµРєС‚СЂРёС‡РµСЃРєРёРµ РјРѕРґСѓР»Рё, С‚РµСЂРјРѕСЌР»РµРєС‚СЂРёС‡РµСЃРєРёРµ СЃР±РѕСЂРєРё";
 	$description = "Kryotherm";
 
 	while ($r = mysql_fetch_array($q))
@@ -659,11 +658,11 @@ function getIndexView($auth) {
   buy_form($href, $r['id'], $r['price'], $r['name'],
 									   $idCat, $r['image'],
 									   $r['I_max'], $r['Q_max'], $r['R'], $r['A'],
-									   $r['B'], $r['C'], $r['D'], $r['H'], $r['Д'], $r['di'],
+									   $r['B'], $r['C'], $r['D'], $r['H'], $r['Р”'], $r['di'],
 									   $r['sealing_type'], $r['HT'],
 									   $prod_quant = null)
 									   */
-/*  Формочка для покупок
+/*  Р¤РѕСЂРјРѕС‡РєР° РґР»СЏ РїРѕРєСѓРїРѕРє
 */
 function buy_form($action, $prod_id = null, $prod_price = null, $prod_name = null,
 				  $idCat = null, $prod_img = null, $I_max = null, $Q_max = null, $U = null,
@@ -698,25 +697,25 @@ function buy_form($action, $prod_id = null, $prod_price = null, $prod_name = nul
                <input name="compare" type="hidden" value="">
 
           ' . (empty($prod_quant)
-		? '<input type="image" src="/img/cart.gif" title="Положить в корзину" onClick="javascript: this.form.buy.value = 1; this.form.submit();" align="left">'
-		: '<input type="image" src="/img/refresh.gif" title="Пересчитать" onClick="javascript: this.form.buy.value = 1; this.form.submit();" align="left">') . '
+		? '<input type="image" src="/img/cart.gif" title="РџРѕР»РѕР¶РёС‚СЊ РІ РєРѕСЂР·РёРЅСѓ" onClick="javascript: this.form.buy.value = 1; this.form.submit();" align="left">'
+		: '<input type="image" src="/img/refresh.gif" title="РџРµСЂРµСЃС‡РёС‚Р°С‚СЊ" onClick="javascript: this.form.buy.value = 1; this.form.submit();" align="left">') . '
 
 
 
           ' . (empty($prod_quant)
 		? (($mode == 'compare')
-			? "<input type='image' src='/img/uncompare.gif' align='left'  title='Убрать из сравнения'
+			? "<input type='image' src='/img/uncompare.gif' align='left'  title='РЈР±СЂР°С‚СЊ РёР· СЃСЂР°РІРЅРµРЅРёСЏ'
                     onClick='javascript: this.form.compare.value = \"del\"; this.form.submit();'>"
-			: "<input type='image'  title='" . (isset($_SESSION['compare'][$prod_id]) ? "Товар находиться в сравнении" : "Добавить в сравнение") . "' src='" . (isset($_SESSION['compare'][$prod_id]) ? "/img/incompare.gif" : "/img/compare.gif") . "' align='left'
+			: "<input type='image'  title='" . (isset($_SESSION['compare'][$prod_id]) ? "РўРѕРІР°СЂ РЅР°С…РѕРґРёС‚СЊСЃСЏ РІ СЃСЂР°РІРЅРµРЅРёРё" : "Р”РѕР±Р°РІРёС‚СЊ РІ СЃСЂР°РІРЅРµРЅРёРµ") . "' src='" . (isset($_SESSION['compare'][$prod_id]) ? "/img/incompare.gif" : "/img/compare.gif") . "' align='left'
                     onClick='javascript: this.form.compare.value = 1; this.form.submit();'>")
-		: "<input type='image' src='/img/uncart.gif' title='Удалить из корзины'
+		: "<input type='image' src='/img/uncart.gif' title='РЈРґР°Р»РёС‚СЊ РёР· РєРѕСЂР·РёРЅС‹'
                     onClick='javascript: this.form.cart_prod_quant.value = 0; this.form.buy.value = 1; this.form.submit();'>") . '
            </form>
 
           ';
 }
 
-/*  Запись данных о купленных продуктах в сессию
+/*  Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… Рѕ РєСѓРїР»РµРЅРЅС‹С… РїСЂРѕРґСѓРєС‚Р°С… РІ СЃРµСЃСЃРёСЋ
 */
 function create_cart_session($data) {
 	//session_name("user_cart");
@@ -728,7 +727,7 @@ function create_cart_session($data) {
 		!empty($data['cart_prod_id'])
 	) {
 		if ($data['cart_prod_quant'] > $data['cart_prod_total']) {
-			print '<script text="Javascript"> alert("В наличии только ' . $data['cart_prod_total'] . ' шт."); document.location.href="/index.php?idCat=' . $data['cart_cat_id'] . '" </script>';
+			print '<script text="Javascript"> alert("Р’ РЅР°Р»РёС‡РёРё С‚РѕР»СЊРєРѕ ' . $data['cart_prod_total'] . ' С€С‚."); document.location.href="/index.php?idCat=' . $data['cart_cat_id'] . '" </script>';
 		} else {
 			if (empty($_SESSION['user_cart'][$data['cart_prod_id']]))
 
@@ -762,12 +761,12 @@ function compare_status($data) {
 	if (is_array($data)) $total = count($data);
 
 	if ($total > 0)
-		return 'Товаров для сравнения: <a href="/compare.php"><b>' . $total . '</b></a>';
+		return 'РўРѕРІР°СЂРѕРІ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ: <a href="/compare.php"><b>' . $total . '</b></a>';
 	else
-		return 'Нет товаров в сравнении';
+		return 'РќРµС‚ С‚РѕРІР°СЂРѕРІ РІ СЃСЂР°РІРЅРµРЅРёРё';
 }
 
-/*  состояние корзины
+/*  СЃРѕСЃС‚РѕСЏРЅРёРµ РєРѕСЂР·РёРЅС‹
 */
 function cart_status($array) {
 	$total_price = 0;
@@ -777,14 +776,14 @@ function cart_status($array) {
 		$total_price += $v['cart_prod_quant'] * $v['cart_prod_price'];
 
 	if (count($array) > 0)
-		return "Товаров: <a href='/cart.php'><b>" . count($array) . "</b></a><br />
-                   на сумму: <b>" . $total_price . " руб.</b><br />
+		return "РўРѕРІР°СЂРѕРІ: <a href='/cart.php'><b>" . count($array) . "</b></a><br />
+                   РЅР° СЃСѓРјРјСѓ: <b>" . $total_price . " СЂСѓР±.</b><br />
                   ";
 	else
-		return "Ваша корзина пуста";
+		return "Р’Р°С€Р° РєРѕСЂР·РёРЅР° РїСѓСЃС‚Р°";
 }
 
-/*  Проверка на пустой массив
+/*  РџСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕР№ РјР°СЃСЃРёРІ
 */
 function is_arr($array) {
 	if (is_array($array)) {
@@ -797,7 +796,7 @@ function is_arr($array) {
 	return false;
 }
 
-/*  Корзина пользователя
+/*  РљРѕСЂР·РёРЅР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 */
 function get_user_cart($array) {
 	$html .=
@@ -813,17 +812,17 @@ function get_user_cart($array) {
                     window.kryotherm || (window.kryotherm = {});
                     window.kryotherm.cart =' . json_encode($array) . '
                 </script>';
-		$html .= '<div style="height: 54px"><a href="/">В каталог</a> > <a href="/cart.php" class="active">Корзина</a></div>
-                     <h1>Корзина</h1>
+		$html .= '<div style="height: 54px"><a href="/">Р’ РєР°С‚Р°Р»РѕРі</a> > <a href="/cart.php" class="active">РљРѕСЂР·РёРЅР°</a></div>
+                     <h1>РљРѕСЂР·РёРЅР°</h1>
                      <div class="clearfloat" style="width: 100%"></div>
                      <table width="100%" cellpadding="0" cellspacing="1" class="items user_cart">
                      <tr>
-                         <th>№</th>
-                         <th align="left">Название</th>
+                         <th>в„–</th>
+                         <th align="left">РќР°Р·РІР°РЅРёРµ</th>
                          <th width="20">PDF</th>
-                         <th align="left">Цена за 1шт.</th>
-                         <th align="left">Количество</th>
-                         <th align="left">Цена</th>
+                         <th align="left">Р¦РµРЅР° Р·Р° 1С€С‚.</th>
+                         <th align="left">РљРѕР»РёС‡РµСЃС‚РІРѕ</th>
+                         <th align="left">Р¦РµРЅР°</th>
                      </tr>
                     ';
 
@@ -838,7 +837,7 @@ function get_user_cart($array) {
 
                            <td>' . get_pdf($v['cart_prod_pdf_file']) . '&nbsp;</td>
 
-                           <td>' . $v['cart_prod_price'] . ' <sub>руб.</sub></td>
+                           <td>' . $v['cart_prod_price'] . ' <sub>СЂСѓР±.</sub></td>
                            <td>' . buy_form($action, $v['cart_prod_id'], $v['cart_prod_price'], $v['cart_prod_name'],
 					$v['cart_prod_id'], $v['cart_prod_img'],
 					$v['cart_prod_I_max'], $v['cart_prod_Q_max'], $v['cart_prod_U'], $v['cart_prod_R'], $v['cart_prod_A'],
@@ -847,23 +846,23 @@ function get_user_cart($array) {
 					$v['cart_prod_sealing_type'], $v['cart_prod_HT'], $v['cart_prod_pdf_file'], $v['cart_prod_total'], '', $v['cart_prod_quant']) . '
 
                            </td>
-                           <td>' . ($v['cart_prod_quant'] * $v['cart_prod_price']) . ' <sub>руб.</sub></td>
+                           <td>' . ($v['cart_prod_quant'] * $v['cart_prod_price']) . ' <sub>СЂСѓР±.</sub></td>
                         </tr>';
 			$total_cost += $v['cart_prod_quant'] * $v['cart_prod_price'];
 		}
 
 		$html .= '</table>
-                     <p><b>Итого: ' . $total_cost . ' руб.</b></p>
-                     <div class="lessthen">Сумма заказа не может быть менее 1000руб.!</div>
-                     <p><input type="button" value="Сделать заказ" ' . (($total_cost < '1000') ? 'disabled' : '') . '
+                     <p><b>РС‚РѕРіРѕ: ' . $total_cost . ' СЂСѓР±.</b></p>
+                     <div class="lessthen">РЎСѓРјРјР° Р·Р°РєР°Р·Р° РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРµРЅРµРµ 1000СЂСѓР±.!</div>
+                     <p><input type="button" value="РЎРґРµР»Р°С‚СЊ Р·Р°РєР°Р·" ' . (($total_cost < '1000') ? 'disabled' : '') . '
                                onClick="javascript: document.location.href=\'cart.php&exec_order=form\'">
-                        <input type="button" value="Очистить"
+                        <input type="button" value="РћС‡РёСЃС‚РёС‚СЊ"
                                onClick="javascript: document.location.href=\'cart.php&clear_cart=1\'">
                      </p>
                     ';
 
 	} else
-		$html .= 'Ваша корзина пуста';
+		$html .= 'Р’Р°С€Р° РєРѕСЂР·РёРЅР° РїСѓСЃС‚Р°';
 
 	return $html;
 }
@@ -871,22 +870,22 @@ function get_user_cart($array) {
 function get_pdf($pdf) {
 	return
 		(!empty($pdf)
-			? '<a href="http://' . $_SERVER['SERVER_NAME'] . '/pdf_docs/' . $pdf . '" target="_blanck" title="Скачать спецификацию">
+			? '<a href="http://' . $_SERVER['SERVER_NAME'] . '/pdf_docs/' . $pdf . '" target="_blanck" title="РЎРєР°С‡Р°С‚СЊ СЃРїРµС†РёС„РёРєР°С†РёСЋ">
           <img src="/img/small_pdf.gif" style="margin: 0px"></a>'
 			: '');
 }
 
-/*  Заказ покупателя
+/*  Р—Р°РєР°Р· РїРѕРєСѓРїР°С‚РµР»СЏ
 */
 function customers_order($array) {
 	if (is_arr($array)) {
 		$c = 0;
 		$html .= '<table width="100%" cellpadding="0" cellspacing="1" class="items order">
                       <tr>
-                          <th>№</th>
-                          <th align="left">Название</th>
-                          <th align="left">Количество</th>
-                          <th align="left">Цена</th>
+                          <th>в„–</th>
+                          <th align="left">РќР°Р·РІР°РЅРёРµ</th>
+                          <th align="left">РљРѕР»РёС‡РµСЃС‚РІРѕ</th>
+                          <th align="left">Р¦РµРЅР°</th>
                       </tr>
                      ';
 
@@ -896,7 +895,7 @@ function customers_order($array) {
                            <td align="center">' . ($c) . '.</td>
                            <td>' . $v['cart_prod_name'] . '</td>
                            <td>' . $v['cart_prod_quant'] . 'x' . $v['cart_prod_price'] . '</td>
-                           <td>' . ($v['cart_prod_quant'] * $v['cart_prod_price']) . ' <sub>руб.</sub></td>
+                           <td>' . ($v['cart_prod_quant'] * $v['cart_prod_price']) . ' <sub>СЂСѓР±.</sub></td>
                         </tr>';
 
 		$html .= '</table>';
@@ -904,7 +903,7 @@ function customers_order($array) {
 	return $html;
 }
 
-//  вывод товара, в письме
+//  РІС‹РІРѕРґ С‚РѕРІР°СЂР°, РІ РїРёСЃСЊРјРµ
 function letter_data($array) {
 	$header = products_header_data();
 
@@ -912,7 +911,7 @@ function letter_data($array) {
 	if (is_array($header)) foreach ($header as $k => $v) {
 		$html .= '<th>' . $v . '</th>';
 	}
-	$html .= '<th>Всего</th></tr>';
+	$html .= '<th>Р’СЃРµРіРѕ</th></tr>';
 
 	if (is_array($array)) foreach ($array as $k => $v)
 
@@ -943,17 +942,17 @@ function letter_data($array) {
 }
 
 
-/*  Форма подтверждения заказа
+/*  Р¤РѕСЂРјР° РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ Р·Р°РєР°Р·Р°
 */
 function get_order_form($array, $customer) {
 //
 	if (!is_arr($array)) {
-		$html .= "Пустой заказ";
+		$html .= "РџСѓСЃС‚РѕР№ Р·Р°РєР°Р·";
 	} else {
 		$html .= "<div style='height: 54px'>
-			<a href='/'>В каталог</a> > <a href='/cart.php'>Корзина</a> > <a href='/cart.php&exec_order=form' class='active'>Подтверждение заказа</a>
+			<a href='/'>Р’ РєР°С‚Р°Р»РѕРі</a> > <a href='/cart.php'>РљРѕСЂР·РёРЅР°</a> > <a href='/cart.php&exec_order=form' class='active'>РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ Р·Р°РєР°Р·Р°</a>
 		</div>
-		<h1>Ваш заказ</h1>" . customers_order($array);
+		<h1>Р’Р°С€ Р·Р°РєР°Р·</h1>" . customers_order($array);
 
 		include(CATALOG_SCRIPT_DIR . 'order_form.php');
 	}
@@ -969,27 +968,36 @@ function exec_order_form($mail, $send_data, &$order_data) {
 	</script>';
 
 	$html .= "<div style='height: 54px'>
-	<a href='/'>В каталог</a> > <a href='/cart.php'>Корзина</a> >
-	<a href='/cart.php&exec_order=form'>Подтверждение закза</a> > ";
+	<a href='/'>Р’ РєР°С‚Р°Р»РѕРі</a> > <a href='/cart.php'>РљРѕСЂР·РёРЅР°</a> >
+	<a href='/cart.php&exec_order=form'>РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ Р·Р°РєР·Р°</a> > ";
+
+
+	if ($_GET['result'] && $_GET['result'] != 0) {
+		$html .= '<span class="active">РћС€РёР±РєР° РѕРїР»Р°С‚С‹</span></div>
+			<p>Р’РёРґРёРјРѕ РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РІРѕ РІСЂРµРјСЏ РѕРїР»Р°С‚С‹</p>
+		';
+		return $html;
+	}
+
 
 	if (!empty($send_data['email'])) $send_data['mail'] = $send_data['email'];
 
 	if (is_arr($send_data) && !empty($send_data['mail'])) {
 		if ($send_data['customer'] == 1) {
-			$customer = 'Физическое лицо';
-			$mess = "<p>Здравствуйте
+			$customer = 'Р¤РёР·РёС‡РµСЃРєРѕРµ Р»РёС†Рѕ';
+			$mess = "<p>Р—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ
 		" . $send_data['name'] . "
 		" . (!empty($send_data['patronymic']) ? $send_data['patronymic'] : "") . "
 		" . $send_data['surname'] . ".</p>
-	<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>";
+	<p>Р’С‹ СЃРґРµР»Р°Р»Рё Р·Р°РєР°Р· РЅР° СЃР°Р№С‚Рµ " . $_SERVER['HTTP_HOST'] . "</p>";
 		} else {
-			$customer = 'Юридическое лицо';
-			$mess = 'Здравствуйте
+			$customer = 'Р®СЂРёРґРёС‡РµСЃРєРѕРµ Р»РёС†Рѕ';
+			$mess = 'Р—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ
 	' . (!empty($send_data['contactperson']) ? $send_data['contactperson'] : $send_data['organisation']) . '
-	<p>Вы сделали заказ на сайте ' . $_SERVER['HTTP_HOST'] . '</p>';
+	<p>Р’С‹ СЃРґРµР»Р°Р»Рё Р·Р°РєР°Р· РЅР° СЃР°Р№С‚Рµ ' . $_SERVER['HTTP_HOST'] . '</p>';
 		}
 
-		$mess = $mess . "<p>Способ доставки: " . $send_data['shipping'] . "</p><p>Ваш заказ:</p>
+		$mess = $mess . "<p>РЎРїРѕСЃРѕР± РґРѕСЃС‚Р°РІРєРё: " . $send_data['shipping'] . "</p><p>Р’Р°С€ Р·Р°РєР°Р·:</p>
 	" . letter_data($order_data);
 
 		$mail->From = SHOP_EMAIL;
@@ -1011,28 +1019,28 @@ function exec_order_form($mail, $send_data, &$order_data) {
 				$customer_data .= $data_definer[$k] . ': ' . $v . '<br />';
 
 
-		$mess = "<p>С сайта " . $_SERVER['HTTP_HOST'] . " поступил заказ:</p>
+		$mess = "<p>РЎ СЃР°Р№С‚Р° " . $_SERVER['HTTP_HOST'] . " РїРѕСЃС‚СѓРїРёР» Р·Р°РєР°Р·:</p>
 	" . letter_data($order_data) .
-			"<p>Заказчик: " . $customer . "</p>
+			"<p>Р—Р°РєР°Р·С‡РёРє: " . $customer . "</p>
 	<p>" . $customer_data . "</p>";
 
 		$mail->From = $send_data['mail'];
-		$mail->FromName = 'Заказ с сайта ' . $_SERVER['HTTP_HOST'];
+		$mail->FromName = 'Р—Р°РєР°Р· СЃ СЃР°Р№С‚Р° ' . $_SERVER['HTTP_HOST'];
 		$mail->AddAddress(SHOP_EMAIL);
 		$mail->IsHTML(true);
-		$mail->Subject = 'Заказ с сайта ' . $_SERVER['HTTP_HOST'];
+		$mail->Subject = 'Р—Р°РєР°Р· СЃ СЃР°Р№С‚Р° ' . $_SERVER['HTTP_HOST'];
 		$mail->Body = $mess;
 
 		if (!$mail->Send()) die ('Mailer Error2: ' . $mail->ErrorInfo);
 
 		//$order_data = array();
 
-		$html .= '<span class="active">Успешно отправлено</span></div>
-<p>Ваш заказ успешно отправлен на обработку.</p>
+		$html .= '<span class="active">РЈСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅРѕ</span></div>
+<p>Р’Р°С€ Р·Р°РєР°Р· СѓСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅ РЅР° РѕР±СЂР°Р±РѕС‚РєСѓ.</p>
 ';
 	} else
-		$html .= '<span class="active">Заполните обязательные поля</span></div>
-<p>Ошибка при заполнении полей формы подтверждения заказа</p>
+		$html .= '<span class="active">Р—Р°РїРѕР»РЅРёС‚Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ</span></div>
+<p>РћС€РёР±РєР° РїСЂРё Р·Р°РїРѕР»РЅРµРЅРёРё РїРѕР»РµР№ С„РѕСЂРјС‹ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ Р·Р°РєР°Р·Р°</p>
 ';
 
 	return $html;
@@ -1040,24 +1048,24 @@ function exec_order_form($mail, $send_data, &$order_data) {
 
 
 function order_data_definer() {
-	return array('shipping' => 'Способ доставки',
-		'organisation' => 'Полное название организации:',
-		'inn' => 'ИНН',
-		'kpp' => 'КПП',
-		'okpo' => 'ОКПО',
-		'jaddress' => 'Юридический адрес',
-		'postaladdress' => 'Фактический адрес',
-		'bank' => 'Банковские реквизиты',
-		'gendir' => 'ФИО Ген. директора',
-		'contactperson' => 'Контактное лицо',
-		'phone' => 'Телефон',
-		'fax' => 'Факс',
+	return array('shipping' => 'РЎРїРѕСЃРѕР± РґРѕСЃС‚Р°РІРєРё',
+		'organisation' => 'РџРѕР»РЅРѕРµ РЅР°Р·РІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё:',
+		'inn' => 'РРќРќ',
+		'kpp' => 'РљРџРџ',
+		'okpo' => 'РћРљРџРћ',
+		'jaddress' => 'Р®СЂРёРґРёС‡РµСЃРєРёР№ Р°РґСЂРµСЃ',
+		'postaladdress' => 'Р¤Р°РєС‚РёС‡РµСЃРєРёР№ Р°РґСЂРµСЃ',
+		'bank' => 'Р‘Р°РЅРєРѕРІСЃРєРёРµ СЂРµРєРІРёР·РёС‚С‹',
+		'gendir' => 'Р¤РРћ Р“РµРЅ. РґРёСЂРµРєС‚РѕСЂР°',
+		'contactperson' => 'РљРѕРЅС‚Р°РєС‚РЅРѕРµ Р»РёС†Рѕ',
+		'phone' => 'РўРµР»РµС„РѕРЅ',
+		'fax' => 'Р¤Р°РєСЃ',
 		'email' => 'Email',
-		'descript' => 'Комментарии пользователя',
-		'patronymic' => 'Отчество',
-		'surname' => 'Фамилия',
-		'adress' => 'Адрес грузополучателя',
-		'name' => 'Имя',
+		'descript' => 'РљРѕРјРјРµРЅС‚Р°СЂРёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ',
+		'patronymic' => 'РћС‚С‡РµСЃС‚РІРѕ',
+		'surname' => 'Р¤Р°РјРёР»РёСЏ',
+		'adress' => 'РђРґСЂРµСЃ РіСЂСѓР·РѕРїРѕР»СѓС‡Р°С‚РµР»СЏ',
+		'name' => 'РРјСЏ',
 		'mail' => 'E-mail'
 	);
 }
@@ -1105,7 +1113,7 @@ function prepare_values(&$item, $key) {
 }
 
 function process_values(&$item, $key) {
-	$item = preg_replace('/^([A-Za-zА-Яа-я\d\s\-,\.\/\(\)]*)(\+\d+\w+)/i', '$1', $item);
+	$item = preg_replace('/^([A-Za-zРђ-РЇР°-СЏ\d\s\-,\.\/\(\)]*)(\+\d+\w+)/i', '$1', $item);
 }
 
 ?>

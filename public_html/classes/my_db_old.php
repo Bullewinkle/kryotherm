@@ -1,7 +1,7 @@
 <?php
 class CMyDB
 {
-  // ïåğåìåííûå
+  // Ğ¿ĞµÑ€ĞµĞ¼ĞµĞ½Ğ½Ñ‹Ğµ
   var $link = null;
   var $result = null;
   // ----------
@@ -9,35 +9,35 @@ class CMyDB
   var $case = null, $select = null, $where = null,
       $order = null, $group = null, $limit = null, $join_table = null;
 
-  // ïîäêëş÷åíèå ê ÁÄ ñ çàäàííûìè ïàğàìåòğàìè
+  // Ğ¿Ğ¾Ğ´ĞºĞ»ÑÑ‡ĞµĞ½Ğ¸Ğµ Ğº Ğ‘Ğ” Ñ Ğ·Ğ°Ğ´Ğ°Ğ½Ğ½Ñ‹Ğ¼Ğ¸ Ğ¿Ğ°Ñ€Ğ°Ğ¼ĞµÑ‚Ñ€Ğ°Ğ¼Ğ¸
   function CMyDB($host = "127.0.0.1", $db = "u565477573_kryo", $user = "u565477573_therm", $psw = "1992rhbjnthv")
   {
-    // ïîäêëş÷åíèå ê MySQL
+    // Ğ¿Ğ¾Ğ´ĞºĞ»ÑÑ‡ĞµĞ½Ğ¸Ğµ Ğº MySQL
     $this->link = mysql_connect($host, $user, $psw)
     or die("Could not connect : " . mysql_error($this->link));
 
-    // âûáîğ ÁÄ
+    // Ğ²Ñ‹Ğ±Ğ¾Ñ€ Ğ‘Ğ”
     mysql_select_db($db, $this->link) or die("Could not select database");
-    mysql_query('SET NAMES cp1251');
-    mysql_query('SET CHARACTER SET cp1251');
-    mysql_query('SET COLLATION_CONNECTION=cp1251_general_ci');
+    mysql_query('SET NAMES utf-8');
+    mysql_query('SET CHARACTER SET utf-8');
+    mysql_query('SET COLLATION_CONNECTION=utf-8_general_ci');
   }
 
 
-  // âûïîëíåíèå çàïğîñà
+  // Ğ²Ñ‹Ğ¿Ğ¾Ğ»Ğ½ĞµĞ½Ğ¸Ğµ Ğ·Ğ°Ğ¿Ñ€Ğ¾ÑĞ°
   function Execute($sql)
   {
     $this->result = mysql_query($sql, $this->link)
     or die("Query failed : " . mysql_error($this->link));
 
-    // ïğîâåğêà ğåçóëüòàòîâ çàïğîñà $sql
+    // Ğ¿Ñ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ñ€ĞµĞ·ÑƒĞ»ÑŒÑ‚Ğ°Ñ‚Ğ¾Ğ² Ğ·Ğ°Ğ¿Ñ€Ğ¾ÑĞ° $sql
     if(!$this->result)
       return null;
     else
       return $this->result;
   }
 
-  // âîçâğàùàåò êîë-âî ñòğîê ğåçóëüòàòà
+  // Ğ²Ğ¾Ğ·Ğ²Ñ€Ğ°Ñ‰Ğ°ĞµÑ‚ ĞºĞ¾Ğ»-Ğ²Ğ¾ ÑÑ‚Ñ€Ğ¾Ğº Ñ€ĞµĞ·ÑƒĞ»ÑŒÑ‚Ğ°Ñ‚Ğ°
   function NumRows($result = "")
   {
     if($result != "")
@@ -73,7 +73,7 @@ class CMyDB
     $this->resset_vars();
   }
 
-  /*  Âñòàâêà â áàçó
+  /*  Ğ’ÑÑ‚Ğ°Ğ²ĞºĞ° Ğ² Ğ±Ğ°Ğ·Ñƒ
   */
   public function insert($data, $case = null)
   {
@@ -83,7 +83,7 @@ class CMyDB
     return $this->insert_id();
   }
 
-  /*  Àïäåéò
+  /*  ĞĞ¿Ğ´ĞµĞ¹Ñ‚
   */
   public function update($data, $where = null, $case = null)
   {
@@ -93,7 +93,7 @@ class CMyDB
 
   }
 
-  /*  Óäàëåíèå
+  /*  Ğ£Ğ´Ğ°Ğ»ĞµĞ½Ğ¸Ğµ
   */
   public function del($where = null, $case = null)
   {
@@ -102,7 +102,7 @@ class CMyDB
                        ".(!empty($where)?"WHERE ".$this->get_where($where):""));
   }
 
-  /*  Ïğîâåğêà íà ñóùåñòâîâàíèå
+  /*  ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ğ½Ğ° ÑÑƒÑ‰ĞµÑÑ‚Ğ²Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ
   */
   public function exist($data, $case = null)
   {
@@ -113,10 +113,10 @@ class CMyDB
     return $this->NumRows();
   }
 
-  /*  Ïîëó÷èòü ìàññèâ ñ äàííûìè
-	  $case - òàáëèöà ñ äàííûìè
-	  $where - óñëîâèÿ äëÿ âûáîğêè (ìàññèâ)
-	  $operator - îïåğàòîğ ñğàâíåíèÿ äëÿ óñëîâèÿ
+  /*  ĞŸĞ¾Ğ»ÑƒÑ‡Ğ¸Ñ‚ÑŒ Ğ¼Ğ°ÑÑĞ¸Ğ² Ñ Ğ´Ğ°Ğ½Ğ½Ñ‹Ğ¼Ğ¸
+	  $case - Ñ‚Ğ°Ğ±Ğ»Ğ¸Ñ†Ğ° Ñ Ğ´Ğ°Ğ½Ğ½Ñ‹Ğ¼Ğ¸
+	  $where - ÑƒÑĞ»Ğ¾Ğ²Ğ¸Ñ Ğ´Ğ»Ñ Ğ²Ñ‹Ğ±Ğ¾Ñ€ĞºĞ¸ (Ğ¼Ğ°ÑÑĞ¸Ğ²)
+	  $operator - Ğ¾Ğ¿ĞµÑ€Ğ°Ñ‚Ğ¾Ñ€ ÑÑ€Ğ°Ğ²Ğ½ĞµĞ½Ğ¸Ñ Ğ´Ğ»Ñ ÑƒÑĞ»Ğ¾Ğ²Ğ¸Ñ
   */
   public function get_data($where = null, $case = null, $operator = '=', $ch1 = '', $ch2 = '')
   {
@@ -132,9 +132,9 @@ class CMyDB
     return $result;
   }
 
-  /*  Âîçâğàùàåò ñòğîêó `èìÿ ïîëÿ`='çíà÷åíèå',`èìÿ ïîëÿ`='çíà÷åíèå', ... äëÿ âñòàâêè\àïäåéòà
-	  $operator - îïåğàòîğû ñğàâíåíèÿ ( =,>,< )
-	  $ch1, $ch2 - ñïåöñèìâîëû äëÿ âûğàæåíèé òèïà LIKE('$ïîèñê$')
+  /*  Ğ’Ğ¾Ğ·Ğ²Ñ€Ğ°Ñ‰Ğ°ĞµÑ‚ ÑÑ‚Ñ€Ğ¾ĞºÑƒ `Ğ¸Ğ¼Ñ Ğ¿Ğ¾Ğ»Ñ`='Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ',`Ğ¸Ğ¼Ñ Ğ¿Ğ¾Ğ»Ñ`='Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ', ... Ğ´Ğ»Ñ Ğ²ÑÑ‚Ğ°Ğ²ĞºĞ¸\Ğ°Ğ¿Ğ´ĞµĞ¹Ñ‚Ğ°
+	  $operator - Ğ¾Ğ¿ĞµÑ€Ğ°Ñ‚Ğ¾Ñ€Ñ‹ ÑÑ€Ğ°Ğ²Ğ½ĞµĞ½Ğ¸Ñ ( =,>,< )
+	  $ch1, $ch2 - ÑĞ¿ĞµÑ†ÑĞ¸Ğ¼Ğ²Ğ¾Ğ»Ñ‹ Ğ´Ğ»Ñ Ğ²Ñ‹Ñ€Ğ°Ğ¶ĞµĞ½Ğ¸Ğ¹ Ñ‚Ğ¸Ğ¿Ğ° LIKE('$Ğ¿Ğ¾Ğ¸ÑĞº$')
   */
   protected function get_set($array, $operator = '=', $ch1 = '"', $ch2 = '"')
   {
@@ -151,23 +151,23 @@ class CMyDB
     return substr($set,2);
   }
 
-  /*  Âîçâğàùàåò ñòğîêó `èìÿ ïîëÿ`='çíà÷åíèå' AND `èìÿ ïîëÿ`='çíà÷åíèå' AND ...
-	  $operator - îïåğàòîğû ñğàâíåíèÿ ( =,>,< )
-	  $ch1, $ch2 - ñïåöñèìâîëû äëÿ âûğàæåíèé òèïà LIKE('$ïîèñê$')
+  /*  Ğ’Ğ¾Ğ·Ğ²Ñ€Ğ°Ñ‰Ğ°ĞµÑ‚ ÑÑ‚Ñ€Ğ¾ĞºÑƒ `Ğ¸Ğ¼Ñ Ğ¿Ğ¾Ğ»Ñ`='Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ' AND `Ğ¸Ğ¼Ñ Ğ¿Ğ¾Ğ»Ñ`='Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ' AND ...
+	  $operator - Ğ¾Ğ¿ĞµÑ€Ğ°Ñ‚Ğ¾Ñ€Ñ‹ ÑÑ€Ğ°Ğ²Ğ½ĞµĞ½Ğ¸Ñ ( =,>,< )
+	  $ch1, $ch2 - ÑĞ¿ĞµÑ†ÑĞ¸Ğ¼Ğ²Ğ¾Ğ»Ñ‹ Ğ´Ğ»Ñ Ğ²Ñ‹Ñ€Ğ°Ğ¶ĞµĞ½Ğ¸Ğ¹ Ñ‚Ğ¸Ğ¿Ğ° LIKE('$Ğ¿Ğ¾Ğ¸ÑĞº$')
   */
   protected function get_where($array, $operator = '=', $ch1 = '', $ch2 = '')
   {
     return str_replace(","," AND ", $this->get_set($array, $operator, $ch1, $ch2));
   }
 
-  /*  Âîçâğàùàåò ñòğîêó 'çíà÷åíèå','çíà÷åíèå'...
+  /*  Ğ’Ğ¾Ğ·Ğ²Ñ€Ğ°Ñ‰Ğ°ĞµÑ‚ ÑÑ‚Ñ€Ğ¾ĞºÑƒ 'Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ','Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ'...
   */
   protected function get_select($array)
   {
     return implode(',', $array);
   }
 
-  /*  Ìåíåäæåğ sql çàïğîñîâ
+  /*  ĞœĞµĞ½ĞµĞ´Ğ¶ĞµÑ€ sql Ğ·Ğ°Ğ¿Ñ€Ğ¾ÑĞ¾Ğ²
   */
   protected function sql()
   {
@@ -184,7 +184,7 @@ class CMyDB
   }
 
 
-  // î÷èòñêà ïàìÿòè
+  // Ğ¾Ñ‡Ğ¸Ñ‚ÑĞºĞ° Ğ¿Ğ°Ğ¼ÑÑ‚Ğ¸
   function Free()
   {
     if($this->link != null) mysql_close($this->link);

@@ -7,7 +7,7 @@
 
   class CAuthorization
   {
-    // ïåðåìåííûå ---
+    // Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ ---
     var $db  = null;
     var $idp = null;
     var $result = null;
@@ -33,23 +33,23 @@
         $this->HTTPAuthorizate();
     }
 
-    // ïîèñê IDP ïî $name, $psw èç òàáëèöû security
+    // Ð¿Ð¾Ð¸ÑÐº IDP Ð¿Ð¾ $name, $psw Ð¸Ð· Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñ‹ security
     function FindPeople($name, $psw)
     {
       $sql = "select id from ".TBL_PREF."users
               where username='$name' and password='$psw'";
       $this->result = $this->db->Execute($sql);
 
-      // ïîëó÷åíèå ðåçóëüòàòà (idp) èç çàïðîñà
+      // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð° (idp) Ð¸Ð· Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°
       $this->idp = $this->GetFieldValue($this->result);
 
-      // åñëè â ðåçóëüòàòå çàïðîñà íå ïîëó÷èëè òîëüêî 1 çàïèñü
+      // ÐµÑÐ»Ð¸ Ð² Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ðµ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ° Ð½Ðµ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¸ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ 1 Ð·Ð°Ð¿Ð¸ÑÑŒ
       if($this->db->NumRows() != 1)  $this->idp = null;
 
       return $this->idp;
     }
 
-    // ïîëó÷åíèå ðîëè ïîëüçîâàòåëÿ
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
     function GetRole($name, $psw)
     {
       $sql = "select r.role
@@ -59,7 +59,7 @@
       return $this->QueryExecute($sql, 0);
     }
 
-    // ïîëó÷åíèå ðîëè ïîëüçîâàòåëÿ
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
     function GetIdRole($name, $psw)
     {
       $sql = "select r.id
@@ -69,7 +69,7 @@
       return $this->QueryExecute($sql, 0);
     }
 
-    // ïîëó÷åíèå ñåêöèè ðîëüçîâàòåëÿ
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÑÐµÐºÑ†Ð¸Ð¸ Ñ€Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
     function GetSection($name, $psw)
     {
       $sql = "select id_section from ".TBL_PREF."users
@@ -77,7 +77,7 @@
       return $this->QueryExecute($sql, 0);
     }
 
-    // ïîëó÷åíèå ñïèñêà ðàçðåø¸ííûõ ñòðàíèö
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ñ€Ð°Ð·Ñ€ÐµÑˆÑ‘Ð½Ð½Ñ‹Ñ… ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†
     function GetPermissPages($name, $psw)
     {
       $sql = "select p.id_page, p.id_user
@@ -87,32 +87,32 @@
       return $this->QueryExecute($sql, array(0, 1));
     }
 
-    // îáðàáàòûâàåò çàïðîñ è âîçâðàùàåò ðåçóëüòàò(û) åãî âûïîëíåíèÿ
+    // Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÑ‚ Ð·Ð°Ð¿Ñ€Ð¾Ñ Ð¸ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚(Ñ‹) ÐµÐ³Ð¾ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ
     function QueryExecute($sql = "", $arrOfResult = -1)
     {
-      if(count($arrOfResult) > 1)               // åñëè ðåçóëüò - ìàññèâ
+      if(count($arrOfResult) > 1)               // ÐµÑÐ»Ð¸ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚ - Ð¼Ð°ÑÑÐ¸Ð²
         $retResult = array_fill(0, count($arrOfResult), null );
-      else                                      // èíà÷å
-        $retResult = null;                      // ðåçóëüòàò - îäíî çíà÷åíèå
+      else                                      // Ð¸Ð½Ð°Ñ‡Ðµ
+        $retResult = null;                      // Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ - Ð¾Ð´Ð½Ð¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ
 
       if($sql != "")
       {
-        $sqlResult = $this->db->Execute($sql);  // ðåçóëüòàòû âûïîëíåíèÿ çàïðîñà
-        if($arrOfResult != -1)                  // åñëè íåîáõîäèìî ïîëó÷èòü ðåç.
+        $sqlResult = $this->db->Execute($sql);  // Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°
+        if($arrOfResult != -1)                  // ÐµÑÐ»Ð¸ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ñ€ÐµÐ·.
           $retResult = $this->GetFieldValue($sqlResult, $arrOfResult);
       }
 
       return $retResult;
     }
 
-    // ïîëó÷åíèå çíà÷åíèå ïîëÿ èç ðåçóëüòàòà çàïðîñà ïî åãî íîìåðó
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾Ð»Ñ Ð¸Ð· Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð° Ð·Ð°Ð¿Ñ€Ð¾ÑÐ° Ð¿Ð¾ ÐµÐ³Ð¾ Ð½Ð¾Ð¼ÐµÑ€Ñƒ
     function GetFieldValue($queryResult = "", $fieldNumber = 0)
     {
       if($queryResult=="") $queryResult = $this->result;
-      if(count($fieldNumber) > 1)  // åñëè ïðîñìàòð. > 1 ïîëÿ - ñîçäà¸ì ìàññèâ
+      if(count($fieldNumber) > 1)  // ÐµÑÐ»Ð¸ Ð¿Ñ€Ð¾ÑÐ¼Ð°Ñ‚Ñ€. > 1 Ð¿Ð¾Ð»Ñ - ÑÐ¾Ð·Ð´Ð°Ñ‘Ð¼ Ð¼Ð°ÑÑÐ¸Ð²
         $this->result = array_fill(0, count($fieldNumber), null);
-      else                         // èíà÷å õâàòèò è
-        $this->result = null;            // îäíîé ïåðåìåííîé
+      else                         // Ð¸Ð½Ð°Ñ‡Ðµ Ñ…Ð²Ð°Ñ‚Ð¸Ñ‚ Ð¸
+        $this->result = null;            // Ð¾Ð´Ð½Ð¾Ð¹ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹
 
       if($this->db->NumRows($queryResult) >= 1)
         while ($row = mysql_fetch_array($queryResult, MYSQL_BOTH))
@@ -125,7 +125,7 @@
       return $this->result;
     }
 
-    // ïîëó÷åíèå èäåíòèôèêàòîðà êàðòèíêè
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€Ð° ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¸
     function GetImgId($id=0)
     {
       if(empty($id)) $sql = "select max(id) from ".TBL_PREF."images";
@@ -136,7 +136,7 @@
       return ((empty($this->result))?0:$this->result);
     }
 
-    // ïîëó÷åíèå èäåíòèôèêàòîðà äîêóìåíòà
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€Ð° Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°
     function GetDocId($id=0)
     {
       if(empty($id)) $sql = "select max(id) from ".TBL_PREF."docs";
@@ -147,7 +147,7 @@
       return ((empty($this->result))?0:$this->result);
     }
 
-    // ïîëó÷åíèå èäåíòèôèêàòîðà ñòðàíèöû ïî èìåíè è èäåíòèôèêàòîðó ïðåäêà
+    // Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð¿Ð¾ Ð¸Ð¼ÐµÐ½Ð¸ Ð¸ Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€Ñƒ Ð¿Ñ€ÐµÐ´ÐºÐ°
     function GetPageId($name='', $par=-1)
     {
       if(!empty($name) and ($par>=0))
@@ -160,7 +160,7 @@
       else return 0;
     }
 
-    // î÷èñòêà ïàìÿòè
+    // Ð¾Ñ‡Ð¸ÑÑ‚ÐºÐ° Ð¿Ð°Ð¼ÑÑ‚Ð¸
     function Free()
     {
       if($this->db != null) $this->db->Free();

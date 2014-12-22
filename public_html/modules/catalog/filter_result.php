@@ -5,9 +5,9 @@
     $count = count($f_data);
 
     $txt .= '<div style="height: 54px;">
-                 <a href="/">В каталог</a> &gt; <span class="active">Фильтр</span>
+                 <a href="/">Р’ РєР°С‚Р°Р»РѕРі</a> &gt; <span class="active">Р¤РёР»СЊС‚СЂ</span>
              </div>
-             <h1>Результаты поиска (всего '.$count.')</h1>
+             <h1>Р РµР·СѓР»СЊС‚Р°С‚С‹ РїРѕРёСЃРєР° (РІСЃРµРіРѕ '.$count.')</h1>
             ';
 
     $order = (!empty($_REQUEST['order'])?$_REQUEST['order']:'name_asc');
