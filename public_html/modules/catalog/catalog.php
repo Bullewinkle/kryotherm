@@ -961,7 +961,8 @@ function get_order_form($array, $customer) {
 }
 
 function exec_order_form($mail, $send_data, &$order_data) {
-	$send_data = (array) $send_data;
+	$send_data = json_decode($send_data, true);
+
 	$html .= '<script  type="text/javascript">
 		window.kryotherm || (window.kryotherm = {});
 		window.kryotherm.orderFormArgs =' . json_encode(func_get_args()) . '

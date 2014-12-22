@@ -1,3 +1,5 @@
+//TODO enable proper client-side form validation
+
 $(function () {
 
 	// HMAC GENERATOR DEFINITION
