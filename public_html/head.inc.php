@@ -12,14 +12,14 @@
 	<?= (file_exists("styles/gallery_style.css") ? '<link href="styles/gallery_style.css" rel="stylesheet" type="text/css" />' : ''); ?>
 	<?= (file_exists("styles/catalog_style.css") ? '<link href="styles/catalog_style.css" rel="stylesheet" type="text/css" />' : ''); ?>
 	<!-- -------------------------------------------------------------- DEPS -------------------------------------------------------------- -->
-	<script LANGUAGE="JavaScript" SRC="scripts/jquery.js"></script>
-	<script LANGUAGE="JavaScript" SRC="scripts/jquery.validate.min.js"></script>
-	<script LANGUAGE="JavaScript" SRC="scripts/underscore-min.js"></script>
+	<script type="text/javascript" src="scripts/libs/jquery.js"></script>
+	<script type="text/javascript" src="scripts/libs/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="scripts/libs/underscore-min.js"></script>
 	<!-- ----------------------------------------------------------- REQUIREMENTS -------------------------------------------------------------- -->
-	<script LANGUAGE="JavaScript" SRC="scripts/api.js"></script>
+	<script type="text/javascript" src="scripts/api.js"></script>
 	<!-- ------------------------------------------------------------- COMMON -------------------------------------------------------------- -->
-	<script LANGUAGE="JavaScript" SRC="scripts/scripts.js"></script>
-	<script LANGUAGE="JavaScript" SRC="scripts/instructions.js"></script>
+	<script type="text/javascript" src="scripts/scripts.js"></script>
+	<script type="text/javascript" src="scripts/instructions.js"></script>
 
 	<!-- -------------------------------------------------------------- SERVER SDATA-------------------------------------------------------------- -->
 	<script type="text/javascript">

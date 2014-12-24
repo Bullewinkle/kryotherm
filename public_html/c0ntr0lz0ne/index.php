@@ -27,7 +27,7 @@
     <meta http-equiv="Content-Style-Type" content="text/css">
     <link rel=stylesheet type="text/css" href="screen.css">
     <SCRIPT LANGUAGE="JavaScript" SRC="../scripts/scripts.js"></SCRIPT>
-    <SCRIPT LANGUAGE="JavaScript" SRC="../scripts/prototype.js"></SCRIPT>
+    <SCRIPT LANGUAGE="JavaScript" SRC="../scripts/libs/prototype.js"></SCRIPT>
 
   </head>
   <body>
