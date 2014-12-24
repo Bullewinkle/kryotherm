@@ -224,56 +224,7 @@ $(function () {
 
 	var cat_items = $("select[name='category']").find("option").length;
 
-	var onOrderFormSubmit = function (e) {
-		$form = $(this).parents('form');
-
-		// -------------- HMAC GENERATOR USAGE --------------
-
-		TIMESTAMP.value = calc_timestamp();
-		MAC_DATA.value = tomacdata('AMOUNT') +
-		tomacdata('CURRENCY') +
-		tomacdata('ORDER') +
-		tomacdata('MERCH_NAME') +
-		tomacdata('MERCHANT') +
-		tomacdata('TERMINAL') +
-		tomacdata('EMAIL') +
-		tomacdata('TRTYPE') +
-		tomacdata('TIMESTAMP') +
-		tomacdata('NONCE') +
-		tomacdata('BACKREF');
-		P_SIGN.value = hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value);
-
-		// ------------ END HMAC GENERATOR USAGE --------------
-
-		console.log(this, e)
-		$dataAboutCustomerInputs = $form.find('.data-about-customer');
-		$dataAboutPaymentInputs = $form.find('.data-about-payment');
-
-		dataAboutCustomer = {}
-		$dataAboutCustomerInputs.each(function (i, input) {
-			dataAboutCustomer[input.name] = input.value
-		});
-		//console.log('data about customer:', dataAboutCustomer);
-
-		dataAboutPayment = {}
-		$dataAboutPaymentInputs.each(function (i, input) {
-			dataAboutPayment[input.name] = input.value
-		});
-		//console.log('data about payment:',dataAboutPayment);
-
-		api.session.setUser(dataAboutCustomer, function () {
-			$form.submit();
-		});
-
-	};
-
-	window.$orderForm = $('.js-place-order-form[name=place-order]');
-	//window.$orderForm.on('submit', onOrderFormSubmit);
-
-	window.$orderFormSubmitButton = $('.js-place-order-form-submit');
-	window.$orderFormSubmitButton.on('click',onOrderFormSubmit);
-
-	//$orderForm.on('submit', validate);
+	initialize()
 
 });
 
@@ -516,3 +467,53 @@ function show_help_2(img, help_id, shift) {
 			}
 		});
 }
+
+function initialize() {
+	var onOrderFormSubmit = function (e) {
+		$form = $(this).parents('form');
+
+		// -------------- HMAC GENERATOR USAGE --------------
+
+		TIMESTAMP.value = calc_timestamp();
+		MAC_DATA.value = tomacdata('AMOUNT') +
+		tomacdata('CURRENCY') +
+		tomacdata('ORDER') +
+		tomacdata('MERCH_NAME') +
+		tomacdata('MERCHANT') +
+		tomacdata('TERMINAL') +
+		tomacdata('EMAIL') +
+		tomacdata('TRTYPE') +
+		tomacdata('TIMESTAMP') +
+		tomacdata('NONCE') +
+		tomacdata('BACKREF');
+		P_SIGN.value = hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value);
+
+		// ------------ END HMAC GENERATOR USAGE --------------
+
+		console.log(this, e)
+		$dataAboutCustomerInputs = $form.find('.data-about-customer');
+		$dataAboutPaymentInputs = $form.find('.data-about-payment');
+
+		dataAboutCustomer = {}
+		$dataAboutCustomerInputs.each(function (i, input) {
+			dataAboutCustomer[input.name] = input.value
+		});
+		//console.log('data about customer:', dataAboutCustomer);
+
+		dataAboutPayment = {}
+		$dataAboutPaymentInputs.each(function (i, input) {
+			dataAboutPayment[input.name] = input.value
+		});
+		//console.log('data about payment:',dataAboutPayment);
+
+		api.session.setUser(dataAboutCustomer, function () {
+			$form.submit();
+		});
+
+	};
+
+	window.$orderForm = $('.js-place-order-form[name=place-order]');
+	window.$orderFormSubmitButton = $('.js-place-order-form-submit');
+	window.$orderFormSubmitButton.on('click',onOrderFormSubmit);
+}
+
