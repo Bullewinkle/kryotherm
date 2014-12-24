@@ -941,112 +941,6 @@ function letter_data($array) {
 	return $html;
 }
 
-
-/*  Форма подтверждения заказа
-*/
-function get_order_form($array, $customer) {
-//
-	if (!is_arr($array)) {
-		$html .= "Пустой заказ";
-	} else {
-		$html .= "<div style='height: 54px'>
-			<a href='/'>В каталог</a> > <a href='/cart.php'>Корзина</a> > <a href='/cart.php&exec_order=form' class='active'>Подтверждение заказа</a>
-		</div>
-		<h1>Ваш заказ</h1>" . customers_order($array);
-
-		include(CATALOG_SCRIPT_DIR . 'order_form.php');
-	}
-	return $html;
-}
-
-function exec_order_form($mail, $send_data, &$order_data) {
-	$send_data = json_decode($send_data, true);
-
-	$html .= '<script  type="text/javascript">
-		window.kryotherm || (window.kryotherm = {});
-		window.kryotherm.orderFormArgs =' . json_encode(func_get_args()) . '
-	</script>';
-
-	$html .= "<div style='height: 54px'>
-	<a href='/'>В каталог</a> > <a href='/cart.php'>Корзина</a> >
-	<a href='/cart.php&exec_order=form'>Подтверждение закза</a> > ";
-
-
-	if ($_GET['result'] && $_GET['result'] != 0) {
-		$html .= '<span class="active">Ошибка оплаты</span></div>
-			<p>Видимо произошла ошибка во время оплаты</p>
-		';
-		return $html;
-	}
-
-
-	if (!empty($send_data['email'])) $send_data['mail'] = $send_data['email'];
-
-	if (is_arr($send_data) && !empty($send_data['mail'])) {
-		if ($send_data['customer'] == 1) {
-			$customer = 'Физическое лицо';
-			$mess = "<p>Здравствуйте
-		" . $send_data['name'] . "
-		" . (!empty($send_data['patronymic']) ? $send_data['patronymic'] : "") . "
-		" . $send_data['surname'] . ".</p>
-	<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>";
-		} else {
-			$customer = 'Юридическое лицо';
-			$mess = 'Здравствуйте
-	' . (!empty($send_data['contactperson']) ? $send_data['contactperson'] : $send_data['organisation']) . '
-	<p>Вы сделали заказ на сайте ' . $_SERVER['HTTP_HOST'] . '</p>';
-		}
-
-		$mess = $mess . "<p>Способ доставки: " . $send_data['shipping'] . "</p><p>Ваш заказ:</p>
-	" . letter_data($order_data);
-
-		$mail->From = SHOP_EMAIL;
-		$mail->FromName = 'Zakaz s saita ' . $_SERVER['HTTP_HOST'];
-		$mail->AddAddress($send_data['mail']);
-		$mail->IsHTML(true);
-		$mail->Subject = 'Zakaz s saita ' . $_SERVER['HTTP_HOST'];
-		$mail->Body = $mess;
-
-		if (!$mail->Send()) die ('Mailer Error1: ' . $mail->ErrorInfo);
-
-		$data_definer = order_data_definer();
-
-		$customer_data = null;
-
-		if (is_array($send_data)) foreach ($send_data as $k => $v)
-
-			if (!empty($v) && !empty($data_definer[$k]))
-				$customer_data .= $data_definer[$k] . ': ' . $v . '<br />';
-
-
-		$mess = "<p>С сайта " . $_SERVER['HTTP_HOST'] . " поступил заказ:</p>
-	" . letter_data($order_data) .
-			"<p>Заказчик: " . $customer . "</p>
-	<p>" . $customer_data . "</p>";
-
-		$mail->From = $send_data['mail'];
-		$mail->FromName = 'Заказ с сайта ' . $_SERVER['HTTP_HOST'];
-		$mail->AddAddress(SHOP_EMAIL);
-		$mail->IsHTML(true);
-		$mail->Subject = 'Заказ с сайта ' . $_SERVER['HTTP_HOST'];
-		$mail->Body = $mess;
-
-		if (!$mail->Send()) die ('Mailer Error2: ' . $mail->ErrorInfo);
-
-		//$order_data = array();
-
-		$html .= '<span class="active">Успешно отправлено</span></div>
-<p>Ваш заказ успешно отправлен на обработку.</p>
-';
-	} else
-		$html .= '<span class="active">Заполните обязательные поля</span></div>
-<p>Ошибка при заполнении полей формы подтверждения заказа</p>
-';
-
-	return $html;
-}
-
-
 function order_data_definer() {
 	return array('shipping' => 'Способ доставки',
 		'organisation' => 'Полное название организации:',
@@ -1066,7 +960,8 @@ function order_data_definer() {
 		'surname' => 'Фамилия',
 		'adress' => 'Адрес грузополучателя',
 		'name' => 'Имя',
-		'mail' => 'E-mail'
+		'mail' => 'E-mail',
+		'ORDER' => 'Номер заказа'
 	);
 }
 
@@ -1114,6 +1009,139 @@ function prepare_values(&$item, $key) {
 
 function process_values(&$item, $key) {
 	$item = preg_replace('/^([A-Za-zА-Яа-я\d\s\-,\.\/\(\)]*)(\+\d+\w+)/i', '$1', $item);
+}
+
+/*  Форма подтверждения заказа
+*/
+function get_order_form($array, $customer) {
+//
+	if (!is_arr($array)) {
+		$html .= "Пустой заказ";
+	} else {
+		$html .= "<div style='height: 54px'>
+			<a href='/'>В каталог</a> > <a href='/cart.php'>Корзина</a> > <a href='/cart.php&exec_order=form' class='active'>Подтверждение заказа</a>
+		</div>
+		<h1>Ваш заказ</h1>" . customers_order($array);
+
+		include(CATALOG_SCRIPT_DIR . 'order_form.php');
+	}
+	return $html;
+}
+
+// ГЕНЕРАЦИЯ И ОТСЫЛКА ПИСЕМ
+function exec_order_form($mail, $send_data, &$order_data) {
+	$send_data = json_decode($send_data, true);
+
+	$html .= '<script  type="text/javascript">
+		window.kryotherm || (window.kryotherm = {});
+		window.kryotherm.$send_data =' . json_encode($send_data) . '
+		window.kryotherm.$order_data =' . json_encode($order_data) . '
+	</script>';
+
+	$html .= "<div style='height: 54px'>
+	<a href='/'>В каталог</a> > <a href='/cart.php'>Корзина</a> >
+	<a href='/cart.php&exec_order=form'>Подтверждение закза</a> > ";
+
+
+	if ($_GET['result'] && $_GET['result'] != 0) {
+		$html .= '<span class="active">Ошибка оплаты</span></div>
+			<p>Видимо произошла ошибка во время оплаты</p>
+		';
+		return $html;
+	}
+	//	 ------------------------ ПОДГОТОВКА ДАННЫХ ДЛЯ СООБЩЕНИЙ ------------------------
+	if (!empty($send_data['email'])) $send_data['mail'] = $send_data['email'];
+	if (!empty($_GET['order'])) {
+		$send_data['ORDER'] = $_GET['order'];
+	}
+
+
+
+	//	 ----------------------- ГЕНЕРАЦИЯ СООБЩЕНИЯ ДЛЯ ЗАКАЗЧИКА -----------------------
+
+
+	if (is_arr($send_data) && !empty($send_data['mail'])) {
+		if ($send_data['customer'] == 1) {
+			$customer = 'Физическое лицо';
+			$messageForCustomer = "<p>Здравствуйте
+		" . $send_data['name'] . "
+		" . (!empty($send_data['patronymic']) ? $send_data['patronymic'] : "") . "
+		" . $send_data['surname'] . ".</p>
+	<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>
+	<p>Номер заказа: " . $send_data['ORDER'] . "</p>";
+		} else {
+			$customer = 'Юридическое лицо';
+			$messageForCustomer = 'Здравствуйте
+	' . (!empty($send_data['contactperson']) ? $send_data['contactperson'] : $send_data['organisation']) . '
+	<p>Вы сделали заказ на сайте ' . $_SERVER['HTTP_HOST'] . '</p>';
+		}
+
+		$messageForCustomer = $messageForCustomer . "<p>Способ доставки: " . $send_data['shipping'] . "</p><p>Ваш заказ:</p>
+	" . letter_data($order_data);
+
+		$mail->AddAddress($send_data['mail']);
+		$mail->From = SHOP_EMAIL;
+		$mail->FromName = SHOP_NAME;
+		$mail->AddReplyTo(SHOP_EMAIL,SHOP_NAME);
+		$mail->IsHTML(true);
+		$mail->Subject = 'Заказ на сайте ' . $_SERVER['HTTP_HOST'];
+		$mail->Body = $messageForCustomer;
+
+		if (!$mail->Send()) die ('Mailer Error1: ' . $mail->ErrorInfo);
+		$mail->ClearAddresses();
+		$mail->ClearReplyTos();
+		$mail->ClearAllRecipients();
+		$mail->ClearAttachments();
+		$mail->ClearCustomHeaders();
+
+	//	 ----------------------- КОНЕЦ ГЕНЕРАЦИИ СООБЩЕНИЯ ДЛЯ ЗАКАЗЧИКА -----------------------
+
+
+	//	 ----------------------- ГЕНЕРАЦИЯ СООБЩЕНИЯ ДЛЯ МАНАГЕРА -----------------------
+
+		$data_definer = order_data_definer();
+
+		$customer_data = null;
+
+		if (is_array($send_data)) foreach ($send_data as $k => $v)
+
+			if (!empty($v) && !empty($data_definer[$k]))
+				$customer_data .= $data_definer[$k] . ': ' . $v . '<br />';
+
+
+		$messageForManager = "<p>С сайта " . $_SERVER['HTTP_HOST'] . " поступил заказ номер ". $send_data['ORDER'] .":</p>
+	" . letter_data($order_data) .
+			"<p>Заказчик: " . $customer . "</p>
+	<p>" . $customer_data . "</p>";
+
+		$mail->AddAddress(SHOP_EMAIL);
+//		$mail->From = SHOP_EMAIL;
+//		$mail->FromName = SHOP_NAME;
+		$mail->From = $send_data['mail'];
+		$mail->FromName = $send_data['mail'];
+		$mail->AddReplyTo($send_data['mail']);
+		$mail->IsHTML(true);
+		$mail->Subject = 'Заказ № ' . $send_data['ORDER'] . ' от '. $send_data['mail'];
+		$mail->Body = $messageForManager;
+
+		if (!$mail->Send()) die ('Mailer Error2: ' . $mail->ErrorInfo);
+		$mail->ClearAddresses();
+		$mail->ClearReplyTos();
+		$mail->ClearAllRecipients();
+		$mail->ClearAttachments();
+		$mail->ClearCustomHeaders();
+
+	//	 ----------------------- КОНЕЦ ГЕНЕРАЦИИ СООБЩЕНИЯ ДЛЯ МАНАГЕРА -----------------------
+
+		$html .= '<span class="active">Успешно отправлено</span></div>
+<p>Ваш заказ успешно отправлен на обработку.</p>
+';
+	} else
+		$html .= '<span class="active">Заполните обязательные поля</span></div>
+<p>Ошибка при заполнении полей формы подтверждения заказа</p>
+';
+
+	return $html;
 }
 
 ?>

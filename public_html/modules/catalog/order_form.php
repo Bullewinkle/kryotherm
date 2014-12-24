@@ -17,7 +17,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 		<tr>
 			<td width="30%">Заказчик:</td>
 			<td>
-				<select class="data-about-customer" size="1" name="customer" onChange="define_customer(this.value)">
+				<select class="customer-data" size="1" name="customer" onChange="define_customer(this.value)">
 					<option value="1" ' . (($customer == 1) ? 'selected' : '') . '>Физическое лицо</option>
 					<option value="2" ' . (($customer == 2) ? 'selected' : '') . '>Юридическое лицо</option>
 				</select>
@@ -26,7 +26,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 		<tr>
 			<td>Способ доставки:</td>
 			<td>
-				<select class="data-about-customer" size="1" name="shipping">
+				<select class="customer-data" size="1" name="shipping">
 					<option value=""> --- </option>
 					<option value="СПСР-Экспресс">СПСР-Экспресс</option>
 					<option value="Грузовозов">Грузовозов</option>
@@ -40,86 +40,86 @@ $html .= '<br /><h2>Ваши данные:</h2>
 		' . (($customer == '1') ? '
 		<tr>
 			<td>Имя: <span class="active">*</span></td>
-			<td><input class="data-about-customer" name="name" type="text" value=""></td>
+			<td><input class="customer-data" name="name" type="text" value="Тест"></td>
 		</tr>
 		<tr>
 			<td>Отчество:</td>
-			<td><input class="data-about-customer" name="patronymic" type="text" value=""></td>
+			<td><input class="customer-data" name="patronymic" type="text" value="Тестович"></td>
 		</tr>
 		<tr>
 			<td>Фамилия: <span class="active">*</span></td>
-			<td><input class="data-about-customer" name="surname" type="text" value=""></td>
+			<td><input class="customer-data" name="surname" type="text" value="Тестов"></td>
 		</tr>
 		<tr>
 			<td>ИНН: <span class="active">*</span></td>
-			<td><input class="data-about-customer" name="inn" type="text" value=""></td>
+			<td><input class="customer-data" name="inn" type="text" value="123456789012"></td>
 		</tr>
 		<tr>
 			<td>Адрес грузополучателя: <span class="active">*</span></td>
-			<td><input class="data-about-customer" name="adress" type="text" value=""></td>
+			<td><input class="customer-data" name="adress" type="text" value="Тестовый адресс"></td>
 		</tr>
 		<tr>
 			<td>Телефон: <span class="active">*</span></td>
-			<td><input class="data-about-customer" name="phone" type="text" value=""></td>
+			<td><input class="customer-data" name="phone" type="text" value="1234567890"></td>
 		</tr>
 		<tr>
 			<td>Факс:</td>
-			<td><input class="data-about-customer" name="fax" type="text" value=""></td>
+			<td><input class="customer-data" name="fax" type="text" value="1234567890"></td>
 		</tr>
 		<tr>
 			<td>E-mail: <span class="active">*</span></td>
-			<td><input class="data-about-customer" name="mail" type="text" value=""></td>
+			<td><input class="customer-data" name="mail" type="text" value="developer085@gmail.com"></td>
 		</tr>
 
 		' : '
 
 		<tr>
 			<td>Полное название организации: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="organisation"></td>
+			<td><input class="customer-data" type="text" value="" name="organisation"></td>
 		</tr>
 		<tr>
 			<td>ИНН: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="inn"></td>
+			<td><input class="customer-data" type="text" value="" name="inn"></td>
 		</tr>
 		<tr>
 			<td>КПП: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="kpp"></td>
+			<td><input class="customer-data" type="text" value="" name="kpp"></td>
 		</tr>
 		<tr>
 			<td>ОКПО:</td>
-			<td><input class="data-about-customer" type="text" value="" name="okpo"></td>
+			<td><input class="customer-data" type="text" value="" name="okpo"></td>
 		</tr>
 		<tr>
 			<td>Юридический адрес: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="jaddress"></td>
+			<td><input class="customer-data" type="text" value="" name="jaddress"></td>
 		</tr>
 		<tr>
 			<td>Фактический адрес: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="postaladdress"></td>
+			<td><input class="customer-data" type="text" value="" name="postaladdress"></td>
 		</tr>
 		<tr>
 			<td>Банковские реквизиты: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="bank"></td>
+			<td><input class="customer-data" type="text" value="" name="bank"></td>
 		</tr>
 		<tr>
 			<td>ФИО Ген. директора: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="gendir"></td>
+			<td><input class="customer-data" type="text" value="" name="gendir"></td>
 		</tr>
 		<tr>
 			<td>Контактное лицо:</td>
-			<td><input class="data-about-customer" type="text" value="" name="contactperson"></td>
+			<td><input class="customer-data" type="text" value="" name="contactperson"></td>
 		</tr>
 		<tr>
 			<td>Телефон: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="phone"></td>
+			<td><input class="customer-data" type="text" value="" name="phone"></td>
 		</tr>
 		<tr>
 			<td>Факс:</td>
-			<td><input class="data-about-customer" type="text" value="" name="fax"></td>
+			<td><input class="customer-data" type="text" value="" name="fax"></td>
 		</tr>
 		<tr>
 			<td>Email: <span class="active">*</span></td>
-			<td><input class="data-about-customer" type="text" value="" name="mail"></td>
+			<td><input class="customer-data" type="text" value="" name="mail"></td>
 		</tr>
 
 		') . '
@@ -128,71 +128,71 @@ $html .= '<br /><h2>Ваши данные:</h2>
 
 		<tr>
 			<td>AMOUNT:</td>
-			<td><input class="data-about-payment" name="AMOUNT" id="AMOUNT" type="text" value="20"/></td>
+			<td><input class="payment-data" name="AMOUNT" id="AMOUNT" type="text" value="20"/></td>
 		</tr>
 		<tr>
 			<td>CURRENCY:</td>
-			<td><input class="data-about-payment" name="CURRENCY" id="CURRENCY" type="text" value="RUB"/></td>
+			<td><input class="payment-data" name="CURRENCY" id="CURRENCY" type="text" value="RUB"/></td>
 		</tr>
 		<tr>
 			<td>ORDER:</td>
-			<td><input class="data-about-payment" name="ORDER" id="ORDER" type="text" value="20141216090746"/></td>
+			<td><input class="payment-data customer-data" name="ORDER" id="ORDER" type="text" value="20141216090746"/></td>
 		</tr>
 		<tr>
 			<td>DESC:</td>
-			<td><input class="data-about-payment" name="DESC" id="DESC" type="text" value="Test product"/></td>
+			<td><input class="payment-data" name="DESC" id="DESC" type="text" value="Test product"/></td>
 		</tr>
 		<tr>
 			<td>TERMINAL:</td>
-			<td><input class="data-about-payment" name="TERMINAL" id="TERMINAL" type="text" value="79036829"/></td>
+			<td><input class="payment-data" name="TERMINAL" id="TERMINAL" type="text" value="79036829"/></td>
 		</tr>
 		<tr>
 			<td>TRTYPE:</td>
-			<td><input class="data-about-payment" name="TRTYPE" id="TRTYPE" type="text" value="1"/></td>
+			<td><input class="payment-data" name="TRTYPE" id="TRTYPE" type="text" value="1"/></td>
 		</tr>
 		<tr>
 			<td>MERCH_NAME:</td>
-			<td><input class="data-about-payment" name="MERCH_NAME" id="MERCH_NAME" type="text" value="ECOGEN_TECHNOLOGY_TEST"/></td>
+			<td><input class="payment-data" name="MERCH_NAME" id="MERCH_NAME" type="text" value="ECOGEN_TECHNOLOGY_TEST"/></td>
 		</tr>
 		<tr>
 			<td>MERCHANT:</td>
-			<td><input class="data-about-payment" name="MERCHANT" id="MERCHANT" type="text" value="790367686219999"/></td>
+			<td><input class="payment-data" name="MERCHANT" id="MERCHANT" type="text" value="790367686219999"/></td>
 		</tr>
 		<tr>
 			<td>EMAIL:</td>
-			<td><input class="data-about-payment" name="EMAIL" id="EMAIL" type="text" value="developer085@gmail.com"/></td>
+			<td><input class="payment-data" name="EMAIL" id="EMAIL" type="text" value="developer085@gmail.com"/></td>
 		</tr>
 		<tr>
 			<td>NONCE:</td>
-			<td><input class="data-about-payment" name="NONCE" id="NONCE" type="text" value="F2B2DD7E603A7ADA"/></td>
+			<td><input class="payment-data" name="NONCE" id="NONCE" type="text" value="F2B2DD7E603A7ADA"/></td>
 		</tr>
 		<tr>
 			<td>BACKREF:</td>
-			<td><input class="data-about-payment" name="BACKREF" id="BACKREF" type="text" value="http://kryotherm.hol.es/cart.php&exec_order=send"/></td>
+			<td><input class="payment-data" name="BACKREF" id="BACKREF" type="text" value="http://kryotherm.hol.es/cart.php&exec_order=send"/></td>
 		</tr>
 		<tr>
 			<td>KEY:</td>
-			<td><input class="data-about-payment" name="KEY" id="KEY" type="text" value="C50E41160302E0F5D6D59F1AA3925C45"/></td>
+			<td><input class="payment-data" name="KEY" id="KEY" type="text" value="C50E41160302E0F5D6D59F1AA3925C45"/></td>
 		</tr>
 		<tr>
 			<td>TIMESTAMP:</td>
-			<td><input class="data-about-payment" name="TIMESTAMP" id="TIMESTAMP" type="text" value="20141216090758"/></td>
+			<td><input class="payment-data" name="TIMESTAMP" id="TIMESTAMP" type="text" value="20141216090758"/></td>
 		</tr>
 		<tr>
 			<td>MAC_DATA:</td>
-			<td><input class="data-about-payment" name="MAC_DATA" id="MAC_DATA" type="text" value=""</td>
+			<td><input class="payment-data" name="MAC_DATA" id="MAC_DATA" type="text" value=""</td>
 		</tr>
 		<tr>
 			<td>P_SIGN:</td>
-			<td><input class="data-about-payment" name="P_SIGN" id="P_SIGN" type="text" value="" /</td>
+			<td><input class="payment-data" name="P_SIGN" id="P_SIGN" type="text" value="" /</td>
 		</tr>
 		<tr>
 			<td>LANG:</td>
-			<td><input class="data-about-payment" name="LANG" id="LANG" type="text" value=""/></td>
+			<td><input class="payment-data" name="LANG" id="LANG" type="text" value=""/></td>
 		</tr>
 		<tr>
 			<td>SERVICE:</td>
-			<td><input class="data-about-payment" name="SERVICE" id="SERVICE" type="text" value=""/></td>
+			<td><input class="payment-data" name="SERVICE" id="SERVICE" type="text" value=""/></td>
 		</tr>
 		<tr>
 			<td>Комментарии пользователя:</td>

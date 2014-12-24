@@ -7,31 +7,31 @@ $(function () {
 	var b64pad = "";
 	var chrsz = 8;
 
-	function hex_sha1(s) {
+	var hex_sha1 = function(s) {
 		return binb2hex(core_sha1(str2binb(s), s.length * chrsz));
 	}
 
-	function b64_sha1(s) {
+	var b64_sha1 = function(s) {
 		return binb2b64(core_sha1(str2binb(s), s.length * chrsz));
 	}
 
-	function str_sha1(s) {
+	var str_sha1 = function(s) {
 		return binb2str(core_sha1(str2binb(s), s.length * chrsz));
 	}
 
-	function hex_hmac_sha1(key, data) {
+	var hex_hmac_sha1 = function(key, data) {
 		return binb2hex(core_hmac_sha1(key, data));
 	}
 
-	function b64_hmac_sha1(key, data) {
+	var b64_hmac_sha1 = function(key, data) {
 		return binb2b64(core_hmac_sha1(key, data));
 	}
 
-	function str_hmac_sha1(key, data) {
+	var str_hmac_sha1 = function(key, data) {
 		return binb2str(core_hmac_sha1(key, data));
 	}
 
-	function core_sha1(x, len) {
+	var core_sha1 = function(x, len) {
 		x[len >> 5] |= 0x80 << (24 - len % 32);
 		x[((len + 64 >> 9) << 4) + 15] = len;
 		var w = Array(80);
@@ -66,19 +66,19 @@ $(function () {
 		return Array(a, b, c, d, e);
 	}
 
-	function sha1_ft(t, b, c, d) {
+	var sha1_ft = function(t, b, c, d) {
 		if (t < 20) return (b & c) | ((~b) & d);
 		if (t < 40) return b ^ c ^ d;
 		if (t < 60) return (b & c) | (b & d) | (c & d);
 		return b ^ c ^ d;
 	}
 
-	function sha1_kt(t) {
+	var sha1_kt = function(t) {
 		return (t < 20) ? 1518500249 : (t < 40) ? 1859775393 :
 			(t < 60) ? -1894007588 : -899497514;
 	}
 
-	function core_hmac_sha1(key, data) {
+	var core_hmac_sha1 = function(key, data) {
 		var bkey = str2binb(key);
 		if (bkey.length > 16) bkey = core_sha1(bkey, key.length * chrsz);
 		var ipad = Array(16), opad = Array(16);
@@ -90,17 +90,17 @@ $(function () {
 		return core_sha1(opad.concat(hash), 512 + 160);
 	}
 
-	function safe_add(x, y) {
+	var safe_add = function(x, y) {
 		var lsw = (x & 0xFFFF) + (y & 0xFFFF);
 		var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
 		return (msw << 16) | (lsw & 0xFFFF);
 	}
 
-	function rol(num, cnt) {
+	var rol = function(num, cnt) {
 		return (num << cnt) | (num >>> (32 - cnt));
 	}
 
-	function str2binb(str) {
+	var str2binb = function(str) {
 		var bin = Array();
 		var mask = (1 << chrsz) - 1;
 		for (var i = 0; i < str.length * chrsz; i += chrsz)
@@ -108,7 +108,7 @@ $(function () {
 		return bin;
 	}
 
-	function binb2str(bin) {
+	var binb2str = function(bin) {
 		var str = "";
 		var mask = (1 << chrsz) - 1;
 		for (var i = 0; i < bin.length * 32; i += chrsz)
@@ -116,7 +116,7 @@ $(function () {
 		return str;
 	}
 
-	function binb2hex(binarray) {
+	var binb2hex = function(binarray) {
 		var hex_tab = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
 		var str = "";
 		for (var i = 0; i < binarray.length * 4; i++) {
@@ -126,7 +126,7 @@ $(function () {
 		return str;
 	}
 
-	function binb2b64(binarray) {
+	var binb2b64 = function(binarray) {
 		var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 		var str = "";
 		for (var i = 0; i < binarray.length * 4; i += 3) {
@@ -160,7 +160,7 @@ $(function () {
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	];
 
-	function hex2bin(str) {
+	var hex2bin = function(str) {
 		var len = str.length;
 		var rv = '';
 		var i = 0;
@@ -181,7 +181,7 @@ $(function () {
 		return rv;
 	}
 
-	function tomacdata(fldId) {
+	var tomacdata = function(fldId) {
 		var str = "";
 		oFld = document.getElementById(fldId)
 		if (oFld.value == "") {
@@ -192,7 +192,7 @@ $(function () {
 		return str;
 	}
 
-	function calc_timestamp() {
+	var calc_timestamp = function() {
 		var date = new Date();
 		var year = date.getUTCFullYear().toString();
 		var month = ((date.getUTCMonth() + 1).toString().length == 1) ? '0' + (date.getUTCMonth() + 1).toString() : (date.getUTCMonth() + 1).toString();
@@ -224,7 +224,50 @@ $(function () {
 
 	var cat_items = $("select[name='category']").find("option").length;
 
-	initialize()
+	var onOrderFormSubmit = function (e) {
+		$form = $(this).parents('form');
+
+		// -------------- HMAC GENERATOR USAGE --------------
+		ORDER.value = +(new Date());
+		TIMESTAMP.value = calc_timestamp();
+		MAC_DATA.value = tomacdata('AMOUNT') +
+		tomacdata('CURRENCY') +
+		tomacdata('ORDER') +
+		tomacdata('MERCH_NAME') +
+		tomacdata('MERCHANT') +
+		tomacdata('TERMINAL') +
+		tomacdata('EMAIL') +
+		tomacdata('TRTYPE') +
+		tomacdata('TIMESTAMP') +
+		tomacdata('NONCE') +
+		tomacdata('BACKREF');
+		P_SIGN.value = hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value);
+
+		// ------------ END HMAC GENERATOR USAGE --------------
+
+		console.log(this, e)
+		$dataAboutCustomerInputs = $form.find('.customer-data');
+		$dataAboutPaymentInputs = $form.find('.payment-data');
+
+		dataAboutCustomer = {}
+		$dataAboutCustomerInputs.each(function (i, input) {
+			dataAboutCustomer[input.name] = input.value
+		});
+
+		dataAboutPayment = {}
+		$dataAboutPaymentInputs.each(function (i, input) {
+			dataAboutPayment[input.name] = input.value
+		});
+
+		api.session.setUser(dataAboutCustomer, function () {
+			$form.submit();
+		});
+
+	};
+
+	window.$orderForm = $('.js-place-order-form[name=place-order]');
+	window.$orderFormSubmitButton = $('.js-place-order-form-submit');
+	window.$orderFormSubmitButton.on('click',onOrderFormSubmit);
 
 });
 
@@ -466,54 +509,5 @@ function show_help_2(img, help_id, shift) {
 				//$("div#help iframe").css("height",($("div#help").height()+45)+'px');
 			}
 		});
-}
-
-function initialize() {
-	var onOrderFormSubmit = function (e) {
-		$form = $(this).parents('form');
-
-		// -------------- HMAC GENERATOR USAGE --------------
-
-		TIMESTAMP.value = calc_timestamp();
-		MAC_DATA.value = tomacdata('AMOUNT') +
-		tomacdata('CURRENCY') +
-		tomacdata('ORDER') +
-		tomacdata('MERCH_NAME') +
-		tomacdata('MERCHANT') +
-		tomacdata('TERMINAL') +
-		tomacdata('EMAIL') +
-		tomacdata('TRTYPE') +
-		tomacdata('TIMESTAMP') +
-		tomacdata('NONCE') +
-		tomacdata('BACKREF');
-		P_SIGN.value = hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value);
-
-		// ------------ END HMAC GENERATOR USAGE --------------
-
-		console.log(this, e)
-		$dataAboutCustomerInputs = $form.find('.data-about-customer');
-		$dataAboutPaymentInputs = $form.find('.data-about-payment');
-
-		dataAboutCustomer = {}
-		$dataAboutCustomerInputs.each(function (i, input) {
-			dataAboutCustomer[input.name] = input.value
-		});
-		//console.log('data about customer:', dataAboutCustomer);
-
-		dataAboutPayment = {}
-		$dataAboutPaymentInputs.each(function (i, input) {
-			dataAboutPayment[input.name] = input.value
-		});
-		//console.log('data about payment:',dataAboutPayment);
-
-		api.session.setUser(dataAboutCustomer, function () {
-			$form.submit();
-		});
-
-	};
-
-	window.$orderForm = $('.js-place-order-form[name=place-order]');
-	window.$orderFormSubmitButton = $('.js-place-order-form-submit');
-	window.$orderFormSubmitButton.on('click',onOrderFormSubmit);
 }
 
