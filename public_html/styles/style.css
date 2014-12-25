@@ -268,13 +268,13 @@ div#help_holder { position: relative; }
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
+	margin-bottom: 16px;
 }
 .form select {}
 .form [type=submit],
 .form [type=button] {}
-.form label {}
-.form .label {
-	font-size: 14px;
+.form label, .form .label {
+	font-size: 12px;
 	font-weight: 100;
 }
 
@@ -283,12 +283,14 @@ div#help_holder { position: relative; }
 	-webkit-box-shadow:0 0 2px 0 tomato;
 	-moz-box-shadow: 0 0 2px 0 tomato;
 	box-shadow: 0 0 2px 0 tomato;
+	margin-bottom: 2px;
 }
 .form input.valid {
 	border: 1px solid lightgreen;
 	-webkit-box-shadow:0 0 2px 0 forestgreen;
 	-moz-box-shadow: 0 0 2px 0 forestgreen;
 	box-shadow: 0 0 2px 0 forestgreen;
+	margin-bottom: 16px;
 }
 
 .form label.invalid {

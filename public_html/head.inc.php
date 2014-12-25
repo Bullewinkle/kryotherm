@@ -25,8 +25,6 @@
 	<script type="text/javascript">
 		window.kryotherm || (window.kryotherm = {});
 		window.kryotherm.$_REQUEST = 	<?= json_encode($_REQUEST); ?>;
-		window.kryotherm.$_SERVER = 	<?= json_encode($_SERVER); ?>;
-		window.kryotherm.$_ENV = 		<?= json_encode($_ENV); ?>;
 		window.kryotherm.$_GET = 		<?= json_encode($_GET); ?>;
 	</script >
 	<!-- ------------------------------------------------------------ END SERVER SDATA-------------------------------------------------------------- -->
