@@ -1058,7 +1058,6 @@ function exec_order_form($mail, $send_data, &$order_data) {
 	//	 ----------------------- ГЕНЕРАЦИЯ СООБЩЕНИЯ ДЛЯ ЗАКАЗЧИКА -----------------------
 	if (is_arr($send_data) && !empty($send_data['mail'])) {
 		$testCustomer = (string) $send_data['customer'];
-		echo var_dump($testCustomer);
 		if ($testCustomer == "1") {
 
 			$customer = "Физическое лицо";
