@@ -169,8 +169,6 @@ a.active, span.active {color: red}
 p.sub_head { background: #fff; margin: 15px -7px 5px -7px; padding: 2px 7px; display: inline; clear: both;}
 .filter_conteiner select {width: 100%;}
 span.activebg { background: url('/img/filter_open_close.gif') no-repeat -9px 0; }
-.order_form input , .order_form textarea {width: 100%;}
-.order_form  td { height: 25px; vertical-align: top;}
 td.vam {vertical-align: middle;}
 
 div.loading , div .load { width: 229px; height: 565px; position: absolute; top: 0px; left: 0px; background: #fff; opacity: 0.9; padding: 100px 0 0 0; display: none;}
@@ -230,11 +228,6 @@ div#help2 iframe
 }
 div#help_holder { position: relative; }
 
-.payment-frame {
-	width: 100%;
-	height: 500px;
-}
-
 .hidden {
 	display: none;
 }
@@ -254,3 +247,71 @@ div#help_holder { position: relative; }
 	visibility: visible;
 	opacity: 1;
 }
+
+
+.form {}
+.form .form-table {}
+.form .form-table tr {}
+.form .form-table td {
+	height: 25px;
+	vertical-align: top;
+}
+
+.form input {
+}
+.form input,.form textarea {
+	width: 100%;
+	border: 1px solid rgb(205,205,205);
+	padding: 2px;
+	border-radius: 2px;
+	outline: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.form select {}
+.form [type=submit],
+.form [type=button] {}
+.form label {}
+.form .label {
+	font-size: 14px;
+	font-weight: 100;
+}
+
+.form input.invalid {
+	border: 1px solid tomato;
+	-webkit-box-shadow:0 0 2px 0 tomato;
+	-moz-box-shadow: 0 0 2px 0 tomato;
+	box-shadow: 0 0 2px 0 tomato;
+}
+.form input.valid {
+	border: 1px solid lightgreen;
+	-webkit-box-shadow:0 0 2px 0 forestgreen;
+	-moz-box-shadow: 0 0 2px 0 forestgreen;
+	box-shadow: 0 0 2px 0 forestgreen;
+}
+
+.form label.invalid {
+	color: rgb(201, 106, 88);
+}
+.form label.valid {
+	color: forestgreen;
+}
+.form .label.invalid {
+
+}
+.form .label.valid {
+
+}
+.form input.invalid {}
+.form input.valid {}
+.form textarea.invalid {}
+.form textarea.valid {}
+.form select.invalid {}
+.form select.valid {}
+
+
+.individual-person .individual-person-input {display: table-row;}
+.individual-person .legal-person-input {display: none;}
+.legal-person .legal-person-input {display: table-row;}
+.legal-person .individual-person-input {display: none;}

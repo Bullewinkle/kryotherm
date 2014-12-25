@@ -943,7 +943,7 @@ function letter_data($array) {
 
 function order_data_definer() {
 	return array('shipping' => 'Способ доставки',
-		'organisation' => 'Полное название организации:',
+		'organisation' => 'Полное название организации',
 		'inn' => 'ИНН',
 		'kpp' => 'КПП',
 		'okpo' => 'ОКПО',
@@ -954,7 +954,6 @@ function order_data_definer() {
 		'contactperson' => 'Контактное лицо',
 		'phone' => 'Телефон',
 		'fax' => 'Факс',
-		'email' => 'Email',
 		'descript' => 'Комментарии пользователя',
 		'patronymic' => 'Отчество',
 		'surname' => 'Фамилия',
@@ -1043,46 +1042,45 @@ function exec_order_form($mail, $send_data, &$order_data) {
 	<a href='/cart.php&exec_order=form'>Подтверждение закза</a> > ";
 
 
+	//	 ------------------------ ЕСЛИ НЕТ РЕЗУЛЬТАТА ОПЛАТЫ ------------------------
 	if ($_GET['result'] && $_GET['result'] != 0) {
 		$html .= '<span class="active">Ошибка оплаты</span></div>
 			<p>Видимо произошла ошибка во время оплаты</p>
 		';
 		return $html;
 	}
+
 	//	 ------------------------ ПОДГОТОВКА ДАННЫХ ДЛЯ СООБЩЕНИЙ ------------------------
+	if (!empty($send_data['EMAIL'])) $send_data['mail'] = $send_data['EMAIL'];
 	if (!empty($send_data['email'])) $send_data['mail'] = $send_data['email'];
-	if (!empty($_GET['order'])) {
-		$send_data['ORDER'] = $_GET['order'];
-	}
-
-
+	if (!empty($_GET['order'])) $send_data['ORDER'] = $_GET['order'];
 
 	//	 ----------------------- ГЕНЕРАЦИЯ СООБЩЕНИЯ ДЛЯ ЗАКАЗЧИКА -----------------------
-
-
 	if (is_arr($send_data) && !empty($send_data['mail'])) {
 		if ($send_data['customer'] == 1) {
 			$customer = 'Физическое лицо';
-			$messageForCustomer = "<p>Здравствуйте
-		" . $send_data['name'] . "
-		" . (!empty($send_data['patronymic']) ? $send_data['patronymic'] : "") . "
-		" . $send_data['surname'] . ".</p>
-	<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>
-	<p>Номер заказа: " . $send_data['ORDER'] . "</p>";
+			$messageForCustomer = "<p>Здравствуйте ".
+			 $send_data['name'] . " " .
+			(!empty($send_data['patronymic']) ? $send_data['patronymic'] : "") . " " .
+			$send_data['surname'] . ".</p>
+			<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>
+			<p>Номер заказа: " . $send_data['ORDER'] . "</p>";
 		} else {
-			$customer = 'Юридическое лицо';
-			$messageForCustomer = 'Здравствуйте
-	' . (!empty($send_data['contactperson']) ? $send_data['contactperson'] : $send_data['organisation']) . '
-	<p>Вы сделали заказ на сайте ' . $_SERVER['HTTP_HOST'] . '</p>';
+			$customer = "Юридическое лицо";
+			$messageForCustomer = "<p>Здравствуйте
+			" . (!empty($send_data['contactperson']) ? $send_data['contactperson'] : $send_data['organisation']) . "
+			<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>
+			<p>Номер заказа: " . $send_data['ORDER'] . "</p>";
 		}
-
-		$messageForCustomer = $messageForCustomer . "<p>Способ доставки: " . $send_data['shipping'] . "</p><p>Ваш заказ:</p>
-	" . letter_data($order_data);
+		if (!empty($send_data['shipping'])) {
+			$messageForCustomer .= "<p>Способ доставки: " . $send_data['shipping'];
+		}
+		$messageForCustomer = $messageForCustomer . "</p><p>Ваш заказ:</p>" . letter_data($order_data);
 
 		$mail->AddAddress($send_data['mail']);
 		$mail->From = SHOP_EMAIL;
 		$mail->FromName = SHOP_NAME;
-		$mail->AddReplyTo(SHOP_EMAIL,SHOP_NAME);
+		$mail->AddReplyTo(SHOP_EMAIL, SHOP_NAME);
 		$mail->IsHTML(true);
 		$mail->Subject = 'Заказ на сайте ' . $_SERVER['HTTP_HOST'];
 		$mail->Body = $messageForCustomer;
@@ -1094,10 +1092,10 @@ function exec_order_form($mail, $send_data, &$order_data) {
 		$mail->ClearAttachments();
 		$mail->ClearCustomHeaders();
 
-	//	 ----------------------- КОНЕЦ ГЕНЕРАЦИИ СООБЩЕНИЯ ДЛЯ ЗАКАЗЧИКА -----------------------
+		//	 ----------------------- КОНЕЦ ГЕНЕРАЦИИ СООБЩЕНИЯ ДЛЯ ЗАКАЗЧИКА -----------------------
 
 
-	//	 ----------------------- ГЕНЕРАЦИЯ СООБЩЕНИЯ ДЛЯ МАНАГЕРА -----------------------
+		//	 ----------------------- ГЕНЕРАЦИЯ СООБЩЕНИЯ ДЛЯ МАНАГЕРА -----------------------
 
 		$data_definer = order_data_definer();
 
@@ -1109,19 +1107,17 @@ function exec_order_form($mail, $send_data, &$order_data) {
 				$customer_data .= $data_definer[$k] . ': ' . $v . '<br />';
 
 
-		$messageForManager = "<p>С сайта " . $_SERVER['HTTP_HOST'] . " поступил заказ номер ". $send_data['ORDER'] .":</p>
+		$messageForManager = "<p>С сайта " . $_SERVER['HTTP_HOST'] . " поступил заказ номер " . $send_data['ORDER'] . ":</p>
 	" . letter_data($order_data) .
 			"<p>Заказчик: " . $customer . "</p>
 	<p>" . $customer_data . "</p>";
 
 		$mail->AddAddress(SHOP_EMAIL);
-//		$mail->From = SHOP_EMAIL;
-//		$mail->FromName = SHOP_NAME;
 		$mail->From = $send_data['mail'];
-		$mail->FromName = $send_data['mail'];
+		$mail->FromName = SHOP_NAME;
 		$mail->AddReplyTo($send_data['mail']);
 		$mail->IsHTML(true);
-		$mail->Subject = 'Заказ № ' . $send_data['ORDER'] . ' от '. $send_data['mail'];
+		$mail->Subject = 'Заказ № ' . $send_data['ORDER'] . ' от ' . $send_data['mail'];
 		$mail->Body = $messageForManager;
 
 		if (!$mail->Send()) die ('Mailer Error2: ' . $mail->ErrorInfo);
@@ -1131,7 +1127,7 @@ function exec_order_form($mail, $send_data, &$order_data) {
 		$mail->ClearAttachments();
 		$mail->ClearCustomHeaders();
 
-	//	 ----------------------- КОНЕЦ ГЕНЕРАЦИИ СООБЩЕНИЯ ДЛЯ МАНАГЕРА -----------------------
+		//	 ----------------------- КОНЕЦ ГЕНЕРАЦИИ СООБЩЕНИЯ ДЛЯ МАНАГЕРА -----------------------
 
 		$html .= '<span class="active">Успешно отправлено</span></div>
 <p>Ваш заказ успешно отправлен на обработку.</p>

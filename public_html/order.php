@@ -63,7 +63,7 @@
 
     if($email=="нет") $email = "anonymous@".$_SERVER['HTTP_HOST'];
 
-    $from="FROM: ".$email." \nContent-Type: text/plain; charset=windows-1251\nContent-Transfer-Encoding: 8bit";
+    $from="FROM: ".$email." \nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit";
 
     $fostasmail=MAIL_INFO;
     mail($fostasmail,"Запрос с сайта", $mess, $from) or  printf("<font color=red><b> НЕ </b></font>");

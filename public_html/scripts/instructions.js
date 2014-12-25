@@ -224,10 +224,8 @@ $(function () {
 
 	var cat_items = $("select[name='category']").find("option").length;
 
-	var onOrderFormSubmit = function (e) {
-		$form = $(this).parents('form');
-
-		// -------------- HMAC GENERATOR USAGE --------------
+	// -------------- HMAC GENERATOR USAGE --------------
+	var generateHMAC = function() {
 		ORDER.value = +(new Date());
 		TIMESTAMP.value = calc_timestamp();
 		MAC_DATA.value = tomacdata('AMOUNT') +
@@ -243,10 +241,38 @@ $(function () {
 		tomacdata('BACKREF');
 		P_SIGN.value = hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value);
 
-		// ------------ END HMAC GENERATOR USAGE --------------
+	}
+	// ------------ END HMAC GENERATOR USAGE --------------
 
-		console.log(this, e)
-		$dataAboutCustomerInputs = $form.find('.customer-data');
+
+	var checkCustomerValue = function(custormerValue) {
+		if ( custormerValue+'' !== '1' && custormerValue+'' !== '2' ) { custormerValue = 1 }
+		if (custormerValue+'' ===  '1') {
+			$orderForm.addClass('individual-person');
+			$orderForm.removeClass('legal-person');
+		} else if (custormerValue+'' ===  '2') {
+			$orderForm.removeClass('individual-person');
+			$orderForm.addClass('legal-person');
+		}
+	}
+
+	window.$orderForm = $('.js-place-order-form[name=place-order]');
+	$customerSelect = $orderForm.find('[name=customer]');
+
+	$customerSelect.on('change', function() { checkCustomerValue(this.value) })
+	checkCustomerValue($customerSelect.val());
+
+	var onOrderFormSubmit = function (form, e) {
+		generateHMAC();
+
+		$form = $(form);
+
+		if ($customerSelect.val()+'' ===  '1') {
+			var selector = '.individual-person-input';
+		} else if ($customerSelect.val()+'' ===  '2') {
+			var selector = '.legal-person-input';
+		}
+		$dataAboutCustomerInputs = $form.find(selector+' .customer-data');
 		$dataAboutPaymentInputs = $form.find('.payment-data');
 
 		dataAboutCustomer = {}
@@ -259,15 +285,43 @@ $(function () {
 			dataAboutPayment[input.name] = input.value
 		});
 
-		api.session.setUser(dataAboutCustomer, function () {
-			$form.submit();
+		api.session.setUser(dataAboutCustomer, function (response) {
+			if (response.status === 0) {
+				form.submit();
+				//console.log(response)
+			} else {
+				alert('Что-то пошло не так, попробуйте еще раз.')
+			}
 		});
 
-	};
+	}
 
-	window.$orderForm = $('.js-place-order-form[name=place-order]');
-	window.$orderFormSubmitButton = $('.js-place-order-form-submit');
-	window.$orderFormSubmitButton.on('click',onOrderFormSubmit);
+	window.$orderForm.validate({
+		submitHandler: onOrderFormSubmit,
+		//invalidHandler: function(event, validator) {},
+		//ignore: ":hidden",
+		rules: validationRules,
+		messages: validationMessages,
+		//groups: {},
+		//onsubmit: true,
+		//onfocusout: function(element,event) {}, // or Boolean
+		//onkeyup: function(element,event) {}, // or Boolean
+		//onclick: function(element,event) {}, // or Boolean
+		//focusInvalid: true,
+		errorClass: "invalid",
+		validClass: "valid",
+		//errorElement: "label",
+		//wrapper: window, // String
+		//errorLabelContainer: '', // Selector
+		//errorContainer: '', // Selector
+		//showErrors: function(errorMap, errorList) {},
+		//errorPlacement: function(error, element) {},
+		//success: '', // String(class) or Function($label)
+		//highlight: function(element,errorClass,validClass) {},
+		//unhighlight: function(element,errorClass,validClass) {},
+		//ignoreTitle: false
+
+	})
 
 });
 
@@ -309,15 +363,15 @@ function validate() {
 				error += $(v).parent("td").prev("td").text() + '\n';
 		});
 
-	if (error) alert('��������� ����:\n' + error);
+	if (error) alert('Заполните поля:\n' + error);
 	else {
 		if ((inn.length !== 12 && customer.val() == 1) || (nonum && customer.val() == 1))
 
-			alert('��� ������ ��������� 12 ����.');
+			alert('ИНН должно содержать 12 цифр.');
 		else {
 			if ((inn.length !== 10 && customer.val() == 2) || (nonum && customer.val() == 2))
 
-				alert('��� ������ ��������� 10 ����.');
+				alert('ИНН должно содержать 10 цифр.');
 			else
 			//order_form.submit();
 				return true
@@ -344,7 +398,7 @@ function list_processing(list) {
 }
 
 function resset() {
-	//if (confirm('�������� ������?'))
+	//if (confirm('Очистить фильтр?'))
 	//{
 
 	var r = '';
@@ -511,3 +565,103 @@ function show_help_2(img, help_id, shift) {
 		});
 }
 
+var validationRules = {
+	name: {
+		required: true
+	},
+	surname: {
+		required: true
+	},
+	EMAIL: {
+		required: true,
+		email: true
+	},
+	inn: {
+		required: true
+	},
+	adress: {
+		required: true
+	},
+	phone: {
+		required: true
+	},
+	organisation: {
+		required: true
+	},
+	kpp: {
+		required: true
+	},
+	jaddress: {
+		required: true
+	},
+	postaladdress: {
+		required: true
+	},
+	bank: {
+		required: true
+	},
+	gendir: {
+		required: true
+	}
+}
+
+var validationCommonMessages = {
+	required: "Это поле обязательно для заполнения."
+}
+var validationMessages = {
+	name: {
+		required: validationCommonMessages.required
+	},
+	surname: {
+		required: validationCommonMessages.required
+	},
+	EMAIL: {
+		required: validationCommonMessages.required,
+		email: 'Пожалуйста, введите валидный e-mail адресс.'
+	},
+	inn: {
+		required: validationCommonMessages.required
+	},
+	adress: {
+		required: validationCommonMessages.required
+	},
+	phone: {
+		required: validationCommonMessages.required
+	},
+	organisation: {
+		required: validationCommonMessages.required
+	},
+	kpp: {
+		required: validationCommonMessages.required
+	},
+	jaddress: {
+		required: validationCommonMessages.required
+	},
+	postaladdress: {
+		required: validationCommonMessages.required
+	},
+	bank: {
+		required: validationCommonMessages.required
+	},
+	gendir: {
+		required: validationCommonMessages.required
+	}
+}
+
+
+//required – Makes the element required.
+//remote – Requests a resource to check the element for validity.
+//minlength – Makes the element require a given minimum length.
+//maxlength – Makes the element require a given maxmimum length.
+//rangelength – Makes the element require a given value range.
+//min – Makes the element require a given minimum.
+//max – Makes the element require a given maximum.
+//range – Makes the element require a given value range.
+//email – Makes the element require a valid email
+//url – Makes the element require a valid url
+//date – Makes the element require a date.
+//dateISO – Makes the element require an ISO date.
+//number – Makes the element require a decimal number.
+//digits – Makes the element require digits only.
+//creditcard – Makes the element require a credit card number.
+//equalTo – Requires the element to be the same as another one
