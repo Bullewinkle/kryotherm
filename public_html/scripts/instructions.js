@@ -258,8 +258,12 @@ $(function () {
 
 	window.$orderForm = $('.js-place-order-form[name=place-order]');
 	$customerSelect = $orderForm.find('[name=customer]');
+	$orderForm.$customerSelect = $customerSelect;
 
-	$customerSelect.on('change', function() { checkCustomerValue(this.value) })
+	$customerSelect.on('change', function() {
+		$orderFormValidator.resetForm()
+		checkCustomerValue(this.value);
+	})
 	checkCustomerValue($customerSelect.val());
 
 	var onOrderFormSubmit = function (form, e) {
@@ -272,7 +276,7 @@ $(function () {
 		} else if ($customerSelect.val()+'' ===  '2') {
 			var selector = '.legal-person-input';
 		}
-		$dataAboutCustomerInputs = $form.find(selector+' .customer-data');
+		$dataAboutCustomerInputs = $form.find(selector+' .customer-data, .common-input .customer-data, [name=customer]');
 		$dataAboutPaymentInputs = $form.find('.payment-data');
 
 		dataAboutCustomer = {}
@@ -287,8 +291,8 @@ $(function () {
 
 		api.session.setUser(dataAboutCustomer, function (response) {
 			if (response.status === 0) {
+				//console.log(response);
 				form.submit();
-				//console.log(response)
 			} else {
 				alert('Что-то пошло не так, попробуйте еще раз.')
 			}
@@ -296,7 +300,7 @@ $(function () {
 
 	}
 
-	window.$orderForm.validate({
+	window.$orderFormValidator = $orderForm.validate({
 		submitHandler: onOrderFormSubmit,
 		//invalidHandler: function(event, validator) {},
 		//ignore: ":hidden",
@@ -577,7 +581,15 @@ var validationRules = {
 		email: true
 	},
 	inn: {
-		required: true
+		required: true,
+		minlength: function () {
+			$customerInputValue = $orderForm.$customerSelect.val()+'';
+			if ($customerInputValue === '1') {
+				return 12
+			} else if ($customerInputValue === '2') {
+				return 10
+			}
+		}
 	},
 	adress: {
 		required: true
@@ -617,10 +629,11 @@ var validationMessages = {
 	},
 	EMAIL: {
 		required: validationCommonMessages.required,
-		email: 'Пожалуйста, введите валидный e-mail адресс.'
+		email: 'Пожалуйста, введите валидный e-mail адрес.'
 	},
 	inn: {
-		required: validationCommonMessages.required
+		required: validationCommonMessages.required,
+		minlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.')
 	},
 	adress: {
 		required: validationCommonMessages.required

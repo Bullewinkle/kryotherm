@@ -15,7 +15,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 
 	<!-- ------------------------------------ DATA ABOUT CUSTOMER ------------------------------------- -->
 
-			<tr>
+			<tr class="common-input">
 				<td class="label" width="30%">Заказчик:</td>
 				<td>
 					<select class="customer-data" size="1" name="customer">
@@ -53,18 +53,6 @@ $html .= '<br /><h2>Ваши данные:</h2>
 				<td><input class="customer-data" name="surname" type="text" value=""></td>
 			</tr>
 			<tr class="individual-person-input">
-				<td class="label">E-mail: <span class="active">*</span></td>
-				<td><input class="payment-data customer-data" name="EMAIL" id="EMAIL" type="text" value="developer085@gmail.com"/></td>
-			</tr>
-			<tr class="individual-person-input">
-				<td class="label">Телефон: <span class="active">*</span></td>
-				<td><input class="customer-data" name="phone" type="text" value=""></td>
-			</tr>
-			<tr class="individual-person-input">
-				<td class="label">ИНН: <span class="active">*</span></td>
-				<td><input class="customer-data " name="inn" type="text" value=""></td>
-			</tr>
-			<tr class="individual-person-input">
 				<td class="label">Адрес грузополучателя: <span class="active">*</span></td>
 				<td><input class="customer-data" name="adress" type="text" value=""></td>
 			</tr>
@@ -73,22 +61,24 @@ $html .= '<br /><h2>Ваши данные:</h2>
 				<td><input class="customer-data" name="fax" type="text" value=""></td>
 			</tr>
 
+			<!-- ОБЩИЕ -->
+			<tr class="common-input">
+				<td class="label">E-mail: <span class="active">*</span></td>
+				<td><input class="payment-data customer-data" name="EMAIL" id="EMAIL" type="text" value="developer085@gmail.com"/></td>
+			</tr>
+			<tr class="common-input">
+				<td class="label">Телефон: <span class="active">*</span></td>
+				<td><input class="customer-data" name="phone" type="text" value=""></td>
+			</tr>
+			<tr class="common-input">
+				<td class="label">ИНН: <span class="active">*</span></td>
+				<td><input class="customer-data " name="inn" type="text" value=""></td>
+			</tr>
+
 			<!-- ЮРИДИЧЕСКОЕ ЛИЦО -->
 			<tr class="legal-person-input">
 				<td class="label">Полное название организации: <span class="active">*</span></td>
 				<td><input class="customer-data" type="text" value="" name="organisation"></td>
-			</tr>
-			<tr class="legal-person-input">
-				<td class="label">E-mail: <span class="active">*</span></td>
-				<td><input class="payment-data customer-data" name="EMAIL" id="EMAIL" type="text" value="developer085@gmail.com"/></td>
-			</tr>
-			<tr class="legal-person-input">
-				<td class="label">Телефон: <span class="active">*</span></td>
-				<td><input class="customer-data" name="phone" type="text" value=""></td>
-			</tr>
-			<tr class="legal-person-input">
-				<td class="label">ИНН: <span class="active">*</span></td>
-				<td><input class="customer-data " name="inn" type="text" value=""></td>
 			</tr>
 			<tr class="legal-person-input">
 				<td class="label">КПП: <span class="active">*</span></td>

@@ -1029,7 +1029,7 @@ function get_order_form($array, $customer) {
 
 // ГЕНЕРАЦИЯ И ОТСЫЛКА ПИСЕМ
 function exec_order_form($mail, $send_data, &$order_data) {
-	$send_data = json_decode($send_data, true);
+	$send_data = (array) $send_data;
 
 	$html .= '<script  type="text/javascript">
 		window.kryotherm || (window.kryotherm = {});
@@ -1057,20 +1057,26 @@ function exec_order_form($mail, $send_data, &$order_data) {
 
 	//	 ----------------------- ГЕНЕРАЦИЯ СООБЩЕНИЯ ДЛЯ ЗАКАЗЧИКА -----------------------
 	if (is_arr($send_data) && !empty($send_data['mail'])) {
-		if ($send_data['customer'] == 1) {
-			$customer = 'Физическое лицо';
+		$testCustomer = (string) $send_data['customer'];
+		echo var_dump($testCustomer);
+		if ($testCustomer == "1") {
+
+			$customer = "Физическое лицо";
 			$messageForCustomer = "<p>Здравствуйте ".
 			 $send_data['name'] . " " .
 			(!empty($send_data['patronymic']) ? $send_data['patronymic'] : "") . " " .
 			$send_data['surname'] . ".</p>
 			<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>
 			<p>Номер заказа: " . $send_data['ORDER'] . "</p>";
+
 		} else {
+
 			$customer = "Юридическое лицо";
-			$messageForCustomer = "<p>Здравствуйте
-			" . (!empty($send_data['contactperson']) ? $send_data['contactperson'] : $send_data['organisation']) . "
+			$messageForCustomer = "<p>Здравствуйте ".
+			(!empty($send_data['contactperson']) ? $send_data['contactperson'] : $send_data['organisation']) . "</p>
 			<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>
 			<p>Номер заказа: " . $send_data['ORDER'] . "</p>";
+
 		}
 		if (!empty($send_data['shipping'])) {
 			$messageForCustomer .= "<p>Способ доставки: " . $send_data['shipping'];

@@ -7,6 +7,7 @@ class Response {
 
 function set_user_data() {
 	$data = file_get_contents('php://input');
+	$data = json_decode($data);
 
 	if (!empty($data)) {
 		$_SESSION['user_data'] = $data;
