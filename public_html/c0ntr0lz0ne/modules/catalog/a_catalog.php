@@ -1,4 +1,4 @@
-<?
+<? 
   $auth->Authorizate();
    $action = (!empty($_REQUEST['action'])?$_REQUEST['action']:"");
    $idPrev = (!empty($_REQUEST['idPrev'])?$_REQUEST['idPrev']:0);
@@ -60,7 +60,7 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
                   <tr>
                     <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
                     <td align="left" valign=top width="100%">
-                      <h1>Управление каталогом</h1>
+                      <h1>РЈРїСЂР°РІР»РµРЅРёРµ РєР°С‚Р°Р»РѕРіРѕРј</h1>
 
                       <?=$catalog->getCategoryList("javascript: var idCat = this.value ;
                                                               var idPar = eval('document.lister.parent_'+idCat+'.value');
@@ -94,10 +94,10 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
   <td align="left" valign=top width="100%">
-      <h1>Добавление категории</h1>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+      <h1>Р”РѕР±Р°РІР»РµРЅРёРµ РєР°С‚РµРіРѕСЂРёРё</h1>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
   </td>
  </tr>
  <tr><td height="5" colspan="3"><div style="background: transparent url(images/points.gif) repeat-x scroll center top; height: 5px; width: 100%;">&nbsp;</div></td></tr>
@@ -115,9 +115,9 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td></td>
   <td colspan="2">
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
         </td></tr>
 </table>
 </td></tr></table>
@@ -131,10 +131,10 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
   <td align="left" valign=top width="100%">
-      <h1>Редактирование категории</h1>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=catalog&idCat=<?=$idPar;?>&idPar=<?=$idPrev;?>&idPrev=<?=$catalog->idPar;?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+      <h1>Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РєР°С‚РµРіРѕСЂРёРё</h1>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=catalog&idCat=<?=$idPar;?>&idPar=<?=$idPrev;?>&idPrev=<?=$catalog->idPar;?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
   </td>
  </tr>
  <tr><td height="5" colspan="3"><div style="background: transparent url(images/points.gif) repeat-x scroll center top; height: 5px; width: 100%;">&nbsp;</div></td></tr>
@@ -152,9 +152,9 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td></td>
   <td colspan="2">
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=catalog&idCat=<?=$idPar;?>&idPar=<?=$idPrev;?>&idPrev=<?=$catalog->idPar;?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=catalog&idCat=<?=$idPar;?>&idPar=<?=$idPrev;?>&idPrev=<?=$catalog->idPar;?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
         </td></tr>
 </table>
 </td></tr></table>
@@ -167,10 +167,10 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
   <td align="left" valign=top width="100%">
-      <h1>Добавление нового товара</h1>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+      <h1>Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ С‚РѕРІР°СЂР°</h1>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
   </td>
  </tr>
  <tr><td height="5" colspan="3"><div style="background: transparent url(images/points.gif) repeat-x scroll center top; height: 5px; width: 100%;">&nbsp;</div></td></tr>
@@ -189,9 +189,9 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td></td>
   <td colspan="2">
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=catalog&idCat=<?=$idCat;?>&idPar=<?=$idPar;?>&idPrev=<?=$idPrev;?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
         </td></tr>
 </table>
 </td></tr></table>
@@ -204,10 +204,10 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
   <td align="left" valign=top width="100%">
-      <h1>Редактирование товара</h1>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="<?=(!empty($idManuf)?'?action=manufacturers&idManuf='.$idManuf:'?action=catalog&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev)?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+      <h1>Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С‚РѕРІР°СЂР°</h1>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="<?=(!empty($idManuf)?'?action=manufacturers&idManuf='.$idManuf:'?action=catalog&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev)?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
   </td>
  </tr>
  <tr><td height="5" colspan="3"><div style="background: transparent url(images/points.gif) repeat-x scroll center top; height: 5px; width: 100%;">&nbsp;</div></td></tr>
@@ -227,9 +227,9 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td></td>
   <td colspan="2">
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="<?=(!empty($idManuf)?'?action=manufacturers&idManuf='.$idManuf:'?action=catalog&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev)?>" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="<?=(!empty($idManuf)?'?action=manufacturers&idManuf='.$idManuf:'?action=catalog&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev)?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
         </td></tr>
 </table>
 </td></tr></table>
@@ -240,7 +240,7 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
                   <tr>
                     <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
                     <td align="left" valign=top width="100%">
-                      <h1>Управление производителями</h1>
+                      <h1>РЈРїСЂР°РІР»РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏРјРё</h1>
                     </td>
                   </tr>
                 </table>
@@ -262,9 +262,9 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
                   <tr>
                     <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
                     <td align="left" valign=top width="100%">
-                      <h1>Список товаров от "<?=$catalog->getMAnufacturersName($idManuf);?>"</h1>
+                      <h1>РЎРїРёСЃРѕРє С‚РѕРІР°СЂРѕРІ РѕС‚ "<?=$catalog->getMAnufacturersName($idManuf);?>"</h1>
                       <form action="?action=manufacturers&idManuf=<?=$idManuf;?>" method="post">
-                       Поиск товара: <input name="find" type="text" value="<?=$_REQUEST['find']?>"><input type="submit" value="Найти!">
+                       РџРѕРёСЃРє С‚РѕРІР°СЂР°: <input name="find" type="text" value="<?=$_REQUEST['find']?>"><input type="submit" value="РќР°Р№С‚Рё!">
                       </form>
                     </td>
                   </tr>
@@ -292,10 +292,10 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
   <td align="left" valign=top width="100%">
-      <h1>Новый производитель</h1>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=manufacturers" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+      <h1>РќРѕРІС‹Р№ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊ</h1>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=manufacturers" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
   </td>
  </tr>
  <tr><td height="5" colspan="3"><div style="background: transparent url(images/points.gif) repeat-x scroll center top; height: 5px; width: 100%;">&nbsp;</div></td></tr>
@@ -310,9 +310,9 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td></td>
   <td colspan="2">
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=manufacturers" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=manufacturers" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
         </td></tr>
 </table>
 </td></tr></table>
@@ -325,10 +325,10 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td width=150><img src="images/catalog-m.jpg" width=120 height=120></td>
   <td align="left" valign=top width="100%">
-      <h1>Редактирование производителя</h1>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=manufacturers" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+      <h1>Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏ</h1>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=manufacturers" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
   </td>
  </tr>
  <tr><td height="5" colspan="3"><div style="background: transparent url(images/points.gif) repeat-x scroll center top; height: 5px; width: 100%;">&nbsp;</div></td></tr>
@@ -344,9 +344,9 @@ if(($action == 'catalog' or $action == 'unlock_category' or $action == 'lock_cat
  <tr>
   <td></td>
   <td colspan="2">
-        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=manufacturers" title="">Отменить</a></div>
-        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.apply.value='1'; category.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=manufacturers" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="javascript:void[0];" onClick="category.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
         </td></tr>
 </table>
 </td></tr></table>

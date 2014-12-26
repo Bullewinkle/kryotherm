@@ -21,7 +21,7 @@ class loader
         {
             if (!preg_match('/^'.$reg_exp.'/', $val, $matches))
             {
-                $this->error = 'Незагруженные строки:<br />';
+                $this->error = 'РќРµР·Р°РіСЂСѓР¶РµРЅРЅС‹Рµ СЃС‚СЂРѕРєРё:<br />';
                 $error_list .= 1+$key.' '.$val.'<br />';
             }
             else
@@ -95,22 +95,22 @@ class loader
         }
 
         $html .= '<table width="80%" border="0" cellpadding="0" cellspacing="0">
-                     <tr><th align="left">Код номенклатуры:</th>
-                         <th align="left">Корневая категория:</th>
-                         <th align="left">Имя категории:</th>
+                     <tr><th align="left">РљРѕРґ РЅРѕРјРµРЅРєР»Р°С‚СѓСЂС‹:</th>
+                         <th align="left">РљРѕСЂРЅРµРІР°СЏ РєР°С‚РµРіРѕСЂРёСЏ:</th>
+                         <th align="left">РРјСЏ РєР°С‚РµРіРѕСЂРёРё:</th>
                          <th></th>
                      </tr>
                  '.$preload_data.'
                  <tr><td colspan="3"></td>
                      <td  align="right">
-                       <input type="submit" value="Добавить">
-                       <input type="button" value="Пропустить" onClick="javascript: document.location.href=\'?action=final_load\'">
+                       <input type="submit" value="Р”РѕР±Р°РІРёС‚СЊ">
+                       <input type="button" value="РџСЂРѕРїСѓСЃС‚РёС‚СЊ" onClick="javascript: document.location.href=\'?action=final_load\'">
                      </td></tr>
                   </table>';
     return $html;
     }
 
-/*  Постраничный вывод
+/*  РџРѕСЃС‚СЂР°РЅРёС‡РЅС‹Р№ РІС‹РІРѕРґ
 */
     function preload_listing($incorrect_codes, $start, $perpage = 10)
     {
@@ -129,7 +129,7 @@ class loader
     return $listing;
     }
 
-/*  Загрузка товаров
+/*  Р—Р°РіСЂСѓР·РєР° С‚РѕРІР°СЂРѕРІ
 */
     function load_products($parset_data, $incorrect_codes, $correct_categories)
     {
@@ -166,14 +166,14 @@ class loader
             }
             else
             {
-                $error = 'Коды номенклатуры не связанные с категориями:<br /> ';
+                $error = 'РљРѕРґС‹ РЅРѕРјРµРЅРєР»Р°С‚СѓСЂС‹ РЅРµ СЃРІСЏР·Р°РЅРЅС‹Рµ СЃ РєР°С‚РµРіРѕСЂРёСЏРјРё:<br /> ';
                 $error_list[$v['code']] = $v['code'];
             }
         }
     return $error.implode(', ',$error_list).'.';
     }
 
-/*  Удаление старых категорий
+/*  РЈРґР°Р»РµРЅРёРµ СЃС‚Р°СЂС‹С… РєР°С‚РµРіРѕСЂРёР№
 */
     function delete_old_products($categories_arr)
     {
@@ -195,7 +195,7 @@ class loader
         }
     }
 
-/*  удаление всех продуктов
+/*  СѓРґР°Р»РµРЅРёРµ РІСЃРµС… РїСЂРѕРґСѓРєС‚РѕРІ
 */
     function total_products_delete()
     {
@@ -273,11 +273,11 @@ class loader
         $errors = array('empty_name' => '', 'empty_root' => '', 'name_repeat' => '');
 
         if (empty($categories_name))
-            $errors['empty_name'] = 'Введите имя категории.';
+            $errors['empty_name'] = 'Р’РІРµРґРёС‚Рµ РёРјСЏ РєР°С‚РµРіРѕСЂРёРё.';
         elseif (empty($root_categories))
-            $errors['empty_root'] = 'Выберите корневую категорию.';
+            $errors['empty_root'] = 'Р’С‹Р±РµСЂРёС‚Рµ РєРѕСЂРЅРµРІСѓСЋ РєР°С‚РµРіРѕСЂРёСЋ.';
         else
-            $errors['name_repeat'] = 'Такая категория уже есть в базе.';
+            $errors['name_repeat'] = 'РўР°РєР°СЏ РєР°С‚РµРіРѕСЂРёСЏ СѓР¶Рµ РµСЃС‚СЊ РІ Р±Р°Р·Рµ.';
 
     return $errors;
     }
@@ -360,7 +360,7 @@ class loader
             fclose($r);
         }
         else
-            $this->error = 'Не удалось открыть файл';
+            $this->error = 'РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»';
 
     return  $data;
     }
@@ -369,12 +369,12 @@ class loader
     {
     return
     preg_replace('/\s+/','',
-                 '(\d+);                              (?# код номенклатуры )
-                  ([A-Za-zА-Яа-я\d\s\-,\.\/\(\)]+);   (?# наименование )
+                 '(\d+);                              (?# РєРѕРґ РЅРѕРјРµРЅРєР»Р°С‚СѓСЂС‹ )
+                  ([A-Za-zРђ-РЇР°-СЏ\d\s\-,\.\/\(\)]+);   (?# РЅР°РёРјРµРЅРѕРІР°РЅРёРµ )
                   ([\d\.,]+);                         (?# I  )
                   ([\d\.,]+);                         (?# Q )
                   ([\d\.,]+);                         (?# U )
-                  ([a-я\s\d\.,]*)\s*;                 (?# R )
+                  ([a-СЏ\s\d\.,]*)\s*;                 (?# R )
                   ([\d\.,]+);                         (?# A )
                   ([\d\.,]+);                         (?# B )
                   ([\d\.,]+);                         (?# C )
@@ -382,10 +382,10 @@ class loader
                   ([\d\.,]+);                         (?# H )
                   ([\d\.,]+);                         (?# D )
                   ([\d\.,]+);                         (?# d )
-                  ([А-ЯЁа-яё\s\d]*)\.*;               (?# герм )
+                  ([Рђ-РЇРЃР°-СЏС‘\s\d]*)\.*;               (?# РіРµСЂРј )
                   ([\d\.,]+);                         (?# HT )
-                  ([\d\.,]+);                         (?# Количество )
-                  ([\d\.,]+)                          (?# Цена )');
+                  ([\d\.,]+);                         (?# РљРѕР»РёС‡РµСЃС‚РІРѕ )
+                  ([\d\.,]+)                          (?# Р¦РµРЅР° )');
     }
 
     private function data_description()

@@ -57,27 +57,27 @@
                                            WHERE c1.id_parent='".$idCat."' GROUP BY c1.id ORDER BY c1.title, c1.sort_order ", array(0,1,2,4,5,6,7,13,14,15));
 
                 $html .= '<table width="100%" cellpadding="2" cellspacing="0">
-                          <tr><th width="2">&nbsp;</th><th class="tal">Название категории / товара</th><th>PDF</th><th>Отображение</th><th>Действия</th></tr>';
+                          <tr><th width="2">&nbsp;</th><th class="tal">РќР°Р·РІР°РЅРёРµ РєР°С‚РµРіРѕСЂРёРё / С‚РѕРІР°СЂР°</th><th>PDF</th><th>РћС‚РѕР±СЂР°Р¶РµРЅРёРµ</th><th>Р”РµР№СЃС‚РІРёСЏ</th></tr>';
 
                 $row = 0;
                 if(is_array($id)) foreach($id as $k=>$v)
 
                    $html .= '<tr '.((($row++)%2 == 0)?'class="dataTableRow1"':'').' >
-                              <td><div><a title="Вверх" href="index.php?action=moveUp_category&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Вверх" src="images/icons/up.gif"></a></div>
-                                  <div style="padding-top: 3px;"><a title="Вниз" href="index.php?action=moveDown_category&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Вниз" src="images/icons/down.gif"></a></div>
+                              <td><div><a title="Р’РІРµСЂС…" href="index.php?action=moveUp_category&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Р’РІРµСЂС…" src="images/icons/up.gif"></a></div>
+                                  <div style="padding-top: 3px;"><a title="Р’РЅРёР·" href="index.php?action=moveDown_category&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Р’РЅРёР·" src="images/icons/down.gif"></a></div>
                               </td>
                               <td><a href="?action=catalog&idCat='.$v.'&idPar='.$id_parent[$k].'&idPrev='.$idPar.'">'.$name[$k].'</a></td>
                               <td align="center">'.$pdf_file[$k].'</td>
                               <td class="tac">'.(!empty($published[$k])?'
-                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="Активный" title=" Активный ">&nbsp;&nbsp;&nbsp;
-                                             <a href="index.php?action=lock_category&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="Сделать неактивным" title=" Сделать неактивным "></a>':'
-                                             <a href="index.php?action=unlock_category&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="Активизировать" title=" Активизировать "></a>&nbsp;&nbsp;&nbsp;
-                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="Неактивный" title=" Неактивный ">').'</td>
+                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="РђРєС‚РёРІРЅС‹Р№" title=" РђРєС‚РёРІРЅС‹Р№ ">&nbsp;&nbsp;&nbsp;
+                                             <a href="index.php?action=lock_category&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј" title=" РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј "></a>':'
+                                             <a href="index.php?action=unlock_category&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ" title=" РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ "></a>&nbsp;&nbsp;&nbsp;
+                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="РќРµР°РєС‚РёРІРЅС‹Р№" title=" РќРµР°РєС‚РёРІРЅС‹Р№ ">').'</td>
                              <td class="tac">
-                                 '.((($_REQUEST['case'] == 'categories') and ($_REQUEST['replace'] == $v))?$this->getCategoryList('javascript:if(confirm(\'Уверены что хотите этого?\'))this.form.submit();','',$v,'replace_category',$v)
-                                 :'<a href="?action=edit_category&idCat='.$v.'&idPar='.$id_parent[$k].'&idPrev='.$idPar.'"><img width="22" height="22" border="0" alt="Редактировать" src="images/icons/ico_edit.gif"></a>
-                                 <a title="Переместить" href="?action=catalog&case=categories&replace='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="43" height="22" border="0" alt="Переместить" src="images/icons/move.gif"></a>
-                                 '.((!empty($par[$k]) or !empty($prod[$k]))?'<img width="22" height="22" border="0" title="Нельзя удалить - удалите связанные страницы" alt="Нельзя удалить - удалите связанные категории или товары" src="images/icons/b_cancel.gif">':'<a href="javascript: void[0];" onClick="javascript: if(confirm(\'Вы действительно хотите удалить категорию '.$name[$k].' ? \'))document.location.href=\'index.php?action=delete_category&delete='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'\';" ><img width="22" height="22" border="0" alt="Удалить" src="images/icons/ico_del.gif"></a>')
+                                 '.((($_REQUEST['case'] == 'categories') and ($_REQUEST['replace'] == $v))?$this->getCategoryList('javascript:if(confirm(\'РЈРІРµСЂРµРЅС‹ С‡С‚Рѕ С…РѕС‚РёС‚Рµ СЌС‚РѕРіРѕ?\'))this.form.submit();','',$v,'replace_category',$v)
+                                 :'<a href="?action=edit_category&idCat='.$v.'&idPar='.$id_parent[$k].'&idPrev='.$idPar.'"><img width="22" height="22" border="0" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ" src="images/icons/ico_edit.gif"></a>
+                                 <a title="РџРµСЂРµРјРµСЃС‚РёС‚СЊ" href="?action=catalog&case=categories&replace='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="43" height="22" border="0" alt="РџРµСЂРµРјРµСЃС‚РёС‚СЊ" src="images/icons/move.gif"></a>
+                                 '.((!empty($par[$k]) or !empty($prod[$k]))?'<img width="22" height="22" border="0" title="РќРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ - СѓРґР°Р»РёС‚Рµ СЃРІСЏР·Р°РЅРЅС‹Рµ СЃС‚СЂР°РЅРёС†С‹" alt="РќРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ - СѓРґР°Р»РёС‚Рµ СЃРІСЏР·Р°РЅРЅС‹Рµ РєР°С‚РµРіРѕСЂРёРё РёР»Рё С‚РѕРІР°СЂС‹" src="images/icons/b_cancel.gif">':'<a href="javascript: void[0];" onClick="javascript: if(confirm(\'Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РєР°С‚РµРіРѕСЂРёСЋ '.$name[$k].' ? \'))document.location.href=\'index.php?action=delete_category&delete='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'\';" ><img width="22" height="22" border="0" alt="РЈРґР°Р»РёС‚СЊ" src="images/icons/ico_del.gif"></a>')
                                  ).'
                              </td>
                              </tr>';
@@ -90,25 +90,25 @@
                 if(is_array($pId)) foreach($pId as $k=>$v)
 
                    $html .= '<tr '.((($row++)%2 == 0)?'class="dataTableRow1"':'').' >
-                              <td><div><a title="Вверх" href="index.php?action=moveUp_product&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$pSort_order[$k].'"><img width="8" height="6" border="0" alt="Вверх" src="images/icons/up.gif"></a></div>
-                                  <div style="padding-top: 3px;"><a title="Вниз" href="index.php?action=moveDown_product&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$pSort_order[$k].'"><img width="8" height="6" border="0" alt="Вниз" src="images/icons/down.gif"></a></div>
+                              <td><div><a title="Р’РІРµСЂС…" href="index.php?action=moveUp_product&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$pSort_order[$k].'"><img width="8" height="6" border="0" alt="Р’РІРµСЂС…" src="images/icons/up.gif"></a></div>
+                                  <div style="padding-top: 3px;"><a title="Р’РЅРёР·" href="index.php?action=moveDown_product&move='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'&sort_order='.$pSort_order[$k].'"><img width="8" height="6" border="0" alt="Р’РЅРёР·" src="images/icons/down.gif"></a></div>
                               </td>
                               <td>'.$pName[$k].'</td>
                               <td class="tac">'.(!empty($pPublished[$k])?'
-                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="Активный" title=" Активный ">&nbsp;&nbsp;&nbsp;
-                                             <a href="index.php?action=lock_product&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="Сделать неактивным" title=" Сделать неактивным "></a>':'
-                                             <a href="index.php?action=unlock_product&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="Активизировать" title=" Активизировать "></a>&nbsp;&nbsp;&nbsp;
-                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="Неактивный" title=" Неактивный ">').'</td>
+                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="РђРєС‚РёРІРЅС‹Р№" title=" РђРєС‚РёРІРЅС‹Р№ ">&nbsp;&nbsp;&nbsp;
+                                             <a href="index.php?action=lock_product&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј" title=" РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј "></a>':'
+                                             <a href="index.php?action=unlock_product&lock='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ" title=" РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ "></a>&nbsp;&nbsp;&nbsp;
+                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="РќРµР°РєС‚РёРІРЅС‹Р№" title=" РќРµР°РєС‚РёРІРЅС‹Р№ ">').'</td>
                              <td class="tac">
-                             '.((($_REQUEST['case'] == 'product') and ($_REQUEST['replace'] == $v))?$this->getCategoryList('javascript:if(confirm(\'Уверены что хотите этого?\'))this.form.submit();','','','replace_product',$v)
-                               :'<a href="?action=edit_product&idProd='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="22" height="22" border="0" alt="Редактировать" src="images/icons/ico_edit.gif"></a>
-                                 <a title="Переместить" href="?action=catalog&case=product&replace='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="43" height="22" border="0" alt="Переместить" src="images/icons/move.gif"></a>
-                                 <a href="javascript: void[0];" onClick="javascript: if(confirm(\'Вы действительно хотите удалить '.$pName[$k].' ? \'))document.location.href=\'index.php?action=delete_product&delete='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'\';" ><img width="22" height="22" border="0" alt="Удалить" src="images/icons/ico_del.gif"></a>').'
+                             '.((($_REQUEST['case'] == 'product') and ($_REQUEST['replace'] == $v))?$this->getCategoryList('javascript:if(confirm(\'РЈРІРµСЂРµРЅС‹ С‡С‚Рѕ С…РѕС‚РёС‚Рµ СЌС‚РѕРіРѕ?\'))this.form.submit();','','','replace_product',$v)
+                               :'<a href="?action=edit_product&idProd='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="22" height="22" border="0" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ" src="images/icons/ico_edit.gif"></a>
+                                 <a title="РџРµСЂРµРјРµСЃС‚РёС‚СЊ" href="?action=catalog&case=product&replace='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'"><img width="43" height="22" border="0" alt="РџРµСЂРµРјРµСЃС‚РёС‚СЊ" src="images/icons/move.gif"></a>
+                                 <a href="javascript: void[0];" onClick="javascript: if(confirm(\'Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ '.$pName[$k].' ? \'))document.location.href=\'index.php?action=delete_product&delete='.$v.'&idCat='.$idCat.'&idPar='.$idPar.'&idPrev='.$idPrev.'\';" ><img width="22" height="22" border="0" alt="РЈРґР°Р»РёС‚СЊ" src="images/icons/ico_del.gif"></a>').'
                              </td>
                              </tr>';
 
                 if(!is_array($id) and !is_array($pId))
-                    $html .= '<tr class="dataTableRow1"><td colspan="4" class="tac"> Нет товаров и категорий </td></tr>';
+                    $html .= '<tr class="dataTableRow1"><td colspan="4" class="tac"> РќРµС‚ С‚РѕРІР°СЂРѕРІ Рё РєР°С‚РµРіРѕСЂРёР№ </td></tr>';
 
                 $html .= '</table>';
 
@@ -123,29 +123,29 @@
                                            GROUP BY m.id ORDER BY m.sort_order ", array(0,1,3,4,5,6,12));
 
                 $html .= '<table width="100%" cellpadding="2" cellspacing="0">
-                          <tr><th width="2">&nbsp;</th><th class="tal">Название производителя</th><th>Количество товаров</th><th width="100">Отображение</th><th width="100">Действия</th></tr>';
+                          <tr><th width="2">&nbsp;</th><th class="tal">РќР°Р·РІР°РЅРёРµ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏ</th><th>РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂРѕРІ</th><th width="100">РћС‚РѕР±СЂР°Р¶РµРЅРёРµ</th><th width="100">Р”РµР№СЃС‚РІРёСЏ</th></tr>';
 
                 $row = 0;
                 if(is_array($id)) foreach($id as $k=>$v)
 
                    $html .= '<tr '.((($row++)%2 == 0)?'class="dataTableRow1"':'').' >
-                              <td><div><a title="Вверх" href="index.php?action=moveUp_manufacturers&move='.$v.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Вверх" src="images/icons/up.gif"></a></div>
-                                  <div style="padding-top: 3px;"><a title="Вниз" href="index.php?action=moveDown_manufacturers&move='.$v.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Вниз" src="images/icons/down.gif"></a></div>
+                              <td><div><a title="Р’РІРµСЂС…" href="index.php?action=moveUp_manufacturers&move='.$v.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Р’РІРµСЂС…" src="images/icons/up.gif"></a></div>
+                                  <div style="padding-top: 3px;"><a title="Р’РЅРёР·" href="index.php?action=moveDown_manufacturers&move='.$v.'&sort_order='.$sort_order[$k].'"><img width="8" height="6" border="0" alt="Р’РЅРёР·" src="images/icons/down.gif"></a></div>
                               </td>
                               <td>'.$name[$k].'</td>
-                              <td class="tac">'.(!empty($summ[$k])?'<a href="?action=manufacturers&idManuf='.$v.'">'.$summ[$k].' ед.</a>':'нет товаров').'</td>
+                              <td class="tac">'.(!empty($summ[$k])?'<a href="?action=manufacturers&idManuf='.$v.'">'.$summ[$k].' РµРґ.</a>':'РЅРµС‚ С‚РѕРІР°СЂРѕРІ').'</td>
                               <td class="tac">'.(!empty($published[$k])?'
-                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="Активный" title=" Активный ">&nbsp;&nbsp;&nbsp;
-                                             <a href="index.php?action=lock_manufacturers&lock='.$v.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="Сделать неактивным" title=" Сделать неактивным "></a>':'
-                                             <a href="index.php?action=unlock_manufacturers&lock='.$v.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="Активизировать" title=" Активизировать "></a>&nbsp;&nbsp;&nbsp;
-                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="Неактивный" title=" Неактивный ">').'</td>
-                             <td class="tac"><a href="?action=edit_manufacturers&idManuf='.$v.'"><img width="22" height="22" border="0" alt="Редактировать" src="images/icons/ico_edit.gif"></a>
-                                 '.(!empty($summ[$k])?'<img width="22" height="22" border="0" title="Нельзя удалить - есть связанные с производителем товары" alt="Нельзя удалить - есть связанные с производителем товары" src="images/icons/b_cancel.gif">':'<a href="javascript: void[0];" onClick="javascript: if(confirm(\'Вы действительно хотите удалить производителя '.$name[$k].' ? \'))document.location.href=\'index.php?action=delete_manufacturers&delete='.$v.'\';" ><img width="22" height="22" border="0" alt="Удалить" src="images/icons/ico_del.gif"></a>').'
+                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="РђРєС‚РёРІРЅС‹Р№" title=" РђРєС‚РёРІРЅС‹Р№ ">&nbsp;&nbsp;&nbsp;
+                                             <a href="index.php?action=lock_manufacturers&lock='.$v.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј" title=" РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј "></a>':'
+                                             <a href="index.php?action=unlock_manufacturers&lock='.$v.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ" title=" РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ "></a>&nbsp;&nbsp;&nbsp;
+                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="РќРµР°РєС‚РёРІРЅС‹Р№" title=" РќРµР°РєС‚РёРІРЅС‹Р№ ">').'</td>
+                             <td class="tac"><a href="?action=edit_manufacturers&idManuf='.$v.'"><img width="22" height="22" border="0" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ" src="images/icons/ico_edit.gif"></a>
+                                 '.(!empty($summ[$k])?'<img width="22" height="22" border="0" title="РќРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ - РµСЃС‚СЊ СЃРІСЏР·Р°РЅРЅС‹Рµ СЃ РїСЂРѕРёР·РІРѕРґРёС‚РµР»РµРј С‚РѕРІР°СЂС‹" alt="РќРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ - РµСЃС‚СЊ СЃРІСЏР·Р°РЅРЅС‹Рµ СЃ РїСЂРѕРёР·РІРѕРґРёС‚РµР»РµРј С‚РѕРІР°СЂС‹" src="images/icons/b_cancel.gif">':'<a href="javascript: void[0];" onClick="javascript: if(confirm(\'Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏ '.$name[$k].' ? \'))document.location.href=\'index.php?action=delete_manufacturers&delete='.$v.'\';" ><img width="22" height="22" border="0" alt="РЈРґР°Р»РёС‚СЊ" src="images/icons/ico_del.gif"></a>').'
                              </td>
                              </tr>';
 
                     if(!is_array($id))
-                     $html .= '<tr class="dataTableRow1"><td colspan="5" class="tac"> Нет производителей </td></tr>';
+                     $html .= '<tr class="dataTableRow1"><td colspan="5" class="tac"> РќРµС‚ РїСЂРѕРёР·РІРѕРґРёС‚РµР»РµР№ </td></tr>';
 
                      $html .= '</table>';
         return $html;
@@ -157,7 +157,7 @@
                 $this->auth->QueryExecute("SELECT * FROM ".TBL_PREF."catalog_products WHERE id_manufacturers='".$idManuf."' ".(!empty($_REQUEST['find'])?"AND name LIKE '%".$_REQUEST['find']."%'":"")." ORDER BY name ", array(0,3,5,6,7,8,14));
 
                 $html .= '<table width="100%" cellpadding="2" cellspacing="0">
-                          <tr><th width="2">№</th><th class="tal">Название товара</th><th width="100">Отображение</th><th width="100">Действия</th></tr>';
+                          <tr><th width="2">в„–</th><th class="tal">РќР°Р·РІР°РЅРёРµ С‚РѕРІР°СЂР°</th><th width="100">РћС‚РѕР±СЂР°Р¶РµРЅРёРµ</th><th width="100">Р”РµР№СЃС‚РІРёСЏ</th></tr>';
 
                 if(is_array($pId)) foreach($pId as $k=>$v)
 
@@ -165,18 +165,18 @@
                               <td><b>'.($k+1).'.</b></td>
                               <td>'.(!empty($_REQUEST['find'])?str_replace($_REQUEST['find'],'<span class="green">'.$_REQUEST['find'].'</span>',$pName[$k]):$pName[$k]).'</td>
                               <td class="tac">'.(!empty($pPublished[$k])?'
-                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="Активный" title=" Активный ">&nbsp;&nbsp;&nbsp;
-                                             <a href="index.php?action=lock_product&lock='.$v.'&idManuf='.$idManuf.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="Сделать неактивным" title=" Сделать неактивным "></a>':'
-                                             <a href="index.php?action=unlock_product&lock='.$v.'&idManuf='.$idManuf.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="Активизировать" title=" Активизировать "></a>&nbsp;&nbsp;&nbsp;
-                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="Неактивный" title=" Неактивный ">').'</td>
-                             <td class="tac"><a href="?action=edit_product&idProd='.$v.'&idManuf='.$idManuf.'"><img width="22" height="22" border="0" alt="Редактировать" src="images/icons/ico_edit.gif"></a>
+                                             <img width="18" height="18" border="0" src="images/icon_status_green.gif" alt="РђРєС‚РёРІРЅС‹Р№" title=" РђРєС‚РёРІРЅС‹Р№ ">&nbsp;&nbsp;&nbsp;
+                                             <a href="index.php?action=lock_product&lock='.$v.'&idManuf='.$idManuf.'"><img width="18" height="18" border="0" src="images/icon_status_red_light.gif" alt="РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј" title=" РЎРґРµР»Р°С‚СЊ РЅРµР°РєС‚РёРІРЅС‹Рј "></a>':'
+                                             <a href="index.php?action=unlock_product&lock='.$v.'&idManuf='.$idManuf.'"><img width="18" height="18" border="0" src="images/icon_status_green_light.gif" alt="РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ" title=" РђРєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ "></a>&nbsp;&nbsp;&nbsp;
+                                             <img width="18" height="18" border="0" src="images/icon_status_red.gif" alt="РќРµР°РєС‚РёРІРЅС‹Р№" title=" РќРµР°РєС‚РёРІРЅС‹Р№ ">').'</td>
+                             <td class="tac"><a href="?action=edit_product&idProd='.$v.'&idManuf='.$idManuf.'"><img width="22" height="22" border="0" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ" src="images/icons/ico_edit.gif"></a>
 
-                                 <a href="javascript: void[0];" onClick="javascript: if(confirm(\'Вы действительно хотите удалить '.$pName[$k].' ? \'))document.location.href=\'index.php?action=delete_product&delete='.$v.'&idManuf='.$idManuf.'\';" ><img width="22" height="22" border="0" alt="Удалить" src="images/icons/ico_del.gif"></a>
+                                 <a href="javascript: void[0];" onClick="javascript: if(confirm(\'Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ '.$pName[$k].' ? \'))document.location.href=\'index.php?action=delete_product&delete='.$v.'&idManuf='.$idManuf.'\';" ><img width="22" height="22" border="0" alt="РЈРґР°Р»РёС‚СЊ" src="images/icons/ico_del.gif"></a>
                              </td>
                              </tr>';
 
                 if(!is_array($id) and !is_array($pId))
-                    $html .= '<tr class="dataTableRow1"><td colspan="4" class="tac"> Нет товаров и категорий </td></tr>';
+                    $html .= '<tr class="dataTableRow1"><td colspan="4" class="tac"> РќРµС‚ С‚РѕРІР°СЂРѕРІ Рё РєР°С‚РµРіРѕСЂРёР№ </td></tr>';
 
                 $html .= '</table>';
 
@@ -227,18 +227,18 @@
                    $this->auth->QueryExecute("SELECT * FROM ".TBL_PREF."catalog_categories WHERE id='".$idCat."'", array(0,1,2,3,8,9,10,11,13,15));
 
                 $html .= '<table width="100%" id="editor">
-                           <tr><td width="117">Название</td>
+                           <tr><td width="117">РќР°Р·РІР°РЅРёРµ</td>
                                <td><input style="width: 100%" name="name" type="text" value="'.$name[0].'"></td>
                                <td rowspan="4" class="tac" style="width:30%">
                                '.(empty($image[0])?'
                                <input type="hidden" value="'.$this->maxImgSize.'" name="MAX_FILE_SIZE">
                                <input name="userfile" type="file" value="">':
                                '<img src='.$this->url.'medium_'.$image[0].'>
-                                <p><input name="delImg" type="checkbox" value="ON"> удалить изображение</p>
+                                <p><input name="delImg" type="checkbox" value="ON"> СѓРґР°Р»РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ</p>
                                ').'
                                </td>
                            </tr>
-                           <tr><td>Описание</td>
+                           <tr><td>РћРїРёСЃР°РЅРёРµ</td>
                                <td>
 <script language="javascript">
 <!--//
@@ -255,19 +255,19 @@ function openEditor(textarea) {
 }
 //-->
 </script>
-          <a href="javascript:openEditor(document.category.text)" title="Визуальный редактор"><img src="images/icons/redaktor.gif" align=middle width="27" height="27" alt="Визуальный редактор"></a>
-          <a href="javascript:openEditor(document.category.text)" title="Визуальный редактор" style="font-size:12px; vertical-align:middle;">Визуальный редактор</a>
+          <a href="javascript:openEditor(document.category.text)" title="Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ"><img src="images/icons/redaktor.gif" align=middle width="27" height="27" alt="Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ"></a>
+          <a href="javascript:openEditor(document.category.text)" title="Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ" style="font-size:12px; vertical-align:middle;">Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ</a>
                                <textarea style="width: 100%" rows="10" name="text">'.$text[0].'</textarea></td></tr>
                            <tr><td>PDF</td>
                                <td>
                                '.(empty($pdf_file[0])?'
                                <input name="pdf_file" type="file" value="">':
                                 $pdf_file[0].'
-                                <p><input name="del_pdf" type="checkbox" value="ON"> удалить документ</p>
+                                <p><input name="del_pdf" type="checkbox" value="ON"> СѓРґР°Р»РёС‚СЊ РґРѕРєСѓРјРµРЅС‚</p>
                                ').'
                                </td></tr>
                            <!--
-                           <tr><td>Привязка к странице:</td>
+                           <tr><td>РџСЂРёРІСЏР·РєР° Рє СЃС‚СЂР°РЅРёС†Рµ:</td>
                                <td>'.$this->get_shop_page_list($tid[0]).'</td>
                            </tr>
                              //-->
@@ -290,22 +290,22 @@ function openEditor(textarea) {
                    $this->auth->QueryExecute("SELECT * FROM ".TBL_PREF."catalog_products WHERE id='".$idProd."' ", array(0,1,2,3,4,9,10,11,12));
 
                 $html .= '<table width="100%" id="editor">
-                           <tr><td width="117">Название</td>
+                           <tr><td width="117">РќР°Р·РІР°РЅРёРµ</td>
                                <td><input style="width: 100%" name="name" type="text" value="'.$name[0].'"></td>
                                <td rowspan="4" class="tac" style="width:30%">
                                '.(empty($image[0])?'
                                <input type="hidden" value="'.$this->maxImgSize.'" name="MAX_FILE_SIZE">
                                <input name="userfile" type="file" value="">':
                                '<img src='.$this->url.'medium_'.$image[0].'>
-                                <p><input name="delImg" type="checkbox" value="ON"> удалить изображение</p>
+                                <p><input name="delImg" type="checkbox" value="ON"> СѓРґР°Р»РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ</p>
                                ').'
                                </td>
                            </tr>
-                           <tr><td>Цена</td>
+                           <tr><td>Р¦РµРЅР°</td>
                                <td><input name="price" type="text" value="'.$price[0].'"></td>
-                           <tr><td>Производитель</td>
-                               <td><select size="1" name="manufacturers"><option value="">не установлен</option>'.$this->getManufacturersList($id_manuf[0]).'</select></td></tr>
-                           <tr><td>Описание</td>
+                           <tr><td>РџСЂРѕРёР·РІРѕРґРёС‚РµР»СЊ</td>
+                               <td><select size="1" name="manufacturers"><option value="">РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ</option>'.$this->getManufacturersList($id_manuf[0]).'</select></td></tr>
+                           <tr><td>РћРїРёСЃР°РЅРёРµ</td>
                                <td><textarea style="width: 100%" rows="10" name="text">'.$text[0].'</textarea></td></tr>
 
                            <tr bgcolor="#c0c0c0"><td colspan="3"><img width="1" height="1" border="0" src="../images/blank.gif"></td></tr>
@@ -327,18 +327,18 @@ function openEditor(textarea) {
                    $this->auth->QueryExecute("SELECT * FROM ".TBL_PREF."catalog_manufacturers WHERE id='".$idManuf."' ", array(0,1,2,7,8,9,10));
 
                 $html .= '<table width="100%" id="editor">
-                           <tr><td width="117">Название</td>
+                           <tr><td width="117">РќР°Р·РІР°РЅРёРµ</td>
                                <td><input style="width: 100%" name="name" type="text" value="'.$name[0].'"></td>
                                <td rowspan="2" class="tac" style="width:30%">
                                '.(empty($image[0])?'
                                <input type="hidden" value="'.$this->maxImgSize.'" name="MAX_FILE_SIZE">
                                <input name="userfile" type="file" value="">':
                                '<img src='.$this->url.'medium_'.$image[0].'>
-                                <p><input name="delImg" type="checkbox" value="ON"> удалить изображение</p>
+                                <p><input name="delImg" type="checkbox" value="ON"> СѓРґР°Р»РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ</p>
                                ').'
                                </td>
                            </tr>
-                           <tr><td>Описание</td>
+                           <tr><td>РћРїРёСЃР°РЅРёРµ</td>
                                <td><textarea style="width: 100%" rows="10" name="text">'.$text[0].'</textarea></td></tr>
 
                            <tr bgcolor="#c0c0c0"><td colspan="3"><img width="1" height="1" border="0" src="../images/blank.gif"></td></tr>
@@ -593,7 +593,7 @@ function openEditor(textarea) {
                                }
                       break;
 
-                      default: echo "<br>Неверный формат файла: ".$_FILES['userfile']['type'];
+                      default: echo "<br>РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ С„Р°Р№Р»Р°: ".$_FILES['userfile']['type'];
                                return false;
                       break;
                       }
@@ -613,36 +613,36 @@ function openEditor(textarea) {
           }
 
     /*
-      Назначение: Функция imgResize - создаёт копию исходного изображения в
-                                      заданных размерах
-      Параметры: $f_src (I) - имя файла источника
-                 $f_dst (I) - имя файла назначения
-                 $w_dst (I) - ширина создаваемого изображения
-                 $h_dst (I) - высота создаваемого изображения
-      Возвращает: true - е. изобр. успешно создаётся, и false в противном сл.
-      Описание: создаёт копию изображения $f_src в пропорциях ширины исходного
-                изображения к $w
+      РќР°Р·РЅР°С‡РµРЅРёРµ: Р¤СѓРЅРєС†РёСЏ imgResize - СЃРѕР·РґР°С‘С‚ РєРѕРїРёСЋ РёСЃС…РѕРґРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РІ
+                                      Р·Р°РґР°РЅРЅС‹С… СЂР°Р·РјРµСЂР°С…
+      РџР°СЂР°РјРµС‚СЂС‹: $f_src (I) - РёРјСЏ С„Р°Р№Р»Р° РёСЃС‚РѕС‡РЅРёРєР°
+                 $f_dst (I) - РёРјСЏ С„Р°Р№Р»Р° РЅР°Р·РЅР°С‡РµРЅРёСЏ
+                 $w_dst (I) - С€РёСЂРёРЅР° СЃРѕР·РґР°РІР°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
+                 $h_dst (I) - РІС‹СЃРѕС‚Р° СЃРѕР·РґР°РІР°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
+      Р’РѕР·РІСЂР°С‰Р°РµС‚: true - Рµ. РёР·РѕР±СЂ. СѓСЃРїРµС€РЅРѕ СЃРѕР·РґР°С‘С‚СЃСЏ, Рё false РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР».
+      РћРїРёСЃР°РЅРёРµ: СЃРѕР·РґР°С‘С‚ РєРѕРїРёСЋ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ $f_src РІ РїСЂРѕРїРѕСЂС†РёСЏС… С€РёСЂРёРЅС‹ РёСЃС…РѕРґРЅРѕРіРѕ
+                РёР·РѕР±СЂР°Р¶РµРЅРёСЏ Рє $w
     */
     function imgResize($f_src = '', $f_dst = '', $w_dst = 0, $h_dst = 0)
     {
       if(!empty($f_src) and !empty($f_dst) and !empty($w_dst) and !empty($h_dst))
         if(file_exists($f_src))
         {
-          // получаем информацию о исходном изображении
+          // РїРѕР»СѓС‡Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РёСЃС…РѕРґРЅРѕРј РёР·РѕР±СЂР°Р¶РµРЅРёРё
           list($w_src, $h_src, $type, $attr) = getimagesize($f_src);
 
-          // получаем отношения размеров, к. должны получить к исходным
+          // РїРѕР»СѓС‡Р°РµРј РѕС‚РЅРѕС€РµРЅРёСЏ СЂР°Р·РјРµСЂРѕРІ, Рє. РґРѕР»Р¶РЅС‹ РїРѕР»СѓС‡РёС‚СЊ Рє РёСЃС…РѕРґРЅС‹Рј
           $h_proporc = $h_dst/$h_src;   $w_proporc = $w_dst/$w_src;
 
-          $proporc = max($h_proporc, $w_proporc);       // опред. большую пропорц.
+          $proporc = max($h_proporc, $w_proporc);       // РѕРїСЂРµРґ. Р±РѕР»СЊС€СѓСЋ РїСЂРѕРїРѕСЂС†.
 
-          //$h_dst = round(($w_dst/$w_src)*$h_src);       // высота нового изобр.
+          //$h_dst = round(($w_dst/$w_src)*$h_src);       // РІС‹СЃРѕС‚Р° РЅРѕРІРѕРіРѕ РёР·РѕР±СЂ.
 
           $rsc_dst = ImageCreateTrueColor($w_dst, $h_dst)
-                         or die ("Ошибка при создании изображения");
+                         or die ("РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё РёР·РѕР±СЂР°Р¶РµРЅРёСЏ");
 
-          // получаем ресурс источника из файла
-          switch($type)                                 // по расширению файла
+          // РїРѕР»СѓС‡Р°РµРј СЂРµСЃСѓСЂСЃ РёСЃС‚РѕС‡РЅРёРєР° РёР· С„Р°Р№Р»Р°
+          switch($type)                                 // РїРѕ СЂР°СЃС€РёСЂРµРЅРёСЋ С„Р°Р№Р»Р°
           {
             // gif
             case 1: $rsc_src = imagecreatefromgif($f_src);  break;
@@ -651,18 +651,18 @@ function openEditor(textarea) {
             // png
             case 3: $rsc_src = imagecreatefrompng($f_src);  break;
 
-            default: return false;                      // другие форматы
+            default: return false;                      // РґСЂСѓРіРёРµ С„РѕСЂРјР°С‚С‹
           }
 
-          // копирование изображения с изменением его размера
+          // РєРѕРїРёСЂРѕРІР°РЅРёРµ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ СЃ РёР·РјРµРЅРµРЅРёРµРј РµРіРѕ СЂР°Р·РјРµСЂР°
           if(!ImageCopyResampled($rsc_dst, $rsc_src, 0, 0,
                                  floor($w_src/2-($w_dst/$proporc)/2),
                                  floor($h_src/2-($h_dst/$proporc)/2),
                                  $w_dst, $h_dst,
                                  $w_dst/$proporc, $h_dst/$proporc)) return false;
 
-          // сохраняем ресурс назначение в файл
-          switch($type)                                 // по расширению файла
+          // СЃРѕС…СЂР°РЅСЏРµРј СЂРµСЃСѓСЂСЃ РЅР°Р·РЅР°С‡РµРЅРёРµ РІ С„Р°Р№Р»
+          switch($type)                                 // РїРѕ СЂР°СЃС€РёСЂРµРЅРёСЋ С„Р°Р№Р»Р°
           {
             // gif
             case 1: return imagegif($rsc_dst, $f_dst);
@@ -671,7 +671,7 @@ function openEditor(textarea) {
             // png
             case 3: return imagepng($rsc_dst, $f_dst);
 
-            default: return false;                      // другие форматы
+            default: return false;                      // РґСЂСѓРіРёРµ С„РѕСЂРјР°С‚С‹
           }
 
         }
@@ -839,9 +839,9 @@ function openEditor(textarea) {
                  $treeArray = $this->getCategoryTree(null,0,'',$block);
 
                  $html = '<form style="margin:0;" name="lister" method="post" action="?action='.$action.'&replace='.$replace.'">
-                           '.(empty($action)?'Перейти в ':'').'<select name="destination" onChange="'.$onChange.'">
-                           '.(!empty($action)?'<option value="">Выберите куда ходите переместить</option>':'').'
-                           <option value="0">Начало</option>';
+                           '.(empty($action)?'РџРµСЂРµР№С‚Рё РІ ':'').'<select name="destination" onChange="'.$onChange.'">
+                           '.(!empty($action)?'<option value="">Р’С‹Р±РµСЂРёС‚Рµ РєСѓРґР° С…РѕРґРёС‚Рµ РїРµСЂРµРјРµСЃС‚РёС‚СЊ</option>':'').'
+                           <option value="0">РќР°С‡Р°Р»Рѕ</option>';
 
                  if(is_array($treeArray))
                  foreach($treeArray as $k=>$v) $html .= '<option value="'.$v['id'].'" '.(($v['id'] == $def)?'selected':'').' >'.$v['level'].$v['name'].'</option>';

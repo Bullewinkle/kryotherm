@@ -1,16 +1,16 @@
 <?  if ($action == 'load_price')
     {
-      $loader->header = 'Загрузка прайса';
+      $loader->header = 'Р—Р°РіСЂСѓР·РєР° РїСЂР°Р№СЃР°';
 
       if (!empty($_FILES['price']['tmp_name']))
       {
-        // парсим данные
+        // РїР°СЂСЃРёРј РґР°РЅРЅС‹Рµ
         $parsed_data = $loader->parser($_FILES['price']['tmp_name']);
 
-        // предзагрузка по категориям
+        // РїСЂРµРґР·Р°РіСЂСѓР·РєР° РїРѕ РєР°С‚РµРіРѕСЂРёСЏРј
         $codes = $loader->preloader($parsed_data);
 
-        // записываем данные в сессию
+        // Р·Р°РїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ СЃРµСЃСЃРёСЋ
         $_SESSION['parsed_data'] = $parsed_data;
         $_SESSION['errors'] = $loader->error;
         $_SESSION['incorrect_codes'] = $codes['incorrect'];
@@ -22,11 +22,11 @@
             $common->redirect('/c0ntr0lz0ne/index.php?action=final_load');
       }
       else
-          $loader->error = 'Выберите файл для загрузки';
+          $loader->error = 'Р’С‹Р±РµСЂРёС‚Рµ С„Р°Р№Р» РґР»СЏ Р·Р°РіСЂСѓР·РєРё';
     }
     elseif ($action == 'load')
     {
-        $loader->header = 'Связка номера номенклатуры с категориями';
+        $loader->header = 'РЎРІСЏР·РєР° РЅРѕРјРµСЂР° РЅРѕРјРµРЅРєР»Р°С‚СѓСЂС‹ СЃ РєР°С‚РµРіРѕСЂРёСЏРјРё';
         $start = (!empty($_REQUEST['start'])?$_REQUEST['start']:0);
 
         if (is_array($_POST['cat_name']) && is_array($_POST['root_category']))
@@ -35,7 +35,7 @@
                                                 $_POST['code'],$_SESSION['incorrect_codes'],
                                                 $_SESSION['correct_categories']);
 
-        // если неопределенных кодов не осталось - переходим к загрузке продуктов
+        // РµСЃР»Рё РЅРµРѕРїСЂРµРґРµР»РµРЅРЅС‹С… РєРѕРґРѕРІ РЅРµ РѕСЃС‚Р°Р»РѕСЃСЊ - РїРµСЂРµС…РѕРґРёРј Рє Р·Р°РіСЂСѓР·РєРµ РїСЂРѕРґСѓРєС‚РѕРІ
         $try_codes = implode('',$_SESSION['incorrect_codes']);
         if (empty($try_codes))
             $common->redirect('?action=final_load');
@@ -43,19 +43,19 @@
     }
     elseif ($action == 'final_load')
     {
-        $loader->header = 'Загрузка товаров';
+        $loader->header = 'Р—Р°РіСЂСѓР·РєР° С‚РѕРІР°СЂРѕРІ';
 
-        // удаляем все товары в данной категории
+        // СѓРґР°Р»СЏРµРј РІСЃРµ С‚РѕРІР°СЂС‹ РІ РґР°РЅРЅРѕР№ РєР°С‚РµРіРѕСЂРёРё
         $loader->delete_old_products($_SESSION['correct_categories']);
-        // записываем новые товары
+        // Р·Р°РїРёСЃС‹РІР°РµРј РЅРѕРІС‹Рµ С‚РѕРІР°СЂС‹
         $_SESSION['errors'] .= $loader->load_products($_SESSION['parsed_data'],
                                                       $_SESSION['incorrect_codes'],
                                                       $_SESSION['correct_categories']);
     }
     elseif ($action == 'del_all_products')
     {
-        $loader->header = 'Все продукты удалены.';
-        $delete_message = '<p>Таблицы базы данных, которые содержат данные о продукции были очищены.</p>';
+        $loader->header = 'Р’СЃРµ РїСЂРѕРґСѓРєС‚С‹ СѓРґР°Р»РµРЅС‹.';
+        $delete_message = '<p>РўР°Р±Р»РёС†С‹ Р±Р°Р·С‹ РґР°РЅРЅС‹С…, РєРѕС‚РѕСЂС‹Рµ СЃРѕРґРµСЂР¶Р°С‚ РґР°РЅРЅС‹Рµ Рѕ РїСЂРѕРґСѓРєС†РёРё Р±С‹Р»Рё РѕС‡РёС‰РµРЅС‹.</p>';
         $loader->total_products_delete();
     }
 
@@ -72,16 +72,16 @@
 
     <form method="post" action="index.php?action=load_price" enctype="multipart/form-data" name="FormName">
       <input type="file" value="" name="price">
-      <input type="submit" value="Загрузить">
+      <input type="submit" value="Р—Р°РіСЂСѓР·РёС‚СЊ">
     </form>
 
 <? }elseif ($action == 'load'){?>
 
-    <p style="margin-top: 20px">Страницы: <?=$loader->preload_listing($_SESSION['incorrect_codes'],$start)?></p>
+    <p style="margin-top: 20px">РЎС‚СЂР°РЅРёС†С‹: <?=$loader->preload_listing($_SESSION['incorrect_codes'],$start)?></p>
 
 <? }elseif ($action == 'final_load'){ ?>
 
-    <p>Загружено товаров: <?=$loader->counter;?></p>
+    <p>Р—Р°РіСЂСѓР¶РµРЅРѕ С‚РѕРІР°СЂРѕРІ: <?=$loader->counter;?></p>
 <? } ?>
   </td>
 </tr>
@@ -89,7 +89,7 @@
 <div id="dataTable">
 <? if ($action == 'load_price'){ ?>
 
-   <p>Выберите прайс для загрузки.</p>
+   <p>Р’С‹Р±РµСЂРёС‚Рµ РїСЂР°Р№СЃ РґР»СЏ Р·Р°РіСЂСѓР·РєРё.</p>
 
 <? }elseif ($action == 'load'){ ?>
 
@@ -99,7 +99,7 @@
 
 <? }elseif ($action == 'final_load'){ ?>
 
-<p><?=(!empty($_SESSION['errors'])?$_SESSION['errors']:'Загрузка прошла успешно.');?></p>
+<p><?=(!empty($_SESSION['errors'])?$_SESSION['errors']:'Р—Р°РіСЂСѓР·РєР° РїСЂРѕС€Р»Р° СѓСЃРїРµС€РЅРѕ.');?></p>
 
 <? } ?>
 <?=$delete_message;?>

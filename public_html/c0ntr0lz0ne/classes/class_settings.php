@@ -35,10 +35,10 @@ class Settings
                               <td>'.$constant[$k].'</td>
                               <td>'.$descr[$k].'</td>
                               <td colspan="2">'.str_replace('http://\'.$_SERVER[\'SERVER_NAME\'].\'/','http://'.$_SERVER['SERVER_NAME'].'/',str_replace('\'.$_SERVER[\'DOCUMENT_ROOT\'].\'/',$_SERVER['DOCUMENT_ROOT'].'/',$value[$k])).'</td>
-                              <td class="tac"><a title="Редактровать" href="?action=settings&case='.$this->case.'&constId='.$v.'&mod=edit"><img width="22" height="22" border="0" alt="Редактировать" src="images/icons/ico_edit.gif"></a></td>
-                              <td class="tac"><a onclick="if(confirm(\'Вы действительно хотите удалить '.$constant[$k].' ?\')) document.location.href=\'?action=settings&case='.$this->case.'&constId='.$v.'&mod=del\'" title="Удалить" href="javascript:void[0];"><img width="22" height="22" border="0" alt="Удалить" src="images/icons/ico_del.gif"></a></td>';
+                              <td class="tac"><a title="Р РµРґР°РєС‚СЂРѕРІР°С‚СЊ" href="?action=settings&case='.$this->case.'&constId='.$v.'&mod=edit"><img width="22" height="22" border="0" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ" src="images/icons/ico_edit.gif"></a></td>
+                              <td class="tac"><a onclick="if(confirm(\'Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ '.$constant[$k].' ?\')) document.location.href=\'?action=settings&case='.$this->case.'&constId='.$v.'&mod=del\'" title="РЈРґР°Р»РёС‚СЊ" href="javascript:void[0];"><img width="22" height="22" border="0" alt="РЈРґР°Р»РёС‚СЊ" src="images/icons/ico_del.gif"></a></td>';
         }
-        else $html = '<tr class="dataTableRow1"><td colspan="6" class="tac"> <b>Нет констант</b> </td></tr>';
+        else $html = '<tr class="dataTableRow1"><td colspan="6" class="tac"> <b>РќРµС‚ РєРѕРЅСЃС‚Р°РЅС‚</b> </td></tr>';
 
     return $html;
     }
@@ -73,16 +73,16 @@ class Settings
 
     function tableRenamer($constVal,$constId)
     {
-        // список существующих таблиц в админке
+        // СЃРїРёСЃРѕРє СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… С‚Р°Р±Р»РёС† РІ Р°РґРјРёРЅРєРµ
         $tables = $this->auth->QueryExecute("show tables",0);
 
-        // предидущий префикс таблиц
+        // РїСЂРµРґРёРґСѓС‰РёР№ РїСЂРµС„РёРєСЃ С‚Р°Р±Р»РёС†
         $prevVal =
         $this->auth->QueryExecute("SELECT value
                                    FROM ".TBL_PREF."settings
                                    WHERE id='".$constId."'",0);
 
-        // Обходим все таблицы и переименовываем их
+        // РћР±С…РѕРґРёРј РІСЃРµ С‚Р°Р±Р»РёС†С‹ Рё РїРµСЂРµРёРјРµРЅРѕРІС‹РІР°РµРј РёС…
         if ($constVal !== $prevVal[0])
         {
             foreach ($tables as $k=>$v)

@@ -9,18 +9,18 @@
                    $this->workDir = $workDir;
           }
 
-/* функция инсталирует модульи */
+/* С„СѓРЅРєС†РёСЏ РёРЅСЃС‚Р°Р»РёСЂСѓРµС‚ РјРѕРґСѓР»СЊРё */
           function installModule(){
 
-                   $this->zip->extract(PCLZIP_OPT_PATH,$this->workDir);  // распаковываем архив во временную папку
-                   $this->zip->delete(PCLZIP_OPT_BY_EREG, '(^[0-9a-z\_]*[\.]{1}php)');  // удаляем все php файлы из архива
-                   $this->zip->delete(PCLZIP_OPT_BY_EREG, '(^[0-9a-z\_]*[\.]{1}css)');  // удаляем все css файлы из архива
+                   $this->zip->extract(PCLZIP_OPT_PATH,$this->workDir);  // СЂР°СЃРїР°РєРѕРІС‹РІР°РµРј Р°СЂС…РёРІ РІРѕ РІСЂРµРјРµРЅРЅСѓСЋ РїР°РїРєСѓ
+                   $this->zip->delete(PCLZIP_OPT_BY_EREG, '(^[0-9a-z\_]*[\.]{1}php)');  // СѓРґР°Р»СЏРµРј РІСЃРµ php С„Р°Р№Р»С‹ РёР· Р°СЂС…РёРІР°
+                   $this->zip->delete(PCLZIP_OPT_BY_EREG, '(^[0-9a-z\_]*[\.]{1}css)');  // СѓРґР°Р»СЏРµРј РІСЃРµ css С„Р°Р№Р»С‹ РёР· Р°СЂС…РёРІР°
 
-                   $instructions = @file($this->workDir.'install.ini');  // считываем содержание install.ini
+                   $instructions = @file($this->workDir.'install.ini');  // СЃС‡РёС‚С‹РІР°РµРј СЃРѕРґРµСЂР¶Р°РЅРёРµ install.ini
 
                    foreach($instructions as $k=>$v) if(!empty($v)){
 
-                       $v = $this->stripScr($v);      //вырезаем символы переноса строки и возврата каретки
+                       $v = $this->stripScr($v);      //РІС‹СЂРµР·Р°РµРј СЃРёРјРІРѕР»С‹ РїРµСЂРµРЅРѕСЃР° СЃС‚СЂРѕРєРё Рё РІРѕР·РІСЂР°С‚Р° РєР°СЂРµС‚РєРё
                        if(strstr($v,'dir_')){
 
                           $dirData = $this->getDirFileData($v);
@@ -37,25 +37,25 @@
 
                    if(file_exists($this->workDir.'install.php')) require_once($this->workDir.'install.php');
 
-                   $this->zip->add($this->workDir.'uninstall.php',PCLZIP_OPT_REMOVE_PATH,$this->workDir); // анинсталл.пхп добавляем в архив
+                   $this->zip->add($this->workDir.'uninstall.php',PCLZIP_OPT_REMOVE_PATH,$this->workDir); // Р°РЅРёРЅСЃС‚Р°Р»Р».РїС…Рї РґРѕР±Р°РІР»СЏРµРј РІ Р°СЂС…РёРІ
 
-                   @unlink($this->workDir.'install.php');          // удаляем инсталл
-                   @unlink($this->workDir.'uninstall.php');        // удаляем анинсталл
-                   @unlink($this->workDir.$modType['name'].'_style.css'); // удаляем css
-                   @unlink($this->workDir.'install.ini');            // удаляем файл конфигурации
+                   @unlink($this->workDir.'install.php');          // СѓРґР°Р»СЏРµРј РёРЅСЃС‚Р°Р»Р»
+                   @unlink($this->workDir.'uninstall.php');        // СѓРґР°Р»СЏРµРј Р°РЅРёРЅСЃС‚Р°Р»Р»
+                   @unlink($this->workDir.$modType['name'].'_style.css'); // СѓРґР°Р»СЏРµРј css
+                   @unlink($this->workDir.'install.ini');            // СѓРґР°Р»СЏРµРј С„Р°Р№Р» РєРѕРЅС„РёРіСѓСЂР°С†РёРё
           }
 
-/* Функция деинсталирует модули*/
+/* Р¤СѓРЅРєС†РёСЏ РґРµРёРЅСЃС‚Р°Р»РёСЂСѓРµС‚ РјРѕРґСѓР»Рё*/
          function deleteModule(){
 
-                $this->zip->extract(PCLZIP_OPT_PATH,$this->workDir);  // распаковываем архив во временную папку
-                $instructions = @file($this->workDir.'install.ini');  // считываем содержание install.ini
+                $this->zip->extract(PCLZIP_OPT_PATH,$this->workDir);  // СЂР°СЃРїР°РєРѕРІС‹РІР°РµРј Р°СЂС…РёРІ РІРѕ РІСЂРµРјРµРЅРЅСѓСЋ РїР°РїРєСѓ
+                $instructions = @file($this->workDir.'install.ini');  // СЃС‡РёС‚С‹РІР°РµРј СЃРѕРґРµСЂР¶Р°РЅРёРµ install.ini
 
 
                 for($i=count($instructions); $i>=0; $i--)
                 if(!empty($instructions[$i])){
 
-                       $v = $this->stripScr($instructions[$i]);   //вырезаем символы переноса строки и возврата каретки
+                       $v = $this->stripScr($instructions[$i]);   //РІС‹СЂРµР·Р°РµРј СЃРёРјРІРѕР»С‹ РїРµСЂРµРЅРѕСЃР° СЃС‚СЂРѕРєРё Рё РІРѕР·РІСЂР°С‚Р° РєР°СЂРµС‚РєРё
                        if(strstr($v,'dir_')){
 
                           $dirData = $this->getDirFileData($v);
@@ -72,12 +72,12 @@
                 if(file_exists($this->workDir.'uninstall.php')) include($this->workDir.'uninstall.php');
 
                 @unlink($this->workDir.'uninstall.php');
-                @unlink($this->workDir.'install.ini');            // удаляем файл конфигурации
-                @unlink($this->workDir.$this->arch);              // удаляем установочный архив
+                @unlink($this->workDir.'install.ini');            // СѓРґР°Р»СЏРµРј С„Р°Р№Р» РєРѕРЅС„РёРіСѓСЂР°С†РёРё
+                @unlink($this->workDir.$this->arch);              // СѓРґР°Р»СЏРµРј СѓСЃС‚Р°РЅРѕРІРѕС‡РЅС‹Р№ Р°СЂС…РёРІ
 
          }
 
-// удаляет папку с вложенными файлами
+// СѓРґР°Р»СЏРµС‚ РїР°РїРєСѓ СЃ РІР»РѕР¶РµРЅРЅС‹РјРё С„Р°Р№Р»Р°РјРё
          function full_del_dir ($directory){
 
                   $dir = opendir($directory);
@@ -91,14 +91,14 @@
 
          function stripScr($string){
 
-                  $v = str_replace(chr(015),'',$string);  // вырезаем символ перевода коретки
-                  $v = str_replace(chr(012),'',$v);  // вырезаем символ переноса строки
+                  $v = str_replace(chr(015),'',$string);  // РІС‹СЂРµР·Р°РµРј СЃРёРјРІРѕР» РїРµСЂРµРІРѕРґР° РєРѕСЂРµС‚РєРё
+                  $v = str_replace(chr(012),'',$v);  // РІС‹СЂРµР·Р°РµРј СЃРёРјРІРѕР» РїРµСЂРµРЅРѕСЃР° СЃС‚СЂРѕРєРё
                   return $v;
          }
 
 
-/* вспомогательная функция для парсера конфига
-   возвращает массив с именем файла\директории и путем для копирования\создания
+/* РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ РїР°СЂСЃРµСЂР° РєРѕРЅС„РёРіР°
+   РІРѕР·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ СЃ РёРјРµРЅРµРј С„Р°Р№Р»Р°\РґРёСЂРµРєС‚РѕСЂРёРё Рё РїСѓС‚РµРј РґР»СЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ\СЃРѕР·РґР°РЅРёСЏ
 */
          function getDirFileData($array){
 
@@ -112,7 +112,7 @@
          }
 
 
-/* Список установленных модулей
+/* РЎРїРёСЃРѕРє СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹С… РјРѕРґСѓР»РµР№
 */
          function getModulesList(){
 
@@ -127,10 +127,10 @@
                           $list .= '<tr '.((($c++)%2==0)?'class="dataTableRow1"':'').'>
                                      <td></td>
                                      <td><a href="?action='.$this->action.'">'.$this->name.'</a></td>
-                                     <td class="tac"><a onClick="javascript: if(confirm(\'Вы уверены, что хотите удалить модуль '.$this->name.'?\n\r Учтите, что это приведет к уничтожению всех данных!\')) document.location.href=\'/c0ntr0lz0ne/index.php?action=del_modules&module='.$modules.'\'" href="javascript: void[0];">удалить</a></td></tr>';
+                                     <td class="tac"><a onClick="javascript: if(confirm(\'Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РјРѕРґСѓР»СЊ '.$this->name.'?\n\r РЈС‡С‚РёС‚Рµ, С‡С‚Рѕ СЌС‚Рѕ РїСЂРёРІРµРґРµС‚ Рє СѓРЅРёС‡С‚РѕР¶РµРЅРёСЋ РІСЃРµС… РґР°РЅРЅС‹С…!\')) document.location.href=\'/c0ntr0lz0ne/index.php?action=del_modules&module='.$modules.'\'" href="javascript: void[0];">СѓРґР°Р»РёС‚СЊ</a></td></tr>';
                        }
-                 if(empty($list)) $list = '<tr><td colspan="3" class="tac"><b>Нет установленных модулей</b></td></tr>';
-                 else $head = '<th>&nbsp;</th><th class="tal">Название модуля:</th><th>Операции:</th>';
+                 if(empty($list)) $list = '<tr><td colspan="3" class="tac"><b>РќРµС‚ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹С… РјРѕРґСѓР»РµР№</b></td></tr>';
+                 else $head = '<th>&nbsp;</th><th class="tal">РќР°Р·РІР°РЅРёРµ РјРѕРґСѓР»СЏ:</th><th>РћРїРµСЂР°С†РёРё:</th>';
 
                  $html .= $head.$list.'</table>';
                  closedir($m);
@@ -138,21 +138,21 @@
                  return $html;
          }
 
-/* переводит названия файлов на человеческий
+/* РїРµСЂРµРІРѕРґРёС‚ РЅР°Р·РІР°РЅРёСЏ С„Р°Р№Р»РѕРІ РЅР° С‡РµР»РѕРІРµС‡РµСЃРєРёР№
 */
          function moduleName($fileName){
 
                  switch($fileName){
 
-                         case "news_module.zip": $this->name = 'Новости'; $this->action = 'news'; break;
-                         case "catalog_module.zip": $this->name = 'Каталог';  $this->action = 'catalog';  break;
-                         case "gallery_module.zip": $this->name = 'Галерея'; $this->action = 'gallery';  break;
-                         case "banners_module.zip": $this->name = 'Баннеры'; $this->action = 'banners';  break;
+                         case "news_module.zip": $this->name = 'РќРѕРІРѕСЃС‚Рё'; $this->action = 'news'; break;
+                         case "catalog_module.zip": $this->name = 'РљР°С‚Р°Р»РѕРі';  $this->action = 'catalog';  break;
+                         case "gallery_module.zip": $this->name = 'Р“Р°Р»РµСЂРµСЏ'; $this->action = 'gallery';  break;
+                         case "banners_module.zip": $this->name = 'Р‘Р°РЅРЅРµСЂС‹'; $this->action = 'banners';  break;
                          default: $name = $fileName; break;
                  }
          }
 
-/*  проверяет модуль на предмет установки
+/*  РїСЂРѕРІРµСЂСЏРµС‚ РјРѕРґСѓР»СЊ РЅР° РїСЂРµРґРјРµС‚ СѓСЃС‚Р°РЅРѕРІРєРё
 */
     function isModuleInstall($moduleName)
     {

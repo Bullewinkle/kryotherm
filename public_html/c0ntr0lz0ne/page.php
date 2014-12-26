@@ -3,39 +3,39 @@ $auth->Authorizate();
 ?>
 <table width="100%">
 <?
-  if(!empty($_REQUEST['action'])) // если выбрали действие
+  if(!empty($_REQUEST['action'])) // РµСЃР»Рё РІС‹Р±СЂР°Р»Рё РґРµР№СЃС‚РІРёРµ
   {
-    // если установили номер страницы, то присвоим его обычной переменной
+    // РµСЃР»Рё СѓСЃС‚Р°РЅРѕРІРёР»Рё РЅРѕРјРµСЂ СЃС‚СЂР°РЅРёС†С‹, С‚Рѕ РїСЂРёСЃРІРѕРёРј РµРіРѕ РѕР±С‹С‡РЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№
     $page_id = isset($_REQUEST['page_id'])?$_REQUEST['page_id']:0;
     $cPath = isset($_REQUEST['cPath'])?$_REQUEST['cPath']:0;
 
-    switch($_REQUEST['action'])   // определяем это действие
+    switch($_REQUEST['action'])   // РѕРїСЂРµРґРµР»СЏРµРј СЌС‚Рѕ РґРµР№СЃС‚РІРёРµ
     {
-      case "del_page":            // удалить страницу
-        if(!empty($page_id))      // если установили идентификатор страницы, то
-        {                         // проверяем - есть ли у страницы потомки
+      case "del_page":            // СѓРґР°Р»РёС‚СЊ СЃС‚СЂР°РЅРёС†Сѓ
+        if(!empty($page_id))      // РµСЃР»Рё СѓСЃС‚Р°РЅРѕРІРёР»Рё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЃС‚СЂР°РЅРёС†С‹, С‚Рѕ
+        {                         // РїСЂРѕРІРµСЂСЏРµРј - РµСЃС‚СЊ Р»Рё Сѓ СЃС‚СЂР°РЅРёС†С‹ РїРѕС‚РѕРјРєРё
           $sql = "select p2.id, p1.image from ".TBL_PREF."pages p1
                   left join ".TBL_PREF."pages p2 on p1.id=p2.id_parent
                   where p1.id=".$page_id;
           list($id, $image) = $auth->QueryExecute($sql, array(0,1));
 
           $id = $id[0];
-          if (empty($id))         // если потомков нет - удаляем страницу
+          if (empty($id))         // РµСЃР»Рё РїРѕС‚РѕРјРєРѕРІ РЅРµС‚ - СѓРґР°Р»СЏРµРј СЃС‚СЂР°РЅРёС†Сѓ
           {
              if(file_exists(A_PAGE_ICON_DIR.$image[0])) unlink(A_PAGE_ICON_DIR.$image[0]);
-            // после удаления связанных изображений и документов удаляем стр.
+            // РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ СЃРІСЏР·Р°РЅРЅС‹С… РёР·РѕР±СЂР°Р¶РµРЅРёР№ Рё РґРѕРєСѓРјРµРЅС‚РѕРІ СѓРґР°Р»СЏРµРј СЃС‚СЂ.
             $auth->QueryExecute("delete from ".TBL_PREF."pages where id=$page_id");
           }
         }
 
-      case "insert_page":         // добавление страницы
+      case "insert_page":         // РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹
         if (!empty($_REQUEST['name']) and isset($_REQUEST['level']) and isset($_REQUEST['parent']))
         {
-          // проверяем страницу на существование
+          // РїСЂРѕРІРµСЂСЏРµРј СЃС‚СЂР°РЅРёС†Сѓ РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ
           $page_id = $auth->GetPageId(addslashes(stripslashes($_REQUEST['name'])), $_REQUEST['parent']);
 
-          if(empty($page_id))     // если такой страницы нет то заносим новую
-          {                       // определяем максимальный индекс сортировки
+          if(empty($page_id))     // РµСЃР»Рё С‚Р°РєРѕР№ СЃС‚СЂР°РЅРёС†С‹ РЅРµС‚ С‚Рѕ Р·Р°РЅРѕСЃРёРј РЅРѕРІСѓСЋ
+          {                       // РѕРїСЂРµРґРµР»СЏРµРј РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ СЃРѕСЂС‚РёСЂРѕРІРєРё
             $sql = "select max(sort_index) from ".TBL_PREF."pages where id_parent=".$_REQUEST['parent'];
             list($sort_index) = $auth->QueryExecute($sql, 0);
 
@@ -61,10 +61,10 @@ $auth->Authorizate();
                                         $_REQUEST['parent']);
           }
 
-          $page_id = $page_id[0]; // приводим идентификатор к нормалному виду
+          $page_id = $page_id[0]; // РїСЂРёРІРѕРґРёРј РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Рє РЅРѕСЂРјР°Р»РЅРѕРјСѓ РІРёРґСѓ
         }
 
-      case "update_page":         // обновление страницы
+      case "update_page":         // РѕР±РЅРѕРІР»РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹
         if (($_REQUEST['action']=="update_page") and !empty($page_id))
           if(!empty($_REQUEST['name']))
           {
@@ -107,23 +107,23 @@ $auth->Authorizate();
 
                       break;
 
-                      default: echo "<br>Неверный формат файла: ".$_FILES['userfile']['type'];
+                      default: echo "<br>РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ С„Р°Р№Р»Р°: ".$_FILES['userfile']['type'];
                       }
           }
 
-      case "lock_page":           // запретить отображение страницы
+      case "lock_page":           // Р·Р°РїСЂРµС‚РёС‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹
           if(!empty($page_id) and ($_REQUEST['action']=="lock_page"))
             $auth->QueryExecute("update ".TBL_PREF."pages set published=0 where id=$page_id");
 
-      case "unlock_page":         // разрешить отображение страницы
+      case "unlock_page":         // СЂР°Р·СЂРµС€РёС‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹
           if(!empty($page_id) and ($_REQUEST['action']=="unlock_page"))
             $auth->QueryExecute("update ".TBL_PREF."pages set published=1 where id=".$page_id);
 
-      case "up_page":           // поднять страницу
+      case "up_page":           // РїРѕРґРЅСЏС‚СЊ СЃС‚СЂР°РЅРёС†Сѓ
           if(!empty($page_id) and ($_REQUEST['action']=="up_page"))
             PageMove($auth, $page_id, "up");
 
-      case "down_page":         // опустить страницу
+      case "down_page":         // РѕРїСѓСЃС‚РёС‚СЊ СЃС‚СЂР°РЅРёС†Сѓ
           if(!empty($page_id) and ($_REQUEST['action']=="down_page"))
             PageMove($auth, $page_id, "down");
 
@@ -161,7 +161,7 @@ $auth->Authorizate();
             }
           }
 
-      case "pages":               // выводим список всех активных страниц дерева
+      case "pages":               // РІС‹РІРѕРґРёРј СЃРїРёСЃРѕРє РІСЃРµС… Р°РєС‚РёРІРЅС‹С… СЃС‚СЂР°РЅРёС† РґРµСЂРµРІР°
           if (empty($_REQUEST['apply']))
           {
                 $sort_id = $sort_name = array();
@@ -175,7 +175,7 @@ $auth->Authorizate();
                   <tr>
                     <td width=150><img src="images/page-m.jpg" width=120 height=120></td>
                     <td align="left" valign=top width="100%">
-                      <h1>Управление страницами</h1>
+                      <h1>РЈРїСЂР°РІР»РµРЅРёРµ СЃС‚СЂР°РЅРёС†Р°РјРё</h1>
 <!--                      <table border=0 width=100% cellspacing=0 cellpadding=0> -->
 <!--
                         <tr>
@@ -183,7 +183,7 @@ $auth->Authorizate();
                             <form action="page.php" method="get">
                               <input type=hidden name="selected_box" value="page">
                               <input type=hidden name="action" value="pages">
-                              Поиск:
+                              РџРѕРёСЃРє:
                               <input name="search" value="<?=(!empty($_REQUEST['search'])?$_REQUEST['search']:"");?>">
                             </form>
                           </td>
@@ -194,9 +194,9 @@ $auth->Authorizate();
                             <form action="" method="get">
                               <input type=hidden name="selected_box" value="page">
                               <input type=hidden name="action" value="pages">
-                              Перейти в:
+                              РџРµСЂРµР№С‚Рё РІ:
                               <select name="cPath" onChange="this.form.submit();">
-                                <option value=0>Начало</option>
+                                <option value=0>РќР°С‡Р°Р»Рѕ</option>
                                 <?=CreateSelOption($sort_id, $sort_name, !empty($cPath)?$cPath:0);?>
                               </select>
                             </form>
@@ -235,9 +235,9 @@ $auth->Authorizate();
           break;
         }
 
-      case "edit_page":           // редактирование страницы
-        if(!empty($page_id))      // возможно в том случае,
-        {                         // если есть что редактировать
+      case "edit_page":           // СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃС‚СЂР°РЅРёС†С‹
+        if(!empty($page_id))      // РІРѕР·РјРѕР¶РЅРѕ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ,
+        {                         // РµСЃР»Рё РµСЃС‚СЊ С‡С‚Рѕ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ
 ?>
       <tr>
         <td colspan=7 valign=top style="padding-right:20px;">
@@ -247,8 +247,8 @@ $auth->Authorizate();
                     <td width=150><img src="images/page-m.jpg" width=120 height=120></td>
                     <td align="left" valign=top>
 
-      <h1>Изменение страницы</h1>
-<?                                // получение информации о странице
+      <h1>РР·РјРµРЅРµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹</h1>
+<?                                // РїРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ СЃС‚СЂР°РЅРёС†Рµ
           $sql = "select * from ".TBL_PREF."pages where id=".$page_id;
           list($id, $parent, $name, $headl, $text, $keyw, $descr, $lev, $url, $p_title, $image) =
             $auth->QueryExecute($sql, array(0, 1, 3, 4, 5, 9, 10, 14, 15, 17, 22));
@@ -261,17 +261,17 @@ $auth->Authorizate();
           $url[0]        = ((!empty($url[0]))?stripslashes($url[0]):"");
           $p_title[0]    = ((!empty($p_title[0]))?stripslashes($p_title[0]):"");
 ?>
-        <div class="button2"><a href="#" onClick="fPage.apply.value='1'; fPage.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=pages&cPath=<?=((!empty($parent[0]))?$parent[0]:0);?>" title="">Отменить</a></div>
-        <div class="button2"><a href="#" onClick="fPage.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="#" onClick="fPage.apply.value='1'; fPage.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=pages&cPath=<?=((!empty($parent[0]))?$parent[0]:0);?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="#" onClick="fPage.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
 
     <form name=fPage enctype="multipart/form-data"
           action="?action=update_page" method=post style="display:inline;">
       <input name=parent type=hidden value=<?=((isset($parent[0]))?$parent[0]:0);?>>
-<?                                // получение списка связанных с ней файлов
+<?                                // РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° СЃРІСЏР·Р°РЅРЅС‹С… СЃ РЅРµР№ С„Р°Р№Р»РѕРІ
         }
 
-      case "add_page":            // создание страниц
+      case "add_page":            // СЃРѕР·РґР°РЅРёРµ СЃС‚СЂР°РЅРёС†
         if(($_REQUEST['action']=="add_page") or empty($page_id))
         {
 ?>
@@ -282,13 +282,13 @@ $auth->Authorizate();
                   <tr>
                     <td width=150><img src="images/page-m.jpg" width=120 height=120></td>
                     <td align="left" valign=top>
-        <h1>Добавление страницы в раздел:</h1>
+        <h1>Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹ РІ СЂР°Р·РґРµР»:</h1>
 <?
           $parent[0] = $page_id;
           $path = TreeMenu($auth, $parent[0], 2, 0);
 
-          if(!empty($page_id))    // если добавляем страницу в существующий
-          {                       // раздел то выводим путь к этому разделу
+          if(!empty($page_id))    // РµСЃР»Рё РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂР°РЅРёС†Сѓ РІ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№
+          {                       // СЂР°Р·РґРµР» С‚Рѕ РІС‹РІРѕРґРёРј РїСѓС‚СЊ Рє СЌС‚РѕРјСѓ СЂР°Р·РґРµР»Сѓ
             for($i=(count($path)-1); $i>=0; $i--)
               if(!empty($path[$i]["name"]))
               {
@@ -296,15 +296,15 @@ $auth->Authorizate();
                 $lev[0] = $path[$i]["level"]+1;
               }
           }
-          else                    // иначе пишем "Основной раздел"
-          {                       // поэтому страница будет  находится
-            $lev[0] = -1;         // на нулевом уровне
-            print "Основной раздел";
+          else                    // РёРЅР°С‡Рµ РїРёС€РµРј "РћСЃРЅРѕРІРЅРѕР№ СЂР°Р·РґРµР»"
+          {                       // РїРѕСЌС‚РѕРјСѓ СЃС‚СЂР°РЅРёС†Р° Р±СѓРґРµС‚  РЅР°С…РѕРґРёС‚СЃСЏ
+            $lev[0] = -1;         // РЅР° РЅСѓР»РµРІРѕРј СѓСЂРѕРІРЅРµ
+            print "РћСЃРЅРѕРІРЅРѕР№ СЂР°Р·РґРµР»";
           }
 ?>
-        <div class="button2"><a href="#" onClick="fPage.apply.value='1'; fPage.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=pages&cPath=<?=((!empty($parent[0]))?$parent[0]:0);?>" title="">Отменить</a></div>
-        <div class="button2"><a href="#" onClick="fPage.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="#" onClick="fPage.apply.value='1'; fPage.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=pages&cPath=<?=((!empty($parent[0]))?$parent[0]:0);?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="#" onClick="fPage.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
 
     <form name=fPage enctype="multipart/form-data"
           action="?action=insert_page" method=post style="display:inline;">
@@ -316,23 +316,23 @@ $auth->Authorizate();
       <tr id="dataTable"><th colspan=3>&nbsp;</th></tr>
       <tr><td colspan=3>&nbsp;</td></tr>
       <tr>
-        <td style="width: 12%">Текст меню</td>
+        <td style="width: 12%">РўРµРєСЃС‚ РјРµРЅСЋ</td>
         <td colspan=2>
           <input name=name type=text maxlength=100 style="width: 100%;"
-                 value="<?=((isset($name[0]))?$name[0]:'Название');?>">
+                 value="<?=((isset($name[0]))?$name[0]:'РќР°Р·РІР°РЅРёРµ');?>">
         </td>
       </tr>
       <tr>
-        <td>Путь к источнику</td>
+        <td>РџСѓС‚СЊ Рє РёСЃС‚РѕС‡РЅРёРєСѓ</td>
         <td colspan=2>
           <input name=url type=text maxlength=255 style="width: 100%;"
                  value="<?=((isset($url[0]))?$url[0]:'');?>">
         </td>
       </tr>
       <tr>
-        <td>Заголовок страницы (в тексте)</td>
+        <td>Р—Р°РіРѕР»РѕРІРѕРє СЃС‚СЂР°РЅРёС†С‹ (РІ С‚РµРєСЃС‚Рµ)</td>
         <td colspan=2>
-          <textarea name=headl style="width: 100%;" rows=1><?=((isset($headl[0]))?$headl[0]:'Заголовок');?></textarea>
+          <textarea name=headl style="width: 100%;" rows=1><?=((isset($headl[0]))?$headl[0]:'Р—Р°РіРѕР»РѕРІРѕРє');?></textarea>
         </td>
       </tr>
 <script language="javascript">
@@ -353,51 +353,51 @@ function openEditor(textarea) {
       <tr>
         <td></td>
         <td colspan="2" style="padding-bottom:0" valign=middle>
-          <a href="javascript:openEditor(document.fPage.text)" title="Визуальный редактор"><img src="images/icons/redaktor.gif" align=middle width="27" height="27" alt="Визуальный редактор"></a>
-          <a href="javascript:openEditor(document.fPage.text)" title="Визуальный редактор" style="font-size:12px; vertical-align:middle;">Визуальный редактор</a>
+          <a href="javascript:openEditor(document.fPage.text)" title="Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ"><img src="images/icons/redaktor.gif" align=middle width="27" height="27" alt="Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ"></a>
+          <a href="javascript:openEditor(document.fPage.text)" title="Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ" style="font-size:12px; vertical-align:middle;">Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ</a>
         </td>
       </tr>
       <tr>
-        <td>Текст</td>
+        <td>РўРµРєСЃС‚</td>
         <td colspan=2>
-            <textarea name=text style="width:100%;" rows=20><?=((isset($text[0]))?$text[0]:'Текст');?></textarea>
+            <textarea name=text style="width:100%;" rows=20><?=((isset($text[0]))?$text[0]:'РўРµРєСЃС‚');?></textarea>
         </td>
       </tr>
       <!--
       <tr>
-        <td>Картинка:</td>
+        <td>РљР°СЂС‚РёРЅРєР°:</td>
         <td colspan=2>
         <?
           if(empty($image[0])){?>
 
             <input type="hidden" name="MAX_FILE_SIZE" value="<?=A_PAGE_ICON_SIZE;?>">
             <input type="file" name="userfile" SIZE=20><br>
-            Файл jpg или gif. Не более 500 Кб.
+            Р¤Р°Р№Р» jpg РёР»Рё gif. РќРµ Р±РѕР»РµРµ 500 РљР±.
 
           <? }else{?>
 
            <br>
            <img border=0 src="<?=A_PAGE_ICON_URL.$image[0]?>" vspace="4" hspace="10"><br>
-           Удалить картинку: <input type="checkbox" name="img_del" value="<?=$image[0];?>">
+           РЈРґР°Р»РёС‚СЊ РєР°СЂС‚РёРЅРєСѓ: <input type="checkbox" name="img_del" value="<?=$image[0];?>">
         <? } ?>
         </td>
       </tr>
       -->
 <tr bgcolor="#c0c0c0"><td colspan="3"><img src="../images/blank.gif" width=1 height=2 border=0></td></tr>
       <tr>
-        <td vailgn=top>Заголовок страницы (title)</td>
+        <td vailgn=top>Р—Р°РіРѕР»РѕРІРѕРє СЃС‚СЂР°РЅРёС†С‹ (title)</td>
         <td colspan=2>
           <textarea style="width: 100%;" rows=2 name=title><?=((!empty($p_title[0]))?$p_title[0]:DEF_TITLE);?></textarea>
         </td>
       </tr>
       <tr>
-        <td vailgn=top>Ключевые слова (keywords)</td>
+        <td vailgn=top>РљР»СЋС‡РµРІС‹Рµ СЃР»РѕРІР° (keywords)</td>
         <td colspan=2>
           <textarea style="width: 100%;" rows=2 name=keyw><?=((!empty($keyw[0]))?$keyw[0]:DEF_KEYW);?></textarea>
         </td>
       </tr>
       <tr>
-        <td vailgn=top>Описание (description)</td>
+        <td vailgn=top>РћРїРёСЃР°РЅРёРµ (description)</td>
         <td colspan=2>
           <textarea style="width: 100%;" rows=2 name=descr><?=((!empty($descr[0]))?$descr[0]:DEF_DESC);?></textarea>
         </td>
@@ -410,9 +410,9 @@ function openEditor(textarea) {
         </td>
       </tr>
       <tr><td></td><td colspan=2>
-        <div class="button2"><a href="#" onClick="fPage.apply.value='1'; fPage.submit();" title="">Применить</a></div>
-        <div class="button2"><a href="?action=pages&cPath=<?=((!empty($parent[0]))?$parent[0]:0);?>" title="">Отменить</a></div>
-        <div class="button2"><a href="#" onClick="fPage.submit();" title="">Сохранить</a></div>
+        <div class="button2"><a href="#" onClick="fPage.apply.value='1'; fPage.submit();" title="">РџСЂРёРјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="?action=pages&cPath=<?=((!empty($parent[0]))?$parent[0]:0);?>" title="">РћС‚РјРµРЅРёС‚СЊ</a></div>
+        <div class="button2"><a href="#" onClick="fPage.submit();" title="">РЎРѕС…СЂР°РЅРёС‚СЊ</a></div>
       </td></tr>
       <tr><td colspan=3 height=20><div style="height:20px; line-height:20px; background:url(images/points.gif) 0px 10px repeat-x; width:100%;">&nbsp;</div></td></tr>
     </form>

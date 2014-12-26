@@ -13,13 +13,13 @@ $auth->Authorizate();
                     {
                         $modules->zip = new PclZip(MODULE_INSTALL_DIR.$_FILES['module']['name']);
                         $modules->installModule();
-                        $modules->mesage = "<span class='green'>Успешно</span>";
+                        $modules->mesage = "<span class='green'>РЈСЃРїРµС€РЅРѕ</span>";
                     }
 
-            }else $modules->mesage = "<span class='red'>Такой модуль уже установлен</span>";
+            }else $modules->mesage = "<span class='red'>РўР°РєРѕР№ РјРѕРґСѓР»СЊ СѓР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ</span>";
         }
 
-        $settings->createConfig();              // обновляем файл конфигурации
+        $settings->createConfig();              // РѕР±РЅРѕРІР»СЏРµРј С„Р°Р№Р» РєРѕРЅС„РёРіСѓСЂР°С†РёРё
         $common->redirect("/c0ntr0lz0ne/index.php?action=modules",'1000');
 
     }
@@ -28,7 +28,7 @@ $auth->Authorizate();
         $modules->zip = new PclZip(MODULE_INSTALL_DIR.$_REQUEST['module']);
         $modules->arch = $_REQUEST['module'];
         $modules->deleteModule();
-        $settings->createConfig();              // обновляем файл конфигурации
+        $settings->createConfig();              // РѕР±РЅРѕРІР»СЏРµРј С„Р°Р№Р» РєРѕРЅС„РёРіСѓСЂР°С†РёРё
         $common->redirect("/c0ntr0lz0ne/index.php?action=modules",'1000');
     }
 ?>
@@ -36,10 +36,10 @@ $auth->Authorizate();
                   <tr>
                     <td width=150><img src="images/page-m.jpg" width=120 height=120></td>
                     <td align="left" valign=top width="100%">
-                      <h1>Добавление модулей</h1>
+                      <h1>Р”РѕР±Р°РІР»РµРЅРёРµ РјРѕРґСѓР»РµР№</h1>
                       <form name="FormName" enctype="multipart/form-data" action="index.php?action=add_modules" method="post">
                                <input name="module" type="file" value="">
-                               <input type="submit" value="Установить">
+                               <input type="submit" value="РЈСЃС‚Р°РЅРѕРІРёС‚СЊ">
                       </form>
                       <p><?=$modules->mesage;?></p>
                     </td>
