@@ -43,7 +43,7 @@
       </tr></table></td></tr>
       <tr id="cont">
         <td><div id="centr"><div id="headl"><div id="headr"><div id="footl"><div id="footr">
-<? require_once("admin_head.php"); ?>
+      <? require_once("admin_head.php"); ?>
         </div></div></div></div></div></td>
       </tr>
       <tr><td align=right valign=bottom id="foot">
