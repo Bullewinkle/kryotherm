@@ -261,21 +261,33 @@ $(function () {
 	$orderForm.$customerSelect = $customerSelect;
 
 	$customerSelect.on('change', function() {
-		$orderFormValidator.resetForm()
+		$orderForm.valid();
+		$orderFormValidator.resetForm();
 		checkCustomerValue(this.value);
 	})
 	checkCustomerValue($customerSelect.val());
 
+	var calculateTotalCost = function() {
+		return 1
+	}
+
 	var onOrderFormSubmit = function (form, e) {
+		//prepare values
+		if (window.kryotherm.total_cost) {
+			AMOUNT.value = window.kryotherm.total_cost
+		} else {
+			AMOUNT.value = calculateTotalCost();
+		}
+
 		generateHMAC();
 
 		$form = $(form);
-
 		if ($customerSelect.val()+'' ===  '1') {
 			var selector = '.individual-person-input';
 		} else if ($customerSelect.val()+'' ===  '2') {
 			var selector = '.legal-person-input';
 		}
+		//use values
 		$dataAboutCustomerInputs = $form.find(selector+' .customer-data, .common-input .customer-data, [name=customer]');
 		$dataAboutPaymentInputs = $form.find('.payment-data');
 
@@ -589,6 +601,14 @@ var validationRules = {
 			} else if ($customerInputValue === '2') {
 				return 10
 			}
+		},
+		maxlength: function () {
+			$customerInputValue = $orderForm.$customerSelect.val()+'';
+			if ($customerInputValue === '1') {
+				return 12
+			} else if ($customerInputValue === '2') {
+				return 10
+			}
 		}
 	},
 	adress: {
@@ -633,7 +653,8 @@ var validationMessages = {
 	},
 	inn: {
 		required: validationCommonMessages.required,
-		minlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.')
+		minlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.'),
+		maxlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.')
 	},
 	adress: {
 		required: validationCommonMessages.required

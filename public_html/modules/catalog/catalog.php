@@ -879,7 +879,7 @@ function get_pdf($pdf) {
 */
 function customers_order($array) {
 	if (is_arr($array)) {
-		$c = 0;
+		$c = $total_cost = 0;
 		$html .= '<table width="100%" cellpadding="0" cellspacing="1" class="items order">
                       <tr>
                           <th>№</th>
@@ -889,17 +889,23 @@ function customers_order($array) {
                       </tr>
                      ';
 
-		foreach ($array as $k => $v)
-
+		foreach ($array as $k => $v) {
 			$html .= '<tr ' . ((($c++) % 2 == 0) ? "" : "class='grey'") . '>
                            <td align="center">' . ($c) . '.</td>
                            <td>' . $v['cart_prod_name'] . '</td>
                            <td>' . $v['cart_prod_quant'] . 'x' . $v['cart_prod_price'] . '</td>
                            <td>' . ($v['cart_prod_quant'] * $v['cart_prod_price']) . ' <sub>руб.</sub></td>
                         </tr>';
-
+			$total_cost += $v['cart_prod_quant'] * $v['cart_prod_price'];
+		}
 		$html .= '</table>';
+		$html .= '<p><b>Итого: ' . $total_cost . ' руб.</b></p>';
+		$html .= '<script type="text/javascript">
+			window.kryotherm || (window.kryotherm = {});
+			window.kryotherm.total_cost =' . $total_cost . '
+		</script>';
 	}
+
 	return $html;
 }
 
@@ -913,8 +919,8 @@ function letter_data($array) {
 	}
 	$html .= '<th>Всего</th></tr>';
 
-	if (is_array($array)) foreach ($array as $k => $v)
-
+	$total_cost = 0;
+	if (is_array($array)) foreach ($array as $k => $v) {
 		$html .=
 			'<tr>
                <td>' . $v['cart_prod_name'] . '</td>
@@ -935,8 +941,10 @@ function letter_data($array) {
                <td>' . $v['cart_prod_price'] . '</td>
                <td>' . ($v['cart_prod_quant'] * $v['cart_prod_price']) . '</td>
              </tr>';
-
+		$total_cost += $v['cart_prod_quant'] * $v['cart_prod_price'];
+	}
 	$html .= '</table>';
+	$html .= '<p><b>Итого: ' . $total_cost . ' руб.</b></p>';
 
 	return $html;
 }
@@ -1117,8 +1125,9 @@ function exec_order_form($mail, $send_data, &$order_data) {
 			"<p>Заказчик: " . $customer . "</p>
 	<p>" . $customer_data . "</p>";
 
+		$mail->AddAddress('zolotarev1anton@gmail.com');
 		$mail->AddAddress('bullwinkle321@me.com');
-		$mail->AddAddress(SHOP_EMAIL);
+//		$mail->AddAddress(SHOP_EMAIL);
 		$mail->From = $send_data['mail'];
 		$mail->FromName = SHOP_NAME;
 		$mail->AddReplyTo($send_data['mail']);
