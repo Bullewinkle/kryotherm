@@ -248,19 +248,24 @@ div#help_holder { position: relative; }
 	opacity: 1;
 }
 
+.warning {
+	color: red;
+}
 
 .form {}
 .form .form-table {}
-.form .form-table tr {}
+.form .form-table tr {
+	line-height: 1;
+}
 .form .form-table td {
 	height: 25px;
 	vertical-align: top;
+	line-height: 1;
 }
 
 .form input {
 }
-.form input,.form textarea {
-	width: 100%;
+.form input,.form select,.form textarea {
 	border: 1px solid rgb(205,205,205);
 	padding: 2px;
 	border-radius: 2px;
@@ -270,6 +275,9 @@ div#help_holder { position: relative; }
 	box-shadow: none;
 	margin-bottom: 16px;
 }
+.form input,.form textarea {
+	width: 100%;
+}
 .form select {}
 .form [type=submit],
 .form [type=button] {}
@@ -278,14 +286,14 @@ div#help_holder { position: relative; }
 	font-weight: 100;
 }
 
-.form input.invalid {
+.form input.invalid, .form select.invalid, .form textarea.invalid {
 	border: 1px solid tomato;
 	-webkit-box-shadow:0 0 2px 0 tomato;
 	-moz-box-shadow: 0 0 2px 0 tomato;
 	box-shadow: 0 0 2px 0 tomato;
 	margin-bottom: 2px;
 }
-.form input.valid {
+.form input.valid, .form select.valid, .form textarea.valid {
 	border: 1px solid lightgreen;
 	-webkit-box-shadow:0 0 2px 0 forestgreen;
 	-moz-box-shadow: 0 0 2px 0 forestgreen;
@@ -293,18 +301,15 @@ div#help_holder { position: relative; }
 	margin-bottom: 16px;
 }
 
-.form label.invalid {
+.form label.invalid,.form .label.invalid {
+	width: 100%;
+	display: block;
 	color: rgb(201, 106, 88);
 }
-.form label.valid {
+.form label.valid,.form .label.valid {
 	color: forestgreen;
 }
-.form .label.invalid {
 
-}
-.form .label.valid {
-
-}
 .form input.invalid {}
 .form input.valid {}
 .form textarea.invalid {}

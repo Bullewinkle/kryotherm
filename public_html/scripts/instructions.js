@@ -205,7 +205,7 @@ $(function () {
 
 	// END HMAC GENERATOR DEFINITION
 
-
+	// INITIALIZE
 	$("div").click(function () {
 		close_help();
 	});
@@ -221,7 +221,6 @@ $(function () {
 	var cat = $("select[name='category']");
 	var prod = $("select[name='product']");
 	var price = $("input[name='price']");
-
 	var cat_items = $("select[name='category']").find("option").length;
 
 	// -------------- HMAC GENERATOR USAGE --------------
@@ -244,6 +243,17 @@ $(function () {
 	}
 	// ------------ END HMAC GENERATOR USAGE --------------
 
+	if (window.kryotherm && window.kryotherm.total_cost){
+		window.kryotherm.total_cost = window.kryotherm.total_cost || calculateTotalCost();
+		window.kryotherm.total_amount = window.kryotherm.total_cost;
+	}
+
+	window.$orderForm = $('.js-place-order-form[name=place-order]');
+	var $totalPrice =  $('.total-cost');
+	var $deliveryPrice =  $('.delivery-price');
+	var $customerSelect = $orderForm.$customerSelect = $orderForm.find('[name=customer]');
+	var $shippingSelect = $orderForm.$shippingSelect = $orderForm.find('[name=shipping]');
+	var $districtSelect = $orderForm.$districtSelect = $orderForm.find('[name=district]');
 
 	var checkCustomerValue = function(custormerValue) {
 		if ( custormerValue+'' !== '1' && custormerValue+'' !== '2' ) { custormerValue = 1 }
@@ -255,29 +265,74 @@ $(function () {
 			$orderForm.addClass('legal-person');
 		}
 	}
+	var checkShippingValue = function(shippingValue) {
+		var deliveryPrice = $(this.selectedOptions[0]).data('price');
+		if ( shippingValue === "Major express") {
+			$districtSelect.removeClass('hidden');
+		} else {
+			$districtSelect.addClass('hidden');
+		}
+		if (deliveryPrice) {
+			$deliveryPrice.removeClass('hidden').find('.value').text(deliveryPrice);
+			$totalPrice.find('.value').text(kryotherm.total_cost+deliveryPrice);
+			window.kryotherm.total_amount = kryotherm.total_cost+deliveryPrice;
+			delivery_price.value = deliveryPrice;
+		} else {
+			$deliveryPrice.addClass('hidden');
+			$totalPrice.find('.value').text(kryotherm.total_cost);
+			window.kryotherm.total_amount = kryotherm.total_cost;
+			delivery_price.value = '';
+		}
+	}
+	var checkDistrictValue = function(districtValue) {
+		var deliveryPrice = $(this.selectedOptions[0]).data('price');
 
-	window.$orderForm = $('.js-place-order-form[name=place-order]');
-	$customerSelect = $orderForm.find('[name=customer]');
-	$orderForm.$customerSelect = $customerSelect;
+		if (deliveryPrice) {
+			$deliveryPrice.removeClass('hidden').find('.value').text(deliveryPrice);
+			$totalPrice.find('.value').text(kryotherm.total_cost+deliveryPrice);
+			window.kryotherm.total_amount = kryotherm.total_cost+deliveryPrice;
+			delivery_price.value = deliveryPrice;
+		} else {
+			$deliveryPrice.addClass('hidden');
+			$totalPrice.find('.value').text(kryotherm.total_cost);
+			window.kryotherm.total_amount = kryotherm.total_cost;
+			delivery_price.value = '';
+		}
+	}
+
 
 	$customerSelect.on('change', function() {
 		$orderForm.valid();
 		$orderFormValidator.resetForm();
-		checkCustomerValue(this.value);
+		checkCustomerValue.call(this,this.value);
 	})
-	checkCustomerValue($customerSelect.val());
+	checkCustomerValue.call($customerSelect[0],$customerSelect[0].value);
 
+	$shippingSelect.on('change', function() {
+		checkShippingValue.call(this, this.value);
+	})
+	checkShippingValue.call($shippingSelect[0], $shippingSelect[0].value);
+
+	$districtSelect.on('change', function() {
+		checkDistrictValue.call(this, this.value);
+	})
+	checkDistrictValue.call($districtSelect[0], $districtSelect[0].value);
+
+	var getDateString = function () {
+		var date = new Date();
+		var dateString = date.getDate()+'.'+date.getMonth()+'.'+date.getFullYear()+' '+date.getHours()+':'+date.getMinutes()
+		return dateString;
+	}
 	var calculateTotalCost = function() {
 		return 1
 	}
 
 	var onOrderFormSubmit = function (form, e) {
 		//prepare values
-		if (window.kryotherm.total_cost) {
-			AMOUNT.value = window.kryotherm.total_cost
-		} else {
-			AMOUNT.value = calculateTotalCost();
-		}
+		//checkShippingValue.call($shippingSelect[0], $shippingSelect[0].value);
+		//checkDistrictValue.call($districtSelect[0], $districtSelect[0].value);
+		AMOUNT.value = window.kryotherm.total_amount;
+		order_date.value = getDateString();
 
 		generateHMAC();
 
@@ -338,21 +393,150 @@ $(function () {
 		//ignoreTitle: false
 
 	})
+	// END  INITIALIZE
 
 });
 
-function prepareTestForm(e) {
-	var data = {}
-	$inputs = $(this).find('input:not([type=submit])')
-	$inputs.each(function (i, input) {
-		data[input.name] = input.value
-	});
-	debugger
-	console.log(data)
-
-
-	return false
+var validationRules = {
+	name: {
+		required: true
+	},
+	shipping: {
+		required: true,
+		minlength: 1
+	},
+	district: {
+		//required: function() {
+		//	if ($orderForm.$shippingSelect.val() === "Major express") {
+		//		return true
+		//	} else {
+		//		return false
+		//	}
+		//}
+		required: true,
+		minlength: 1
+	},
+	surname: {
+		required: true
+	},
+	EMAIL: {
+		required: true,
+		email: true
+	},
+	inn: {
+		required: true,
+		minlength: function () {
+			$customerInputValue = $orderForm.$customerSelect.val()+'';
+			if ($customerInputValue === '1') {
+				return 12
+			} else if ($customerInputValue === '2') {
+				return 10
+			}
+		},
+		maxlength: function () {
+			$customerInputValue = $orderForm.$customerSelect.val()+'';
+			if ($customerInputValue === '1') {
+				return 12
+			} else if ($customerInputValue === '2') {
+				return 10
+			}
+		}
+	},
+	adress: {
+		required: true
+	},
+	phone: {
+		required: true
+	},
+	organisation: {
+		required: true
+	},
+	kpp: {
+		required: true
+	},
+	jaddress: {
+		required: true
+	},
+	postaladdress: {
+		required: true
+	},
+	bank: {
+		required: true
+	},
+	gendir: {
+		required: true
+	}
 }
+
+var validationCommonMessages = {
+	required: "Это поле обязательно для заполнения."
+}
+var validationMessages = {
+	name: {
+		required: validationCommonMessages.required
+	},
+	shipping: {
+		required: 'Выберите способ доставки.'
+	},
+	district: {
+		required: 'Выберите округ для доставки.'
+	},
+	surname: {
+		required: validationCommonMessages.required
+	},
+	EMAIL: {
+		required: validationCommonMessages.required,
+		email: 'Пожалуйста, введите валидный e-mail адрес.'
+	},
+	inn: {
+		required: validationCommonMessages.required,
+		minlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.'),
+		maxlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.')
+	},
+	adress: {
+		required: validationCommonMessages.required
+	},
+	phone: {
+		required: validationCommonMessages.required
+	},
+	organisation: {
+		required: validationCommonMessages.required
+	},
+	kpp: {
+		required: validationCommonMessages.required
+	},
+	jaddress: {
+		required: validationCommonMessages.required
+	},
+	postaladdress: {
+		required: validationCommonMessages.required
+	},
+	bank: {
+		required: validationCommonMessages.required
+	},
+	gendir: {
+		required: validationCommonMessages.required
+	}
+}
+
+
+//required – Makes the element required.
+//remote – Requests a resource to check the element for validity.
+//minlength – Makes the element require a given minimum length.
+//maxlength – Makes the element require a given maxmimum length.
+//rangelength – Makes the element require a given value range.
+//min – Makes the element require a given minimum.
+//max – Makes the element require a given maximum.
+//range – Makes the element require a given value range.
+//email – Makes the element require a valid email
+//url – Makes the element require a valid url
+//date – Makes the element require a date.
+//dateISO – Makes the element require an ISO date.
+//number – Makes the element require a decimal number.
+//digits – Makes the element require digits only.
+//creditcard – Makes the element require a credit card number.
+//equalTo – Requires the element to be the same as another one
+
 
 function validate() {
 	var customer = $("select[name='customer']");
@@ -580,122 +764,3 @@ function show_help_2(img, help_id, shift) {
 			}
 		});
 }
-
-var validationRules = {
-	name: {
-		required: true
-	},
-	surname: {
-		required: true
-	},
-	EMAIL: {
-		required: true,
-		email: true
-	},
-	inn: {
-		required: true,
-		minlength: function () {
-			$customerInputValue = $orderForm.$customerSelect.val()+'';
-			if ($customerInputValue === '1') {
-				return 12
-			} else if ($customerInputValue === '2') {
-				return 10
-			}
-		},
-		maxlength: function () {
-			$customerInputValue = $orderForm.$customerSelect.val()+'';
-			if ($customerInputValue === '1') {
-				return 12
-			} else if ($customerInputValue === '2') {
-				return 10
-			}
-		}
-	},
-	adress: {
-		required: true
-	},
-	phone: {
-		required: true
-	},
-	organisation: {
-		required: true
-	},
-	kpp: {
-		required: true
-	},
-	jaddress: {
-		required: true
-	},
-	postaladdress: {
-		required: true
-	},
-	bank: {
-		required: true
-	},
-	gendir: {
-		required: true
-	}
-}
-
-var validationCommonMessages = {
-	required: "Это поле обязательно для заполнения."
-}
-var validationMessages = {
-	name: {
-		required: validationCommonMessages.required
-	},
-	surname: {
-		required: validationCommonMessages.required
-	},
-	EMAIL: {
-		required: validationCommonMessages.required,
-		email: 'Пожалуйста, введите валидный e-mail адрес.'
-	},
-	inn: {
-		required: validationCommonMessages.required,
-		minlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.'),
-		maxlength: $.validator.format('Длинна ИНН должна быть {0} сомволов.')
-	},
-	adress: {
-		required: validationCommonMessages.required
-	},
-	phone: {
-		required: validationCommonMessages.required
-	},
-	organisation: {
-		required: validationCommonMessages.required
-	},
-	kpp: {
-		required: validationCommonMessages.required
-	},
-	jaddress: {
-		required: validationCommonMessages.required
-	},
-	postaladdress: {
-		required: validationCommonMessages.required
-	},
-	bank: {
-		required: validationCommonMessages.required
-	},
-	gendir: {
-		required: validationCommonMessages.required
-	}
-}
-
-
-//required – Makes the element required.
-//remote – Requests a resource to check the element for validity.
-//minlength – Makes the element require a given minimum length.
-//maxlength – Makes the element require a given maxmimum length.
-//rangelength – Makes the element require a given value range.
-//min – Makes the element require a given minimum.
-//max – Makes the element require a given maximum.
-//range – Makes the element require a given value range.
-//email – Makes the element require a valid email
-//url – Makes the element require a valid url
-//date – Makes the element require a date.
-//dateISO – Makes the element require an ISO date.
-//number – Makes the element require a decimal number.
-//digits – Makes the element require digits only.
-//creditcard – Makes the element require a credit card number.
-//equalTo – Requires the element to be the same as another one

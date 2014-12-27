@@ -899,7 +899,8 @@ function customers_order($array) {
 			$total_cost += $v['cart_prod_quant'] * $v['cart_prod_price'];
 		}
 		$html .= '</table>';
-		$html .= '<p><b>Итого: ' . $total_cost . ' руб.</b></p>';
+		$html .= '<p class="delivery-price warning hidden">+Доставка <span class="value"></span> руб.</p>
+			<p class="total-cost"><b>Итого: <span class="value">' . $total_cost . '</span> руб.</b></p>';
 		$html .= '<script type="text/javascript">
 			window.kryotherm || (window.kryotherm = {});
 			window.kryotherm.total_cost =' . $total_cost . '
@@ -910,8 +911,17 @@ function customers_order($array) {
 }
 
 //  вывод товара, в письме
-function letter_data($array) {
+function letter_data($array, &$send_data) {
 	$header = products_header_data();
+
+	if (is_array($send_data)) {
+		if (!empty($send_data['delivery_price'])) {
+			$deliverPrice = $send_data['delivery_price'];
+		} else {
+			$deliverPrice = null;
+		}
+
+	}
 
 	$html .= '<table border="1"><tr>';
 	if (is_array($header)) foreach ($header as $k => $v) {
@@ -944,6 +954,11 @@ function letter_data($array) {
 		$total_cost += $v['cart_prod_quant'] * $v['cart_prod_price'];
 	}
 	$html .= '</table>';
+
+	if (!empty($deliverPrice)) {
+		$total_cost+=$deliverPrice;
+	}
+
 	$html .= '<p><b>Итого: ' . $total_cost . ' руб.</b></p>';
 
 	return $html;
@@ -968,6 +983,9 @@ function order_data_definer() {
 		'adress' => 'Адрес грузополучателя',
 		'name' => 'Имя',
 		'mail' => 'E-mail',
+		'order_date' => 'Дата и время заказа',
+		'district' => 'Округ',
+		'delivery_price' => 'Стоимость доставки',
 		'ORDER' => 'Номер заказа'
 	);
 }
@@ -1023,12 +1041,16 @@ function process_values(&$item, $key) {
 function get_order_form($array, $customer) {
 //
 	if (!is_arr($array)) {
-		$html .= "Пустой заказ";
+		$html .= 'Пустой заказ';
 	} else {
-		$html .= "<div style='height: 54px'>
-			<a href='/'>В каталог</a> > <a href='/cart.php'>Корзина</a> > <a href='/cart.php&exec_order=form' class='active'>Подтверждение заказа</a>
+		$html .= '<div style="height: 54px">
+			<a href="/">В каталог</a> > <a href="/cart.php">Корзина</a> > <a href="/cart.php&exec_order=form" class="active">Подтверждение заказа</a>
 		</div>
-		<h1>Ваш заказ</h1>" . customers_order($array);
+		<h1>Ваш заказ</h1>' . customers_order($array) .'
+
+		</br>
+		<div><a href="/index.php?page_id=25" title="Схема оплаты">Схема оплаты</a></div>
+		<div><a href="/index.php?page_id=2" title="Доставка товара">Доставка товара</a></div>';
 
 		include(CATALOG_SCRIPT_DIR . 'order_form.php');
 	}
@@ -1088,7 +1110,13 @@ function exec_order_form($mail, $send_data, &$order_data) {
 		if (!empty($send_data['shipping'])) {
 			$messageForCustomer .= "<p>Способ доставки: " . $send_data['shipping'];
 		}
-		$messageForCustomer = $messageForCustomer . "</p><p>Ваш заказ:</p>" . letter_data($order_data);
+		if (!empty($send_data['district'])) {
+			$messageForCustomer .= "<p>Округ: " . $send_data['district'];
+		}
+		if (!empty($send_data['delivery_price'])) {
+			$messageForCustomer .= "<p>Стоимость доставки: " . $send_data['delivery_price'];
+		}
+		$messageForCustomer = $messageForCustomer . "</p><p>Ваш заказ:</p>" . letter_data($order_data,$send_data);
 
 		$mail->AddAddress($send_data['mail']);
 		$mail->From = SHOP_EMAIL;
@@ -1121,11 +1149,10 @@ function exec_order_form($mail, $send_data, &$order_data) {
 
 
 		$messageForManager = "<p>С сайта " . $_SERVER['HTTP_HOST'] . " поступил заказ номер " . $send_data['ORDER'] . ":</p>
-	" . letter_data($order_data) .
+	" . letter_data($order_data,$send_data) .
 			"<p>Заказчик: " . $customer . "</p>
 	<p>" . $customer_data . "</p>";
 
-		$mail->AddAddress('zolotarev1anton@gmail.com');
 		$mail->AddAddress('bullwinkle321@me.com');
 //		$mail->AddAddress(SHOP_EMAIL);
 		$mail->From = $send_data['mail'];

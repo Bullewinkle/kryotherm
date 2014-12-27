@@ -5,13 +5,48 @@ $html .= '<script type="text/javascript">
 	window.kryotherm.customer =' . json_encode($customer) . '
 </script>';
 
-$html .= '<br /><h2>Ваши данные:</h2>
+/*
+ * КАК ИСПОЛЬЗОВАТЬ:
+ *
+ * ВСЯ ФОРМА УПРАВЛЯЕТСЯ CSS - КЛАССАМИ!
+ *
+ * css class-ы, контролирующие показ:
+ * 	для родителя input-a:
+ * 		individual-person-input - показывать для физических лиц
+ * 		legal-person-input  - показывать для юридических лиц
+ * 		common-input - показывать для юридических и физических лиц
+ *
+ * css class-ы, контролирующие отправку данных:
+ * 	для самого input-a:
+ * 		payment-data - данные, необходимые для оплаты, отправляются в платежный шлюз
+ * 		customer-data - данные о клиенте и его заказе, отправляются на сервак, сохраняются там в сессию, и затем берутся от туда, для отправки email сообщений.
+ * */
 
+
+$html .= '<br /><h2>Ваши данные:</h2>
 <form class="form order-form js-place-order-form '. (($customer == '1') ?'individual-person':'legal-person' ) .'" name="place-order" method="post" action="http://193.200.10.117:8080/cgi-bin/cgi_link">
 	<table width="100%" class="form-table">
 		<tbody>
 
 	<!-- ------------------------------------ DATA ABOUT CUSTOMER ------------------------------------- -->
+
+			<!-- ХЗ где, что и как показывать...
+			Способы доставки:
+			1. Major express срок доставки от 2х до 5ти дней
+				1) Северо-Западный федеральный округ +900р к стоимости заказа
+				2) Центральный федеральный округ +800р к стоимости заказа
+				3) Южный федеральный округ +1000р к стоимости заказа
+				4) Поволжский федеральный округ +800р к стоимости заказа
+				5) Уральский федеральный округ +800р к стоимости заказа
+				6) Сибирский федеральный округ +1100р к стоимости заказа
+				7) Дальневосточный федеральный округ +800р к стоимости заказа
+			         
+			2. Автотрэйдинг Срок доставки от 2х недель +450р к стоимости заказа
+			3. Деловые линии Срок доставки от 2х недель +450р к стоимости заказа
+			4. Почта России Срок доставки от 3х недель +250р к стоимости заказа
+			5. Самовывоз
+			-->
+
 
 			<tr class="common-input">
 				<td class="label" width="30%">Заказчик:</td>
@@ -22,21 +57,34 @@ $html .= '<br /><h2>Ваши данные:</h2>
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td class="label">Способ доставки:</td>
+			<tr class="common-input">
+				<td class="label">Способ доставки: <span class="active">*</span></td>
 				<td>
 					<select class="customer-data" size="1" name="shipping">
 						<option value=""> --- </option>
-						<option value="СПСР-Экспресс">СПСР-Экспресс</option>
-						<option value="Грузовозов">Грузовозов</option>
-						<option value="Автотрейдинг">Автотрейдинг</option>
-						<option value="Почта России">Почта России</option>
-						<option value="Самовывоз">Самовывоз</option>
-						<option value="Другое">Другое</option>
+						<option data-price="" value="Major express">Major express</option>
+						<option data-price="450" value="Автотрейдинг">Автотрейдинг</option>
+						<option data-price="450" value="Деловые линии">Деловые линии</option>
+						<option data-price="250" value="Почта России">Почта России</option>
+						<option data-price="" value="Самовывоз">Самовывоз</option>
+					</select>
+					<select class="customer-data hidden" size="1" name="district">
+						<option value="">Выберите округ:</option>
+						<option data-price="900" value="Северо-Западный федеральный округ">Северо-Западный федеральный округ</option>
+						<option data-price="800" value="Центральный федеральный округ">Центральный федеральный округ</option>
+						<option data-price="1000" value="Южный федеральный округ">Южный федеральный округ</option>
+						<option data-price="800" value="Поволжский федеральный округ">Поволжский федеральный округ</option>
+						<option data-price="800" value="Уральский федеральный округ">Уральский федеральный округ</option>
+						<option data-price="1100" value="Сибирский федеральный округ">Сибирский федеральный округ</option>
+						<option data-price="800" value="Дальневосточный федеральный округ">Дальневосточный федеральный округ</option>
 					</select>
 				</td>
+				<div class="delivery-period"></div>
 			</tr>
-
+			<tr class="common-input hidden">
+				<td class="label">Доставка:</td>
+				<td><input type="text" class="customer-data" id="delivery_price" name="delivery_price"/></td>
+			</tr>
 			<tr class="individual-person-input"> <!-- ФИЗИЧЕСКОЕ ЛИЦО -->
 				<td class="label">Имя: <span class="active">*</span></td>
 				<td><input class="customer-data" name="name" type="text" value=""></td>
@@ -55,7 +103,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 			</tr>
 			<tr class="common-input"> <!-- ОБЩИЕ -->
 				<td class="label">ИНН: <span class="active">*</span></td>
-				<td><input class="customer-data " name="inn" type="text" value=""></td>
+				<td><input class="customer-data" name="inn" type="text" value=""></td>
 			</tr>
 			<tr class="legal-person-input"> <!-- ЮРИДИЧЕСКОЕ ЛИЦО -->
 				<td class="label">КПП: <span class="active">*</span></td>
@@ -176,6 +224,11 @@ $html .= '<br /><h2>Ваши данные:</h2>
 				<td colspan="2" class="vam">
 					<span class="active">*</span> &mdash; поля обязательные для заполнения.
 				</td>
+			</tr>
+
+			<tr class="common-input hidden">
+				<td class="label">Время и дата:</td>
+				<td><input type="text" class="customer-data" id="order_date" name="order_date"/></td>
 			</tr>
 			<tr>
 				<td></td>
