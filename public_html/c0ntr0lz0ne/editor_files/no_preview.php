@@ -8,7 +8,7 @@ include_once ('./lang/'.$lang_include);
 <html>
 <head>
 <title>Untitled</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <head>
 <style type="text/css">

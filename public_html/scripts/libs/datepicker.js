@@ -1,12 +1,12 @@
 var datePickerDivID = "datepicker";
 var iFrameDivID = "datepickeriframe";
 
-var dayArrayShort = new Array('Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб');
+var dayArrayShort = new Array('Р’СЃ', 'РџРЅ', 'Р’С‚', 'РЎСЂ', 'Р§С‚', 'РџС‚', 'РЎР±');
 var dayArrayMed = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 var dayArrayLong = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var monthArrayShort = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
 var monthArrayMed = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec');
-var monthArrayLong = new Array('Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь');
+var monthArrayLong = new Array('РЇРЅРІР°СЂСЊ', 'Р¤РµРІСЂР°Р»СЊ', 'РњР°СЂС‚', 'РђРїСЂРµР»СЊ', 'РњР°Р№', 'РСЋРЅСЊ', 'РСЋР»СЊ', 'РђРІРіСѓСЃС‚', 'РЎРµРЅС‚СЏР±СЂСЊ', 'РћРєС‚СЏР±СЂСЊ', 'РќРѕСЏР±СЂСЊ', 'Р”РµРєР°Р±СЂСЊ');
 
 
 var defaultDateSeparator = "/"; // common values would be "/" or "."
@@ -126,9 +126,9 @@ var xTABLE = "</table>" + crlf;
  // this is the title bar, which displays the month and the buttons to
  // go back to a previous month or forward to the next month
  html += TR_title;
- html += TD_buttons + getButtonCode(dateFieldName, thisDay, -12, "&lt;&lt;","Год назад") + '<br />' + getButtonCode(dateFieldName, thisDay, -1, "&lt;","Месяц назад") + xTD;
+ html += TD_buttons + getButtonCode(dateFieldName, thisDay, -12, "&lt;&lt;","Р“РѕРґ РЅР°Р·Р°Рґ") + '<br />' + getButtonCode(dateFieldName, thisDay, -1, "&lt;","РњРµСЃСЏС† РЅР°Р·Р°Рґ") + xTD;
  html += TD_title + DIV_title + monthArrayLong[ thisDay.getMonth()] + " " + thisDay.getFullYear() + xDIV + xTD;
- html += TD_buttons + getButtonCode(dateFieldName, thisDay, 12, "&gt;&gt;","Год вперед") + '<br />' + getButtonCode(dateFieldName, thisDay, 1, "&gt;","Месяц вперед") + xTD;
+ html += TD_buttons + getButtonCode(dateFieldName, thisDay, 12, "&gt;&gt;","Р“РѕРґ РІРїРµСЂРµРґ") + '<br />' + getButtonCode(dateFieldName, thisDay, 1, "&gt;","РњРµСЃСЏС† РІРїРµСЂРµРґ") + xTD;
  html += xTR;
 
  // this is the row that indicates which day of the week we're on
@@ -173,8 +173,8 @@ var xTABLE = "</table>" + crlf;
  var today = new Date();
  var todayString = "Today is " + dayArrayMed[today.getDay()] + ", " + monthArrayMed[ today.getMonth()] + " " + today.getDate();
  html += TR_todaybutton + TD_todaybutton;
- html += "<button class='dpTodayButton' onClick='refreshDatePicker(\"" + dateFieldName + "\");'>Текущая дата</button> ";
- html += "<button class='dpTodayButton' onClick='updateDateField(\"" + dateFieldName + "\");'>Закрыть</button>";
+ html += "<button class='dpTodayButton' onClick='refreshDatePicker(\"" + dateFieldName + "\");'>РўРµРєСѓС‰Р°СЏ РґР°С‚Р°</button> ";
+ html += "<button class='dpTodayButton' onClick='updateDateField(\"" + dateFieldName + "\");'>Р—Р°РєСЂС‹С‚СЊ</button>";
  html += xTD + xTR;
 
  // and finally, close the table

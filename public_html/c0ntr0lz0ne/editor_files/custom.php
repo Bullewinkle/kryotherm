@@ -8,7 +8,7 @@ include_once ('./lang/'.$lang_include);
 <html>
 <head>
 <title><?php echo $lang['titles']['custom']; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script language="JavaScript" type="text/javascript" src="<?php echo WP_WEB_DIRECTORY; ?>js/dialogEditorShared.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo WP_WEB_DIRECTORY; ?>js/dialogShared.js"></script>
 <script type="text/javascript" language="JavaScript">

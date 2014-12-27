@@ -14,7 +14,7 @@ if (defined('SMILEY_FILE_DIRECTORY') && defined('SMILEY_WEB_DIRECTORY')) {
 <html>
 <head>
 <title><?php echo $lang['titles']['smileys']; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 <!--
 @import url(<?php echo WP_WEB_DIRECTORY; ?>dialoge_theme.css);

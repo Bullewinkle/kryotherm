@@ -4,7 +4,7 @@
 
 /*
  NOTE: when creating language files make sure that any non-english characters or special characters are written as SGML character codes, 
- e.g. you should use &auml; rather than ไ
+ e.g. you should use &auml; rather than ะด
 */
 
 $lang = array();

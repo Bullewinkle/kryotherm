@@ -3,7 +3,7 @@
 By Oliver Bryant
 http://calendar.swazz.org
 
-говорить по русски научили на
+РіРѕРІРѕСЂРёС‚СЊ РїРѕ СЂСѓСЃСЃРєРё РЅР°СѓС‡РёР»Рё РЅР°
 http://zaandr.ru */
 
 function getObj(objID)
@@ -64,7 +64,7 @@ function Top(obj)
 
 document.write('<table id="fc" style="position:absolute;border-collapse:collapse;background:#FFFFFF;border:1px solid #cccccc;display:none" cellpadding=2>');
 document.write('<tr><td style="cursor:pointer" onclick="csubm()"><<</td><td colspan=5 id="mns" align="center" style="font:bold 13px Arial"></td><td align="right" style="cursor:pointer" onclick="caddm()">>></td></tr>');
-document.write('<tr><td align=center style="background:#f0f1ec;font:12px Arial">Пн</td><td align=center style="background:#f0f1ec;font:12px Arial">Вт</td><td align=center style="background:#f0f1ec;font:12px Arial">Ср</td><td align=center style="background:#f0f1ec;font:12px Arial">Чт</td><td align=center style="background:#f0f1ec;font:12px Arial">Пт</td><td align=center style="background:#f0f1ec;font:12px Arial">Сб</td><td align=center style="background:#f0f1ec;font:12px Arial">Вс</td></tr>');
+document.write('<tr><td align=center style="background:#f0f1ec;font:12px Arial">РџРЅ</td><td align=center style="background:#f0f1ec;font:12px Arial">Р’С‚</td><td align=center style="background:#f0f1ec;font:12px Arial">РЎСЂ</td><td align=center style="background:#f0f1ec;font:12px Arial">Р§С‚</td><td align=center style="background:#f0f1ec;font:12px Arial">РџС‚</td><td align=center style="background:#f0f1ec;font:12px Arial">РЎР±</td><td align=center style="background:#f0f1ec;font:12px Arial">Р’СЃ</td></tr>');
 for(var kk=1;kk<=6;kk++) {
 	document.write('<tr>');
 	for(var tt=1;tt<=7;tt++) {
@@ -129,7 +129,7 @@ function cs_click(e) {
 
 }
 
-var mn=new Array('Янв','Фев','Март','Апр','Май','Июнь','Июль','Авг','Сен','Окт','Ноя','Дек');
+var mn=new Array('РЇРЅРІ','Р¤РµРІ','РњР°СЂС‚','РђРїСЂ','РњР°Р№','РСЋРЅСЊ','РСЋР»СЊ','РђРІРі','РЎРµРЅ','РћРєС‚','РќРѕСЏ','Р”РµРє');
 var mnn=new Array('31','28','31','30','31','30','31','31','30','31','30','31');
 var mnl=new Array('31','29','31','30','31','30','31','31','30','31','30','31');
 var calvalarr=new Array(42);

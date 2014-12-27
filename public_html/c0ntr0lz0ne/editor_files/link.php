@@ -7,7 +7,7 @@ include_once ('./lang/'.$lang_include);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo $lang['titles']['hyperlink']; ?></title>
 <style type="text/css">
 <!--
@@ -63,7 +63,7 @@ p {
 
 
 <?
-function convert_unicode($t, $to = 'windows-1251')
+function convert_unicode($t, $to = 'utf-8')
 {
         $t = preg_replace( '#%u([0-9A-F]{1,4})#ie', "'&#' . hexdec('\\1') . ';'", $t );
         $t = urldecode ($t);

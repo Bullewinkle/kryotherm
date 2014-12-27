@@ -179,7 +179,7 @@ function image_exit($message) {
   global $lang;
   echo '<html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>'.$lang['titles']['image'].'</title>
     <link rel="stylesheet" href="'.WP_WEB_DIRECTORY.'dialoge_theme.css" type="text/css">
     <script language="JavaScript" type="text/javascript" src="'.WP_WEB_DIRECTORY.'js/dialogShared.js"></script>
@@ -657,7 +657,7 @@ if (isset($_FILES['image_field']) ? $_FILES['image_field'] : '') {
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo $lang['titles']['image']; ?></title>
 <link rel="stylesheet" href="<?php echo WP_WEB_DIRECTORY; ?>dialoge_theme.css" type="text/css">
 <style type="text/css">

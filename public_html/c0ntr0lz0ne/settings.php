@@ -70,14 +70,14 @@ $auth->Authorizate();
  <tr>
   <td width=150><img src="images/settings-m.jpg" width=120 height=120></td>
   <td align="left" valign=top width="100%">
-      <h1>Настройки</h1>
-        <div <?=(($case == 'common')?'class="button3"':'class="button2"')?> ><a href="?action=settings&case=common" title="">Общие</a></div>
-        <div <?=(($case == 'pages')?'class="button3"':'class="button2"')?> ><a href="?action=settings&case=pages" title="">Страницы</a></div>
+      <h1>РќР°СЃС‚СЂРѕР№РєРё</h1>
+        <div <?=(($case == 'common')?'class="button3"':'class="button2"')?> ><a href="?action=settings&case=common" title="">РћР±С‰РёРµ</a></div>
+        <div <?=(($case == 'pages')?'class="button3"':'class="button2"')?> ><a href="?action=settings&case=pages" title="">РЎС‚СЂР°РЅРёС†С‹</a></div>
 
-<? if($modules->isModuleInstall('news')){ ?> <div <?=(($case == 'news')?'class="button3"':'class="button2"')?><a href="?action=settings&case=news" title="">Новости</a></div> <? } ?>
-<? if($modules->isModuleInstall('catalog')){ ?> <div <?=(($case == 'catalog')?'class="button3"':'class="button2"')?><a href="?action=settings&case=catalog" title="">Каталог</a></div> <? } ?>
-<? if($modules->isModuleInstall('gallery')){ ?> <div <?=(($case == 'gallery')?'class="button3"':'class="button2"')?><a href="?action=settings&case=gallery" title="">Галерея</a></div> <? } ?>
-<? if($modules->isModuleInstall('banners')){ ?> <div <?=(($case == 'banners')?'class="button3"':'class="button2"')?><a href="?action=settings&case=banners" title="">Баннеры</a></div> <? } ?>
+<? if($modules->isModuleInstall('news')){ ?> <div <?=(($case == 'news')?'class="button3"':'class="button2"')?><a href="?action=settings&case=news" title="">РќРѕРІРѕСЃС‚Рё</a></div> <? } ?>
+<? if($modules->isModuleInstall('catalog')){ ?> <div <?=(($case == 'catalog')?'class="button3"':'class="button2"')?><a href="?action=settings&case=catalog" title="">РљР°С‚Р°Р»РѕРі</a></div> <? } ?>
+<? if($modules->isModuleInstall('gallery')){ ?> <div <?=(($case == 'gallery')?'class="button3"':'class="button2"')?><a href="?action=settings&case=gallery" title="">Р“Р°Р»РµСЂРµСЏ</a></div> <? } ?>
+<? if($modules->isModuleInstall('banners')){ ?> <div <?=(($case == 'banners')?'class="button3"':'class="button2"')?><a href="?action=settings&case=banners" title="">Р‘Р°РЅРЅРµСЂС‹</a></div> <? } ?>
   </td>
  </tr>
  <tr><td height="5" colspan="3"><div style="background: transparent url(images/points.gif) repeat-x scroll center top; height: 5px; width: 100%;">&nbsp;</div></td></tr>
@@ -89,19 +89,19 @@ $auth->Authorizate();
  <tr><td colspan="3">
 <form name="settings" action="/c0ntr0lz0ne/index.php?action=settings&case=<?=$case;?><?=(!empty($mod)?'&mod='.$mod:'')?><?=(!empty($constId)?'&constId='.$constId:'')?>" method="post">
   <table width="100%" class="settings" id="dataTable">
-   <tr><th class="tal" >Имя константы</th><th width="33%">Описание</th>
-       <th>Значение</th>
+   <tr><th class="tal" >РРјСЏ РєРѕРЅСЃС‚Р°РЅС‚С‹</th><th width="33%">РћРїРёСЃР°РЅРёРµ</th>
+       <th>Р—РЅР°С‡РµРЅРёРµ</th>
        <th width="200">
            <input name="parameter" type="radio" value="" <?=(empty($addition)?'checked':'')?> >NONE &nbsp;
            <input name="parameter" type="radio" value="'.$_SERVER['DOCUMENT_ROOT'].'/" <?=(($addition == 1)?'checked':'')?> >PAHT &nbsp;
            <input name="parameter" type="radio" value="http://'.$_SERVER['SERVER_NAME'].'/" <?=(($addition == 2)?'checked':'')?> >URL
        </th>
-       <th colspan="2">Действия</th></tr>
+       <th colspan="2">Р”РµР№СЃС‚РІРёСЏ</th></tr>
 
    <tr><td><input style="width: 100%" name="constName" type="text" value="<?=$name[0];?>"></td>
        <td><input style="width: 100%" name="constDescr" type="text" value="<?=$descr[0];?>"></td>
        <td colspan="2"><input style="width: 100%" name="constVal" type="text" value="<?=$value[0];?>"></td>
-       <td class="tac" colspan="2"><input type="Submit" value="Применить"></td>
+       <td class="tac" colspan="2"><input type="Submit" value="РџСЂРёРјРµРЅРёС‚СЊ"></td>
 
    <?=$settings->constantsList($case);?>
   </table>

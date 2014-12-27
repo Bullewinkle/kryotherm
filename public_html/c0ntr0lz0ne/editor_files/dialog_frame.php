@@ -18,7 +18,7 @@ if (isset($lang['titles'][$title])) {
 <html>
 <head>
 <title><?php echo $title; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<?php echo WP_WEB_DIRECTORY; ?>dialoge_theme.css" type="text/css">
 <style type="text/css">
 body {
