@@ -6,4 +6,9 @@ RewriteCond %{REQUEST_FILENAME}       !-s
 RewriteRule ^(.*)$ /translater.php?request_url=/$1 [L]
 
 
-AddDefaultCharset utf8
+AddDefaultCharset utf-8
+AddCharset utf-8 *
+<IfModule mod_charset.c>
+    CharsetSourceEnc utf-8
+    CharsetDefault utf-8
+</IfModule>
