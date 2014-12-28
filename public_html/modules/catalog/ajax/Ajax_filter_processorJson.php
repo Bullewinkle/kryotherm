@@ -20,7 +20,7 @@
     ob_clean();
     include(CATALOG_SCRIPT_DIR.'filter_html.php');
     $json = array(
-        'response' => iconv('utf-8', 'utf-8', str_replace("\r", "", preg_replace('/\s{2,}/', ' ', ob_get_clean())))
+        'response' => str_replace("\r", "", preg_replace('/\s{2,}/', ' ', ob_get_clean()))
     );
 
     print json_encode($json);

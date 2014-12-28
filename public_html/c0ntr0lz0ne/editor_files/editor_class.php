@@ -454,7 +454,7 @@ class wysiwygPro {
 	 
 	*/
 	
-	function set_encoding($encoding="iso-8859-1") {
+	function set_encoding($encoding="UTF-8") {
 		if ($this->has_expired) {
 			if (isset ($encoding) ? $encoding : '') {
 				$this->encoding = $encoding;

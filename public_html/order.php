@@ -27,9 +27,9 @@
       $filter = new catalog_filter($auth, $idCat);
   }
 
-   mysql_query('SET NAMES utf-8');
-   mysql_query('SET CHARACTER SET utf-8');
-   mysql_query('SET COLLATION_CONNECTION=utf-8_general_ci');
+   mysql_query('SET NAMES utf8');
+   mysql_query('SET CHARACTER SET utf8');
+   mysql_query('SET COLLATION_CONNECTION=utf8_general_ci');
 
 
 

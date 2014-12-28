@@ -1154,7 +1154,7 @@ function exec_order_form($mail, $send_data, &$order_data) {
 	<p>" . $customer_data . "</p>";
 
 		$mail->AddAddress('bullwinkle321@me.com');
-//		$mail->AddAddress(SHOP_EMAIL);
+		$mail->AddAddress(SHOP_EMAIL);
 		$mail->From = $send_data['mail'];
 		$mail->FromName = SHOP_NAME;
 		$mail->AddReplyTo($send_data['mail']);

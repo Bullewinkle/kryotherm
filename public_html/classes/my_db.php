@@ -18,8 +18,8 @@ class CMyDB
 
         // выбор БД
         mysql_select_db($db, $this->link) or die("Could not select database");
-        mysql_query('SET NAMES utf-8');
-        mysql_query('SET CHARACTER SET utf-8');
+        mysql_query('SET NAMES utf8');
+        mysql_query('SET CHARACTER SET utf8');
         mysql_query('SET COLLATION_CONNECTION=utf8_general_ci');
     }
 
