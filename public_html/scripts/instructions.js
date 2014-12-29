@@ -332,6 +332,7 @@ $(function () {
 		//checkShippingValue.call($shippingSelect[0], $shippingSelect[0].value);
 		//checkDistrictValue.call($districtSelect[0], $districtSelect[0].value);
 		AMOUNT.value = window.kryotherm.total_amount;
+		BACKREF.value = window.location.origin + BACKREF.value
 		order_date.value = getDateString();
 
 		generateHMAC();

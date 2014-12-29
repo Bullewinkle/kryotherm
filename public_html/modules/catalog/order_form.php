@@ -158,7 +158,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 			</tr>
 			<tr class="hidden">
 				<td class="label">AMOUNT:</td>
-				<td><input class="payment-data" name="AMOUNT" id="AMOUNT" type="text" value="20"/></td>
+				<td><input class="payment-data" name="AMOUNT" id="AMOUNT" type="text" value=""/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">CURRENCY:</td>
@@ -190,7 +190,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 			</tr>
 			<tr class="hidden">
 				<td class="label">BACKREF:</td>
-				<td><input class="payment-data" name="BACKREF" id="BACKREF" type="text" value="http://kryotherm.hol.es/cart.php&exec_order=send"/></td>
+				<td><input class="payment-data" name="BACKREF" id="BACKREF" type="text" value="/cart.php&exec_order=send"/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">KEY:</td>
@@ -198,7 +198,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 			</tr>
 			<tr class="hidden">
 				<td class="label">TIMESTAMP:</td>
-				<td><input class="payment-data" name="TIMESTAMP" id="TIMESTAMP" type="text" value="20141216090758"/></td>
+				<td><input class="payment-data" name="TIMESTAMP" id="TIMESTAMP" type="text" value=""/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">MAC_DATA:</td>
