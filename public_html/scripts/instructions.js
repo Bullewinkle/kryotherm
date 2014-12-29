@@ -273,12 +273,12 @@ $(function () {
 			$districtSelect.addClass('hidden');
 		}
 		if (deliveryPrice) {
-			$deliveryPrice.removeClass('hidden').find('.value').text(deliveryPrice);
+			$deliveryPrice.find('.value').text(deliveryPrice);
 			$totalPrice.find('.value').text(kryotherm.total_cost+deliveryPrice);
 			window.kryotherm.total_amount = kryotherm.total_cost+deliveryPrice;
 			delivery_price.value = deliveryPrice;
 		} else {
-			$deliveryPrice.addClass('hidden');
+			$deliveryPrice.find('.value').text('0');
 			$totalPrice.find('.value').text(kryotherm.total_cost);
 			window.kryotherm.total_amount = kryotherm.total_cost;
 			delivery_price.value = '';
@@ -288,12 +288,12 @@ $(function () {
 		var deliveryPrice = $(this.selectedOptions[0]).data('price');
 
 		if (deliveryPrice) {
-			$deliveryPrice.removeClass('hidden').find('.value').text(deliveryPrice);
+			$deliveryPrice.find('.value').text(deliveryPrice);
 			$totalPrice.find('.value').text(kryotherm.total_cost+deliveryPrice);
 			window.kryotherm.total_amount = kryotherm.total_cost+deliveryPrice;
 			delivery_price.value = deliveryPrice;
 		} else {
-			$deliveryPrice.addClass('hidden');
+			$deliveryPrice.find('.value').text('0');
 			$totalPrice.find('.value').text(kryotherm.total_cost);
 			window.kryotherm.total_amount = kryotherm.total_cost;
 			delivery_price.value = '';

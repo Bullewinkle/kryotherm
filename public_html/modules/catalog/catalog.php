@@ -899,7 +899,7 @@ function customers_order($array) {
 			$total_cost += $v['cart_prod_quant'] * $v['cart_prod_price'];
 		}
 		$html .= '</table>';
-		$html .= '<p class="delivery-price warning hidden">+Доставка <span class="value"></span> руб.</p>
+		$html .= '<p class="delivery-price warning">+Доставка <span class="value">0</span> руб.</p>
 			<p class="total-cost"><b>Итого: <span class="value">' . $total_cost . '</span> руб.</b></p>';
 		$html .= '<script type="text/javascript">
 			window.kryotherm || (window.kryotherm = {});
@@ -1049,7 +1049,7 @@ function get_order_form($array, $customer) {
 		<h1>Ваш заказ</h1>' . customers_order($array) .'
 
 		</br>
-		<div><a href="/index.php?page_id=25" title="Схема оплаты">Схема оплаты</a></div>
+		<div><a href="/index.php?page_id=23" title="Схема оплаты">Схема оплаты</a></div>
 		<div><a href="/index.php?page_id=2" title="Доставка товара">Доставка товара</a></div>';
 
 		include(CATALOG_SCRIPT_DIR . 'order_form.php');

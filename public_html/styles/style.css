@@ -322,3 +322,8 @@ div#help_holder { position: relative; }
 .individual-person .legal-person-input {display: none;}
 .legal-person .legal-person-input {display: table-row;}
 .legal-person .individual-person-input {display: none;}
+
+.delivery-price {
+	font-weight: 600;
+	font-size: 14px;
+}
