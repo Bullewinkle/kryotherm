@@ -112,7 +112,7 @@ $html .= '<br />
 				<td class="label">Полное название организации: <span class="active">*</span></td>
 				<td><input class="customer-data" type="text" value="" name="organisation"></td>
 			</tr>
-			<tr class="common-input"> <!-- ОБЩИЕ -->
+			<tr class="legal-person-input"> <!-- ОБЩИЕ -->
 				<td class="label">ИНН: <span class="active">*</span></td>
 				<td><input class="customer-data" name="inn" type="text" value=""></td>
 			</tr>
