@@ -23,8 +23,9 @@ $html .= '<script type="text/javascript">
  * */
 
 
-$html .= '<br /><h2>Ваши данные:</h2>
+$html .= '<br />
 <form class="form order-form js-place-order-form '. (($customer == '1') ?'individual-person':'legal-person' ) .'" name="place-order" method="post" action="http://193.200.10.117:8080/cgi-bin/cgi_link">
+	<h2>Ваши данные:</h2>
 	<table width="100%" class="form-table">
 		<tbody>
 
@@ -57,6 +58,16 @@ $html .= '<br /><h2>Ваши данные:</h2>
 					</select>
 				</td>
 			</tr>
+			<tr class="common-input" hidden>
+				<td class="label">Способ оплаты:</td>
+				<td>
+					<select class="customer-data" name="payment_method" id="payment_method">
+						<!-- option value="online" ' . (($customer == 1) ? 'selected' : '') . '>Банковской картой</option -->
+						<!-- option value="offline" ' . (($customer == 2) ? 'selected' : '') . '>Выставление счета</option -->
+						<option value="offline" selected >Банковской картой</option>
+					</select>
+				</td>
+			</tr>
 			<tr class="common-input">
 				<td class="label">Способ доставки: <span class="active">*</span></td>
 				<td>
@@ -69,7 +80,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 						<option data-price="" value="Самовывоз">Самовывоз</option>
 					</select>
 					<select class="customer-data hidden" size="1" name="district">
-						<option value="">Выберите округ:</option>
+						<option value="" selected>Выберите округ:</option>
 						<option data-price="900" value="Северо-Западный федеральный округ">Северо-Западный федеральный округ</option>
 						<option data-price="800" value="Центральный федеральный округ">Центральный федеральный округ</option>
 						<option data-price="1000" value="Южный федеральный округ">Южный федеральный округ</option>
@@ -170,7 +181,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 			</tr>
 			<tr class="hidden">
 				<td class="label">TERMINAL:</td>
-				<td><input class="payment-data" name="TERMINAL" id="TERMINAL" type="text" value="79036829"/></td>
+				<td><input class="payment-data" name="TERMINAL" id="TERMINAL" type="text" value="25915201"/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">TRTYPE:</td>
@@ -178,11 +189,11 @@ $html .= '<br /><h2>Ваши данные:</h2>
 			</tr>
 			<tr class="hidden">
 				<td class="label">MERCH_NAME:</td>
-				<td><input class="payment-data" name="MERCH_NAME" id="MERCH_NAME" type="text" value="ECOGEN_TECHNOLOGY_TEST"/></td>
+				<td><input class="payment-data" name="MERCH_NAME" id="MERCH_NAME" type="text" value="ECOGEN_TECHNOLOGY"/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">MERCHANT:</td>
-				<td><input class="payment-data" name="MERCHANT" id="MERCHANT" type="text" value="790367686219999"/></td>
+				<td><input class="payment-data" name="MERCHANT" id="MERCHANT" type="text" value="000573225915201"/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">NONCE:</td>
@@ -237,6 +248,7 @@ $html .= '<br /><h2>Ваши данные:</h2>
 		</tbody>
 	</table>
 </form>
+<script type="text/javascript" src="/scripts/order_form.js"></script>
 <br />
 '
 
