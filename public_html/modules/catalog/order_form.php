@@ -8,6 +8,10 @@ $html .= '<script type="text/javascript">
 /*
  * КАК ИСПОЛЬЗОВАТЬ:
  *
+ * Action:
+ * 	для оплаты картой: https://3ds.payment.ru/cgi-bin/cgi_link
+ * 	для оплаты по счету: /cart.php&exec_order=send
+ *
  * ВСЯ ФОРМА УПРАВЛЯЕТСЯ CSS - КЛАССАМИ!
  *
  * css class-ы, контролирующие показ:
@@ -24,7 +28,7 @@ $html .= '<script type="text/javascript">
 
 
 $html .= '<br />
-<form class="form order-form js-place-order-form '. (($customer == '1') ?'individual-person':'legal-person' ) .'" name="place-order" method="post" action="http://193.200.10.117:8080/cgi-bin/cgi_link">
+<form class="form order-form js-place-order-form '. (($customer == '1') ?'individual-person':'legal-person' ) .'" name="place-order" method="post" action="https://3ds.payment.ru/cgi-bin/cgi_link">
 	<h2>Ваши данные:</h2>
 	<table width="100%" class="form-table">
 		<tbody>
@@ -58,13 +62,12 @@ $html .= '<br />
 					</select>
 				</td>
 			</tr>
-			<tr class="common-input" hidden>
+			<tr class="common-input">
 				<td class="label">Способ оплаты:</td>
 				<td>
 					<select class="customer-data" name="payment_method" id="payment_method">
-						<!-- option value="online" ' . (($customer == 1) ? 'selected' : '') . '>Банковской картой</option -->
-						<!-- option value="offline" ' . (($customer == 2) ? 'selected' : '') . '>Выставление счета</option -->
-						<option value="offline" selected >Банковской картой</option>
+						<option value="online" ' . (($customer == 1) ? 'selected' : '') . '>Банковской картой</option>
+						<option value="offline" ' . (($customer == 2) ? 'selected' : '') . '>Выставление счета</option>
 					</select>
 				</td>
 			</tr>
@@ -177,7 +180,7 @@ $html .= '<br />
 			</tr>
 			<tr class="hidden">
 				<td class="label">DESC:</td>
-				<td><input class="payment-data" name="DESC" id="DESC" type="text" value="Test product"/></td>
+				<td><input class="payment-data" name="DESC" id="DESC" type="text" value="Product"/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">TERMINAL:</td>
@@ -205,7 +208,7 @@ $html .= '<br />
 			</tr>
 			<tr class="hidden">
 				<td class="label">KEY:</td>
-				<td><input class="payment-data" name="KEY" id="KEY" type="text" value="C50E41160302E0F5D6D59F1AA3925C45"/></td>
+				<td><input class="payment-data" name="KEY" id="KEY" type="text" value="0A5C7CA49BD7F87674F84FDE15D285C0"/></td>
 			</tr>
 			<tr class="hidden">
 				<td class="label">TIMESTAMP:</td>
@@ -237,7 +240,7 @@ $html .= '<br />
 				</td>
 			</tr>
 
-			<tr class="common-input hidden">
+			<tr class="hiddencommon-input hidden">
 				<td class="label">Время и дата:</td>
 				<td><input type="text" class="customer-data" id="order_date" name="order_date"/></td>
 			</tr>

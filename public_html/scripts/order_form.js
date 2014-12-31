@@ -293,7 +293,7 @@ $(function () {
 	var checkPaymentValue = function () {
 		//TODO switch action of the form
 		if (this.value === 'online') {
-			orderForm.ui.$orderForm.attr('action', "http://193.200.10.117:8080/cgi-bin/cgi_link")
+			orderForm.ui.$orderForm.attr('action', "https://3ds.payment.ru/cgi-bin/cgi_link")
 		}
 		else if (this.value === 'offline') {
 			orderForm.ui.$orderForm.attr('action', "/cart.php&exec_order=send")
@@ -342,7 +342,7 @@ $(function () {
 		//checkShippingValue.call($shippingSelect[0], $shippingSelect[0].value);
 		//checkDistrictValue.call($districtSelect[0], $districtSelect[0].value);
 		AMOUNT.value = window.kryotherm.total_amount;
-		BACKREF.value = window.location.origin + BACKREF.value
+		BACKREF.value = window.location.origin + '/cart.php&exec_order=send';
 		order_date.value = getDateString();
 
 		generateHMAC();
