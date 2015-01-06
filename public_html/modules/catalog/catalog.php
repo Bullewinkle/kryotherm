@@ -1001,7 +1001,7 @@ function sort_array($array, $order, $mode = '') {
 	$field = str_replace($sort_type, '', $order);
 
 	if (is_array($array)) foreach ($array as $k => $v) {
-		if ($mode = 'compare') $v = compare_values($v);
+		if ($mode == 'compare') $v = compare_values($v);
 
 		$result[$k] = array_merge(array($field => $v[$field]), $v);
 	}
