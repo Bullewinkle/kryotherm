@@ -1029,11 +1029,11 @@ function prepare_keys(&$item, $key) {
 }
 
 function prepare_values(&$item, $key) {
-	$item = (string)$item . '+' . uniqid();
+	$item = (string)$item . ' +++' . uniqid();
 }
 
 function process_values(&$item, $key) {
-	$item = preg_replace('/^([A-Za-zА-Яа-я\d\s\-,\.\/\(\)]*)(\+\d+\w+)/i', '$1', $item);
+	$item = preg_replace('/\s\+\+\+\d+\w+/', '', $item);
 }
 
 /*  Форма подтверждения заказа
