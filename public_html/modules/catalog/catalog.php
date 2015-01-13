@@ -986,7 +986,8 @@ function order_data_definer() {
 		'order_date' => 'Дата и время заказа',
 		'district' => 'Округ',
 		'delivery_price' => 'Стоимость доставки',
-		'ORDER' => 'Номер заказа'
+		'ORDER' => 'Номер заказа',
+		'payment_method' => 'Способ оплаты'
 	);
 }
 
@@ -1106,6 +1107,13 @@ function exec_order_form($mail, $send_data, &$order_data) {
 			<p>Вы сделали заказ на сайте " . $_SERVER['HTTP_HOST'] . "</p>
 			<p>Номер заказа: " . $send_data['ORDER'] . "</p>";
 
+		}
+		if (!empty($send_data['payment_method'])) {
+			$payment_method_text = $send_data['payment_method'];
+			if ($send_data['payment_method'] == 'online') { $payment_method_text = 'банковской картой'; }
+			if ($send_data['payment_method'] == 'offline') { $payment_method_text = 'выставление счета'; }
+
+			$messageForCustomer .= "<p>Способ оплаты: " . $payment_method_text;
 		}
 		if (!empty($send_data['shipping'])) {
 			$messageForCustomer .= "<p>Способ доставки: " . $send_data['shipping'];
