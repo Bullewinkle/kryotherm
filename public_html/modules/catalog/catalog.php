@@ -1153,7 +1153,7 @@ function exec_order_form($mail, $send_data, &$order_data) {
 			"<p>Заказчик: " . $customer . "</p>
 	<p>" . $customer_data . "</p>";
 
-		$mail->AddAddress(SHOP_EMAIL);
+//		$mail->AddAddress(SHOP_EMAIL);
 		$mail->AddAddress('developer085@gmail.com');
 		$mail->From = $send_data['mail'];
 		$mail->FromName = SHOP_NAME;

@@ -1,6 +1,6 @@
                 </div>
-                <div class="rc" <?=($show_right?"style='display: none'":"")?>>        <!-- третья колонка, если нужна... -->
-                <ul><? include("menu/dop_menu.php"); ?></ul>
+                <div class="rc <?=($third_menu_horizontal?'third_menu_horizontal_wrapper':'')?>" <?=($show_right?"style='display: none'":"")?>>        <!-- третья колонка, если нужна... -->
+                    <ul class="third-menu <?=($third_menu_horizontal?'third_menu_horizontal':"")?>"><? include("menu/dop_menu.php"); ?></ul>
                 </div>
             </div>
         </div>
