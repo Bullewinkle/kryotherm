@@ -207,20 +207,22 @@ $(function () {
 
 	// -------------- HMAC GENERATOR USAGE --------------
 	var generateHMAC = function() {
-		ORDER.value = +(new Date());
-		TIMESTAMP.value = calc_timestamp();
-		MAC_DATA.value = tomacdata('AMOUNT') +
-		tomacdata('CURRENCY') +
-		tomacdata('ORDER') +
-		tomacdata('MERCH_NAME') +
-		tomacdata('MERCHANT') +
-		tomacdata('TERMINAL') +
-		tomacdata('EMAIL') +
-		tomacdata('TRTYPE') +
-		tomacdata('TIMESTAMP') +
-		tomacdata('NONCE') +
-		tomacdata('BACKREF');
-		P_SIGN.value = hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value);
+		$('[name=ORDER]').eq(0).val( +(new Date()) );
+		$('[name=TIMESTAMP]').eq(0).val( calc_timestamp() );
+		$('[name=MAC_DATA]').eq(0).val(
+			tomacdata('AMOUNT') +
+			tomacdata('CURRENCY') +
+			tomacdata('ORDER') +
+			tomacdata('MERCH_NAME') +
+			tomacdata('MERCHANT') +
+			tomacdata('TERMINAL') +
+			tomacdata('EMAIL') +
+			tomacdata('TRTYPE') +
+			tomacdata('TIMESTAMP') +
+			tomacdata('NONCE') +
+			tomacdata('BACKREF')
+		);
+		$('[name=P_SIGN]').eq(0).val( hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value) );
 
 	}
 	// ------------ END HMAC GENERATOR USAGE --------------
@@ -257,7 +259,8 @@ $(function () {
 		}
 	}
 	var checkShippingValue = function(shippingValue) {
-		var deliveryPrice = $(this.selectedOptions[0]).data('price');
+		var selectedOption =  $(this).find(':selected').eq(0);
+		var deliveryPrice = selectedOption.data('price');
 		if ( shippingValue === "Major express") {
 			orderForm.ui.$districtSelect.removeClass('hidden');
 		} else {
@@ -267,27 +270,28 @@ $(function () {
 			orderForm.ui.$deliveryPrice.find('.value').text(deliveryPrice);
 			orderForm.ui.$totalPrice.find('.value').text(kryotherm.total_cost+deliveryPrice);
 			window.kryotherm.total_amount = kryotherm.total_cost+deliveryPrice;
-			delivery_price.value = deliveryPrice;
+			$('[name=delivery_price]').eq(0).val(deliveryPrice);
 		} else {
 			orderForm.ui.$deliveryPrice.find('.value').text('0');
 			orderForm.ui.$totalPrice.find('.value').text(kryotherm.total_cost);
 			window.kryotherm.total_amount = kryotherm.total_cost;
-			delivery_price.value = '';
+			$('[name=delivery_price]').eq(0).val('');
 		}
 	}
 	var checkDistrictValue = function(districtValue) {
-		var deliveryPrice = $(this.selectedOptions[0]).data('price');
+		var selectedOption =  $(this).find(':selected').eq(0);
+		var deliveryPrice = selectedOption.data('price');
 
 		if (deliveryPrice) {
 			orderForm.ui.$deliveryPrice.find('.value').text(deliveryPrice);
 			orderForm.ui.$totalPrice.find('.value').text(kryotherm.total_cost+deliveryPrice);
 			window.kryotherm.total_amount = kryotherm.total_cost+deliveryPrice;
-			delivery_price.value = deliveryPrice;
+			$('[name=delivery_price]').eq(0).val(deliveryPrice);
 		} else {
 			orderForm.ui.$deliveryPrice.find('.value').text('0');
 			orderForm.ui.$totalPrice.find('.value').text(kryotherm.total_cost);
 			window.kryotherm.total_amount = kryotherm.total_cost;
-			delivery_price.value = '';
+			$('[name=delivery_price]').eq(0).val('');
 		}
 	}
 	var checkPaymentValue = function () {
@@ -341,9 +345,9 @@ $(function () {
 		//prepare values
 		//checkShippingValue.call($shippingSelect[0], $shippingSelect[0].value);
 		//checkDistrictValue.call($districtSelect[0], $districtSelect[0].value);
-		AMOUNT.value = window.kryotherm.total_amount;
-		BACKREF.value = window.location.origin + '/cart.php&exec_order=send';
-		order_date.value = getDateString();
+		$('[AMOUNT]').eq(0).val(window.kryotherm.total_amount);
+		$('[BACKREF]').eq(0).val(window.location.origin + '/cart.php&exec_order=send');
+		$('[order_date]').eq(0).val(getDateString());
 
 		generateHMAC();
 

@@ -334,7 +334,7 @@ div#help_holder { position: relative; }
 }
 .third_menu_horizontal_wrapper {
 	width: 100%;
-	padding: 30px 0;
+	padding: 0 0 30px;
 }
 .third_menu_horizontal {
 	width: 100%;

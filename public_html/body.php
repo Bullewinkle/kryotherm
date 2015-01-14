@@ -2,13 +2,15 @@
 $show_right = null;
 $third_menu_horizontal = null;
 
-if (strpos($_SERVER['REQUEST_URI'], 'cart.php') ||
-	!empty($_REQUEST['exec_order'])
-) {
-	$third_menu_horizontal = 1;
-}
+//if (strpos($_SERVER['REQUEST_URI'], 'cart.php') ||
+//	!empty($_REQUEST['exec_order'])
+//) {
+//	$third_menu_horizontal = 1;
+//}
 
 if (!empty($_REQUEST['idCat']) ||
+	strpos($_SERVER['REQUEST_URI'], 'cart.php') ||
+	!empty($_REQUEST['exec_order']) ||
 	strpos($_SERVER['REQUEST_URI'], 'compare.php') ||
 	strpos($_SERVER['REQUEST_URI'], 'filter_result.php')
 ) {

@@ -1040,18 +1040,30 @@ function process_values(&$item, $key) {
 /*  Форма подтверждения заказа
 */
 function get_order_form($array, $customer) {
+	$html .= '<div style="height: 54px">
+			<a href="/">В каталог</a> > <a href="/cart.php">Корзина</a> > <a href="/cart.php&exec_order=form" class="active">Подтверждение заказа</a>
+		</div>
+
+		<div class="rc third_menu_horizontal_wrapper">
+			<ul class="third-menu third_menu_horizontal">';
+				// from menu/dop_menu.php"
+				$menu = TestTreeMenu(0);
+				for($i=0; $i<count($menu); $i++)
+					if(isset($menu[$i]["id"]))
+					{
+						if(empty($menu[$i]["url"]))
+							$html .= "<li class='menu-dop menu".$menu[$i]["level"]."'><a href='".URL."index.php?page_id=".$menu[$i]["id"]."' ".(($_REQUEST['page_id']==$menu[$i]["id"])?'class="selected"':'')." title='".$menu[$i]["name"]."'>".$menu[$i]["name"]."</a></li>";
+						else
+							$html .= "<li class='menu-dop menu".$menu[$i]["level"]."' ><a href='".$menu[$i]["url"]."' ".(($_SERVER['REQUEST_URI']==$menu[$i]["url"])?'class="selected"':'')." title='".$menu[$i]["name"]."'>".$menu[$i]["name"]."</a></li>";
+					}
+					// end menu/dop_menu.php"
+			$html .= '</ul>
+		</div>';
 //
 	if (!is_arr($array)) {
 		$html .= 'Пустой заказ';
 	} else {
-		$html .= '<div style="height: 54px">
-			<a href="/">В каталог</a> > <a href="/cart.php">Корзина</a> > <a href="/cart.php&exec_order=form" class="active">Подтверждение заказа</a>
-		</div>
-		<h1>Ваш заказ</h1>' . customers_order($array) .'
-
-		</br>
-		<div><a href="/index.php?page_id=23" title="Схема оплаты">Схема оплаты</a></div>
-		<div><a href="/index.php?page_id=2" title="Доставка товара">Доставка товара</a></div>';
+		$html .= '<h1>Ваш заказ</h1>' . customers_order($array);
 
 		include(CATALOG_SCRIPT_DIR . 'order_form.php');
 	}
@@ -1161,8 +1173,8 @@ function exec_order_form($mail, $send_data, &$order_data) {
 			"<p>Заказчик: " . $customer . "</p>
 	<p>" . $customer_data . "</p>";
 
-//		$mail->AddAddress(SHOP_EMAIL);
-		$mail->AddAddress('developer085@gmail.com');
+//		$mail->AddAddress('developer085@gmail.com');
+		$mail->AddAddress(SHOP_EMAIL);
 		$mail->From = $send_data['mail'];
 		$mail->FromName = SHOP_NAME;
 		$mail->AddReplyTo($send_data['mail']);
