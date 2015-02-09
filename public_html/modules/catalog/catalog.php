@@ -854,6 +854,7 @@ function get_user_cart($array) {
 		$html .= '</table>
                      <p><b>Итого: ' . $total_cost . ' руб.</b></p>
                      <div class="lessthen">Сумма заказа не может быть менее 1000руб.!</div>
+					 <div class="therms">Перед совершением заказа, ознакомьтесь со <a href="http://shop.kryotherm.ru/index.php?page_id=2" target="_blank" title="условия доставки">сроками оформления заказа и его доставки</a>.</div>
                      <p><input type="button" value="Сделать заказ" ' . (($total_cost < '1000') ? 'disabled' : '') . '
                                onClick="javascript: document.location.href=\'cart.php&exec_order=form\'">
                         <input type="button" value="Очистить"

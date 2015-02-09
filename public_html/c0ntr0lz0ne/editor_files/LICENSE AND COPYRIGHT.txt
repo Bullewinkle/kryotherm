@@ -1,20 +1,20 @@
-WYSIWYGPRO COPYRIGHT AND LICENSING INFORMATION
-
-WysiwygPro is NOT open source software.
-WysiwygPro is NOT shareware.
-WysiwygPro is NOT Freeware.
-
-WysiwygPro is licensed under the terms of the WysiwygPro license.
-If you purchased WysiwygPro then you will have recieved a copy of the license.
-
-If you are not a WysiwygPro license holder and you have recieved this software 
-as part of a larger application or website then you DO NOT have permission to 
-use this software outside of the larger application or website and you are not 
-entitled to support from wysiwygpro.com, however you may participate in our 
-online forum. Use, modification or distribution of this software by non-license 
-holders is a violation of copyright law.
-
-A WysiwygPro License can be purchased from http://www.wysiwygpro.com
-
-For further information about WysiwygPro please visit http://www.wysiwygpro.com
+WYSIWYGPRO COPYRIGHT AND LICENSING INFORMATION
+
+WysiwygPro is NOT open source software.
+WysiwygPro is NOT shareware.
+WysiwygPro is NOT Freeware.
+
+WysiwygPro is licensed under the terms of the WysiwygPro license.
+If you purchased WysiwygPro then you will have recieved a copy of the license.
+
+If you are not a WysiwygPro license holder and you have recieved this software 
+as part of a larger application or website then you DO NOT have permission to 
+use this software outside of the larger application or website and you are not 
+entitled to support from wysiwygpro.com, however you may participate in our 
+online forum. Use, modification or distribution of this software by non-license 
+holders is a violation of copyright law.
+
+A WysiwygPro License can be purchased from http://www.wysiwygpro.com
+
+For further information about WysiwygPro please visit http://www.wysiwygpro.com
 or email service@wysiwygpro.com

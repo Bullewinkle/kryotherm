@@ -10,13 +10,13 @@ api = {
 			$.ajax({
 				url: 'api/session/set_user_data',
 				type: "POST",
-				data: JSON.stringify(data),
+				data: window.JSON.stringify(data),
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				success: function (data) {
-					data = JSON.parse(data);
-					successCallback(data);
+				success: function(response) {
+					response = window.JSON.parse(response);
+					successCallback(response);
 				},
 				error: errorCallback
 			});
@@ -31,8 +31,8 @@ api = {
 			$.ajax({
 				url: 'api/session/get_user_data',
 				type: "GET",
-				success: function (data) {
-					data = JSON.parse(data);
+				success: function(response) {
+					response = window.JSON.parse(response);
 					if (_.isObject(storage)) {
 						storage.userData = data;
 						successCallback(data)

@@ -77,7 +77,6 @@ $html .= '<br />
 					<select class="customer-data" size="1" name="shipping">
 						<option value=""> --- </option>
 						<option data-price="" value="Major express">Major express</option>
-						<option data-price="450" value="Автотрейдинг">Автотрейдинг</option>
 						<option data-price="450" value="Деловые линии">Деловые линии</option>
 						<option data-price="250" value="Почта России">Почта России</option>
 						<option data-price="" value="Самовывоз">Самовывоз</option>

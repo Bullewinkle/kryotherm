@@ -155,7 +155,8 @@ tr.grey, tr.grey td { background: #eee; font-size: 11px;}
 
 a.active, span.active {color: red}
 
-.lessthen {background: #1d4f63; color: white; font-size: 20px; font-family: georgia; padding: 10px 7px;}
+.lessthen {background: #1d4f63; color: white; font-size: 14px; font-family: georgia; padding: 10px 7px;}
+.therms {background: #FFFFFF; color: red; font-size: 20px; font-family: georgia; padding: 10px 7px;}
 
 
 .filter_header { height: 29px; padding: 2px 0 0 14px; 

@@ -222,7 +222,7 @@ $(function () {
 			tomacdata('NONCE') +
 			tomacdata('BACKREF')
 		);
-		$('[name=P_SIGN]').eq(0).val( hex_hmac_sha1(hex2bin(KEY.value), MAC_DATA.value) );
+		$('[name=P_SIGN]').eq(0).val( hex_hmac_sha1(hex2bin( $('[name=KEY]').eq(0).val()), $('[name=MAC_DATA]').eq(0).val()) );
 
 	}
 	// ------------ END HMAC GENERATOR USAGE --------------
@@ -241,7 +241,7 @@ $(function () {
 			$districtSelect: rootFormElement.find('[name=district]'),
 			$paymentSelect: rootFormElement.find('[name=payment_method]'),
 			$totalPrice:   $('.total-cost'),
-			$deliveryPrice:   $('.delivery-price'),
+			$deliveryPrice:   $('.delivery-price')
 
 		}
 	}
@@ -252,11 +252,14 @@ $(function () {
 			orderForm.ui.$orderForm.addClass('individual-person');
 			orderForm.ui.$orderForm.removeClass('legal-person');
 			orderForm.ui.$paymentSelect.val('online').parents('tr').removeClass('hidden');
+			orderForm.ui.$orderForm.attr('action', "https://3ds.payment.ru/cgi-bin/cgi_link")
 		} else if (custormerValue+'' ===  '2') {
 			orderForm.ui.$orderForm.removeClass('individual-person');
 			orderForm.ui.$orderForm.addClass('legal-person');
 			orderForm.ui.$paymentSelect.val('offline').parents('tr').addClass('hidden');
+			orderForm.ui.$orderForm.attr('action', "/cart.php&exec_order=send")
 		}
+
 	}
 	var checkShippingValue = function(shippingValue) {
 		var selectedOption =  $(this).find(':selected').eq(0);
@@ -295,7 +298,6 @@ $(function () {
 		}
 	}
 	var checkPaymentValue = function () {
-		//TODO switch action of the form
 		if (this.value === 'online') {
 			orderForm.ui.$orderForm.attr('action', "https://3ds.payment.ru/cgi-bin/cgi_link")
 		}
@@ -345,9 +347,9 @@ $(function () {
 		//prepare values
 		//checkShippingValue.call($shippingSelect[0], $shippingSelect[0].value);
 		//checkDistrictValue.call($districtSelect[0], $districtSelect[0].value);
-		$('[AMOUNT]').eq(0).val(window.kryotherm.total_amount);
-		$('[BACKREF]').eq(0).val(window.location.origin + '/cart.php&exec_order=send');
-		$('[order_date]').eq(0).val(getDateString());
+		$('[name=AMOUNT]').eq(0).val(window.kryotherm.total_amount);
+		$('[name=BACKREF]').eq(0).val(window.location.origin + '/cart.php&exec_order=send');
+		$('[name=order_date]').eq(0).val(getDateString());
 
 		generateHMAC();
 
@@ -395,7 +397,7 @@ $(function () {
 		//onclick: function(element,event) {}, // or Boolean
 		//focusInvalid: true,
 		errorClass: "invalid",
-		validClass: "valid",
+		validClass: "valid"
 		//errorElement: "label",
 		//wrapper: window, // String
 		//errorLabelContainer: '', // Selector
